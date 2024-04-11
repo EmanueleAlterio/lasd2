@@ -64,8 +64,8 @@ protected:
     /* ********************************************************************** */
 
     // Comparison operators
-    bool operator==(const Node &);
-    bool operator!=(Node &&) noexcept;
+    bool operator==(const Node &) const noexcept;
+    bool operator!=(const Node &) const noexcept;
 
 
     /* ********************************************************************** */
@@ -114,8 +114,8 @@ public:
   /* ************************************************************************ */
 
   // Comparison operators
-  List& operator==(const List &) const noexcept;
-  List& operator!=(const List &) const noexcept;
+  bool operator==(const List &) const noexcept;
+  bool operator!=(const List &) const noexcept;
 
   /* ************************************************************************ */
 
@@ -139,9 +139,9 @@ public:
 
   // Specific member functions (inherited from DictionaryContainer)
 
-  void Insert(const Data&); // Copy of the value
-  void Insert(Data &&) noexcept; // Move of the value
-  void Remove(const Data &);
+  bool Insert(const Data&) override;
+  bool Insert(Data&&) override;
+  bool Remove(const Data&) override;
 
   /* ************************************************************************ */
 
