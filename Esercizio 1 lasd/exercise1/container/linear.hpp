@@ -52,10 +52,10 @@ public:
   virtual Data& operator[](const unsigned long) = 0;// (mutable version; concrete function must throw std::out_of_range when out of range)
 
   inline virtual const Data& Front() const; // (non-mutable version; concrete function must throw std::length_error when empty)
-  inline virtual const Data& Front(); // (mutable version; concrete function must throw std::length_error when empty)
+  virtual Data& Front(); // (mutable version; concrete function must throw std::length_error when empty)
 
-  inline virtual const Data& Back() const; // (non-mutable version; concrete function must throw std::length_error when empty)
-  inline virtual const Data& Back(); // (mutable version; concrete function must throw std::length_error when empty)
+  virtual const Data& Back() const; // (non-mutable version; concrete function must throw std::length_error when empty)
+  virtual Data& Back(); // (mutable version; concrete function must throw std::length_error when empty)
 
   /* ************************************************************************ */
 

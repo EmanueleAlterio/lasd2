@@ -36,7 +36,7 @@ public:
   /* ************************************************************************ */
 
   // Specific constructor
-  StackLst(const lasd:: MappableContainer<Data> & con) : List<Data>(con); // A stack obtained from a TraversableContainer
+  //StackLst(const lasd:: MappableContainer<Data> & con) : List<Data>(con); // A stack obtained from a TraversableContainer
   // StackLst(argument) specifiers; // A stack obtained from a MappableContainer
 
   /* ************************************************************************ */

@@ -32,7 +32,7 @@ const Data& LinearContainer<Data> :: Front() const{
 }
 
 template<typename Data>
-const Data& LinearContainer<Data> :: Front(){
+Data& LinearContainer<Data> :: Front(){
     
     if (size > 0){
         return operator[](0);
@@ -52,7 +52,7 @@ const Data& LinearContainer<Data> :: Back() const{
 }
 
 template<typename Data>
-const Data& LinearContainer<Data> :: Back(){
+Data& LinearContainer<Data> :: Back(){
 
     if (size > 0){
         return operator[](size-1);

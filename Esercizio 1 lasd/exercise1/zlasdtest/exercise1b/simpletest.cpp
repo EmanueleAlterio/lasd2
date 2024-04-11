@@ -189,6 +189,8 @@ void stestStack(uint & testnum, uint & testerr) {
   cout << endl << "Exercise 1B - Stack (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
 }
 
+***************************************************************************** */
+
 /* **************************************************************************
 
 template <typename Que>
