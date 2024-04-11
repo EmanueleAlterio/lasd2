@@ -64,8 +64,8 @@ protected:
     /* ********************************************************************** */
 
     // Comparison operators
-    Node& operator==(const Node &);
-    Node& operator!=(Node &&) noexcept;
+    bool operator==(const Node &);
+    bool operator!=(Node &&) noexcept;
 
 
     /* ********************************************************************** */
