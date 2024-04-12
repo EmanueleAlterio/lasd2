@@ -384,4 +384,160 @@ namespace lasd {
         return false;
     }
 
+
+    template<typename Data>
+    const Data& List<Data> :: operator[](const unsigned long index) const{
+        if(index >= size){ //index essendo ulong non ha bisogno del controllo < 0 in quanto non può mai esserlo
+            throw std::out_of_range("[EXCEPTION]: List index out of range");
+        }
+
+        if(index == size - 1)
+            return tail->element;
+        
+        Node* curr = head;
+        for(i = 0; i < index; i++){
+            curr = curr->next;
+        }
+        
+        return curr->element;
+    }   
+
+
+    template<typename Data>
+    Data& List<Data> :: operator[](const unsigned long){
+        
+        if(index >= size){ //index essendo ulong non ha bisogno del controllo < 0 in quanto non può mai esserlo
+            throw std::out_of_range("[EXCEPTION]: List index out of range");
+        }
+
+        if(index == size - 1 && tail != nullptr)
+            return tail->element;
+        
+        Node* curr = head;
+        for(i = 0; i < index; i++){
+            curr = curr->next;
+        }
+        
+        return curr->element;
+    }
+
+
+    //Front
+    template<typename Data>
+    const Data& List<Data> :: Front() const{
+        
+        if(head == nullptr){
+            throw std::length_error("List is Empty");
+        }
+
+        return head->element;
+
+    }
+
+
+    template<typename Data>
+    Data& List<Data> :: Front(){
+        
+        if(head == nullptr){
+            throw std::length_error("List is Empty");
+        }
+
+        return head->element;
+    }
+
+
+    //Back
+    template<typename Data>
+    const Data& List<Data> :: Back() const{
+
+        if(tail != nullptr){
+            throw std::length_error("List is Empty");
+        }
+
+        return tail->element;
+
+    }
+
+    template<typename Data>
+    Data& List<Data> :: Back(){
+
+        if(tail != nullptr){
+            throw std::length_error("List is Empty");
+        }
+
+        return tail->element;
+
+    }
+
+   // Specific member function (inherited from TraversableContainer)
+    template<typename Data>
+    void List<Data>::Traverse(TraverseFun fun) const{
+        PreOrderTraverse(fun, head);
+    }
+    
+    template<typename Data>
+    void List<Data>::PreOrderTraverse(TraverseFun fun) const{
+        PreOrderTraverse(fun, head);
+    }
+
+    template<typename Data>
+    void List<Data>::PostOrderTraverse(TraverseFun fun) const{
+        PostOrderTraverse(fun, head);
+    }
+
+    // Specific member function (inherited from MappableContainer)
+
+     template<typename Data>
+    void List<Data>::Map(MapFun fun){
+        PreOrderMap(fun, head);
+    }
+    
+    template<typename Data>
+    void List<Data>::PreOrderMap(MapFun fun){
+        PreOrderMap(fun, head);
+    }
+
+    template<typename Data>
+    void List<Data>::PostOrderMap(MapFun fun){
+        PostOrderMap(fun, head);
+    }
+
+    // Auxiliary functions
+
+    template <typename Data>
+    void List<Data>::PreOrderTraverse(TraverseFun fun, const Node *node) const{
+        if(node != nullptr){
+            for( ; node != nullptr; node = node->next){
+                fun(node->element);
+            }
+        }
+    }
+
+    template<typename Data>
+    void List<Data> :: PostOrderTraverse(TraverseFun fun, const Node *node) const{
+        if(node != nullptr){
+            PostOrderTraverse(fun, node->next);
+            fun(node->element);
+        }
+    }
+
+    template <typename Data>
+    void List<Data> :: PreOrderMap(MapFun fun, Node *node){
+        if(node != nullptr){
+            for( ; node != nullptr; node = node->next){
+                fun(node->element);
+            }
+        }
+    }
+
+    template <typename Data>
+    void List<Data> :: PostOrderMap(MapFun fun, Node *node){
+        if(node != nullptr){
+            PostOrderMap(fun, node->next);
+            fun(node->element);
+        }
+    }
+
+
+
 }

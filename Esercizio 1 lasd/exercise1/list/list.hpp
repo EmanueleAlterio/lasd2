@@ -169,7 +169,7 @@ public:
 
   // Specific member function (inherited from PreOrderTraversableContainer)
 
-  void PreOrderTraverse(TraverseFun) const override; // Override PreOrderTraversableContainer member
+  // Override PreOrderTraversableContainer member
 
   /* ************************************************************************ */
 
@@ -200,7 +200,10 @@ public:
 protected:
 
   // Auxiliary functions, if necessary!
-
+  void PreOrderTraverse(TraverseFun, const Node*) const;
+  void PostOrderTraverse(TraverseFun, const Node*) const;
+  void PreOrderMap(MapFun, Node*);
+  void PostOrderMap(MapFun, Node*);
 };
 
 /* ************************************************************************** */
