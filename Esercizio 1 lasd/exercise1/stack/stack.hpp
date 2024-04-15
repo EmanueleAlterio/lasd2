@@ -1,78 +1,47 @@
 
-
-#ifndef STACKLST_HPP
-#define STACKLST_HPP
+#ifndef STACK_HPP
+#define STACK_HPP
 
 /* ************************************************************************** */
 
-#include "../stack.hpp"
-#include "../../list/list.hpp"
+#include "../container/container.hpp"
 
 /* ************************************************************************** */
 
 namespace lasd {
 
-/* ************************************************************************** */
-
 template <typename Data>
-class StackLst : virtual public Stack<Data>,
-                virtual protected List<Data>{
+class Stack : virtual public ClearableContainer{
 
 public:
-
-  // Default constructor
-  StackLst() = default;
-
-  /* ************************************************************************ */
-
-  // Specific constructor
-  StackLst(const TraversableContainer<Data> &container) : List<Data>(container){};
-  StackLst(MappableContainer<Data> &&container) : List<Data>(std::move(container)){};
-
-  /* ************************************************************************ */
-
-  // Copy and Move constructor
-  StackLst(const StackLst &stackLst) : List<Data>(stackLst){};
-  StackLst(StackLst &&stackLst) noexcept : List<Data>(std::move(stackLst)){};
-
-  /* ************************************************************************ */
-
   // Destructor
-  virtual ~StackLst() = default;
+  virtual ~Stack() = default;
 
   /* ************************************************************************ */
 
   // Copy and Move assignment
-  StackLst& operator=(const StackLst&);
-  StackLst& operator=(StackLst&&) noexcept;
+  Stack& operator=(const Stack&) = delete;
+  Stack& operator=(Stack&&) noexcept = delete;
 
   /* ************************************************************************ */
 
   // Comparison operators
-  bool operator==(const StackLst&) const noexcept;
-  bool operator!=(const StackLst&) const noexcept;
-  
+  bool operator==(const Stack&) const noexcept = delete;
+  bool operator!=(const Stack&) const noexcept = delete;
+
   /* ************************************************************************ */
 
-  // Specific member functions (inherited from Stack)
-  const Data& Top() const override;
-  Data& Top() override;
+  // Specific member functions
+  virtual const Data& Top() const = 0;
+  virtual Data& Top() = 0;
   
-  void Pop() override;
-  Data TopNPop() override;
+  virtual void Pop() = 0;
+  virtual Data TopNPop() = 0;
   
-  void Push(const Data&) override;
-  void Push(Data&&) noexcept override;
-  /* ************************************************************************ */
-
-  // Specific member function (inherited from ClearableContainer)
-  using List<Data>::Clear;
+  virtual void Push(const Data&) = 0;
+  virtual void Push(Data&&) noexcept = 0;
 };
 
-/* ************************************************************************** */
-
 }
-
-#include "stacklst.cpp"
 
 #endif

@@ -34,8 +34,8 @@ public:
   /* ************************************************************************ */
 
   // Specific constructor
-  QueueLst(const TraversableContainer<Data> & continer) : List<Data>(contianer){}; // A stack obtained from a TraversableContainer
-  QueueLst(MappableContainer<Data> && continer) : List<Data>(std::move(continer)){}; // A stack obtained from a MappableContainer
+  QueueLst(const TraversableContainer<Data> & container) : List<Data>(container){}; // A stack obtained from a TraversableContainer
+  QueueLst(MappableContainer<Data> && container) : List<Data>(std::move(container)){}; // A stack obtained from a MappableContainer
 
   /* ************************************************************************ */
 

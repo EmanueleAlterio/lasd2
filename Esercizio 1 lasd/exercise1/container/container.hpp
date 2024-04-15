@@ -48,11 +48,11 @@ public:
 
   // Specific member functions
 
-  bool Empty() const noexcept{
+  virtual bool Empty() const noexcept{
     return (size==0);
   }// (concrete function should not throw exceptions)
 
-  unsigned long  Size() const noexcept{
+  virtual unsigned long Size() const noexcept{
     return size;
   }; // (concrete function should not throw exceptions)
 

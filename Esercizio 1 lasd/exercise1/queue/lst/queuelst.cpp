@@ -2,13 +2,13 @@
 namespace lasd {
 
 /* ************************************************************************** */
-template<tyename Data>
+template<typename Data>
 QueueLst<Data>& QueueLst<Data> :: operator=(const QueueLst &queueLst){
     List<Data> :: operator=(queueLst);
     return *this;
 }
 
-template<tyename Data>
+template<typename Data>
 QueueLst<Data>& QueueLst<Data> :: operator=(QueueLst &&queueLst) noexcept {
     List<Data> :: operator=(std::move(queueLst));
     return *this;
@@ -17,7 +17,7 @@ QueueLst<Data>& QueueLst<Data> :: operator=(QueueLst &&queueLst) noexcept {
 template<typename Data>
 bool QueueLst<Data> :: operator==(const QueueLst &queueLst) const noexcept{
     
-    return List<Data> :: operator=(queueLst);
+    return List<Data> :: operator==(queueLst);
 }
 
 template<typename Data>
@@ -52,7 +52,7 @@ void QueueLst<Data> :: Enqueue(const Data & data){
 }
 
 template<typename Data>
-void QueueLst<Data> :: Enqueue(Data && data){
+void QueueLst<Data> :: Enqueue(Data && data) noexcept{ 
     List<Data> :: InsertAtBack(std::move(data)); 
 }
 /* ************************************************************************** */
