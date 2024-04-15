@@ -14,7 +14,7 @@ namespace lasd {
 /* ************************************************************************** */
 
 template <typename Data>
-class QueueVec {
+class QueueVec : virtual public Queue<Data> , virtual protected Vector<Data>{
   // Must extend Queue<Data>,
   //             Vector<Data>
 
@@ -24,76 +24,90 @@ private:
 
 protected:
 
-  // using Vector<Data>::???;
+  using Vector<Data>:: elements;
+  using Vector<Data>:: size;
+  using long head = 0;
+  using long tail = 0;
 
   // ...
 
 public:
 
   // Default constructor
-  // QueueVec() specifier;
+  QueueVec() : Vector<Data>(5){};
 
   /* ************************************************************************ */
 
   // Specific constructor
-  // QueueVec(argument) specifiers; // A stack obtained from a TraversableContainer
-  // QueueVec(argument) specifiers; // A stack obtained from a MappableContainer
+  QueueVec(const TraversableContainer<Data> &); // A stack obtained from a TraversableContainer
+  QueueVec(MappableContainer<Data> &&); // A stack obtained from a MappableContainer
 
   /* ************************************************************************ */
 
   // Copy constructor
-  // QueueVec(argument);
+  QueueVec(const QueueVec &queueVec) : Vector<Data>(queueVec){
+    head = queueVec.head;
+    tail = queueVec.tail;
+  };
 
   // Move constructor
-  // QueueVec(argument);
+  QueueVec(QueueVec &&queueVec): Vector<Data>(std::move(queueVec)){
+    std::swap(head, queueVec.head);
+    std::swap(tail, queueVec.tail);
+  };
 
   /* ************************************************************************ */
 
   // Destructor
-  // ~QueueVec() specifier;
+  virtual ~QueueVec() = default;
 
   /* ************************************************************************ */
 
   // Copy assignment
-  // type operator=(argument);
+  QueueVec& operator=(const QueueVec &);
 
   // Move assignment
-  // type operator=(argument);
+  QueueVec& operator=(QueueVec &&) noexcept;
 
   /* ************************************************************************ */
 
   // Comparison operators
-  // type operator==(argument) specifiers;
-  // type operator!=(argument) specifiers;
+  bool operator==(const QueueVec &) const noexcept;
+  bool operator!=(const QueueVec &) const noexcept;
 
   /* ************************************************************************ */
 
   // Specific member functions (inherited from Queue)
 
-  // type Head() specifiers; // Override Queue member (non-mutable version; must throw std::length_error when empty)
-  // type Head() specifiers; // Override Queue member (mutable version; must throw std::length_error when empty)
-  // type Dequeue() specifiers; // Override Queue member (must throw std::length_error when empty)
-  // type HeadNDequeue() specifiers; // Override Queue member (must throw std::length_error when empty)
-  // type Enqueue(argument) specifiers; // Override Queue member (copy of the value)
-  // type Enqueue(argument) specifiers; // Override Queue member (move of the value)
+  const Data& Head() const override; // Override Queue member (non-mutable version; must throw std::length_error when empty)
+  Data& Head() override; // Override Queue member (mutable version; must throw std::length_error when empty)
+
+  void Dequeue() override; // Override Queue member (must throw std::length_error when empty)
+  Data HeadNDequeue() override; // Override Queue member (must throw std::length_error when empty)
+
+  void Enqueue(const Data &) override; // Override Queue member (copy of the value)
+  void Enqueue(Data &&) noexcept override; // Override Queue member (move of the value)
 
   /* ************************************************************************ */
 
   // Specific member functions (inherited from Container)
 
-  // type Empty() specifiers; // Override Container member
+  bool Empty() const noexcept override; // Override Container member
 
-  // type Size() specifiers; // Override Container member
+  unsigned long Size() const noexcept override; // Override Container member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from ClearableContainer)
 
-  // type Clear() specifiers; // Override ClearableContainer member
+  void Clear() override; // Override ClearableContainer member
 
 protected:
 
   // Auxiliary functions, if necessary!
+  void Expand();
+  void Reduce();
+  void Resize(unsigned long, unsigned long);  
 
 };
 
