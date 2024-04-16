@@ -25,7 +25,7 @@ Vector<Data> :: Vector(const unsigned long initialSize){
 template<typename Data>
 Vector<Data> :: Vector(const TraversableContainer<Data> & traversableCon){
     try{
-        size = traversableCon.size;
+        size = traversableCon.Size();
         elements = new Data[size];
 
         unsigned long i = 0;
@@ -47,7 +47,7 @@ Vector<Data> :: Vector(const TraversableContainer<Data> & traversableCon){
 template<typename Data>
 Vector<Data> :: Vector(MappableContainer<Data> && mappableCon){
     try{
-        size = mappableCon.size;
+        size = mappableCon.Size();
         elements = new Data[size];
 
         unsigned long i = 0;
@@ -105,7 +105,7 @@ Vector<Data> :: ~Vector(){
     Vector<Data>& Vector<Data>::operator=(const Vector &vec){
         if(this != &vec){
             try{
-                Vector<Data> tmp = new Vector<Data>(vec);
+                Vector<Data> *tmp = new Vector<Data>(vec);
                 std::swap(*tmp, *this);
 
                 delete tmp;
@@ -259,116 +259,36 @@ Data& Vector<Data>::Back(){
 
 /*SortableVector*/
 
-// Specific constructors
-template<typename Data>
-SortableVector<Data> :: SortableVector(const unsigned long initialSize){
-    try
-    {
-        size = initialSize;
-        elements = new Data[size];
-    }
-    catch(std::bad_alloc)
-    {
-        std::cerr << "[EXCEPTION] Cannot allocate memory for SortableVector" ;
-    }
+   // Specific constructors
+    template<typename Data>
+    SortableVector<Data>::SortableVector(const unsigned long newSize):Vector<Data>(newSize){}
+
+    template<typename Data>
+    SortableVector<Data>::SortableVector(const TraversableContainer<Data>& container):Vector<Data>(container){}
+
+    template<typename Data>
+    SortableVector<Data>::SortableVector(MappableContainer<Data>&& container):Vector<Data>(std::move(container)){}
+
+    //Copy and Move constructor
+    template<typename Data>
+    SortableVector<Data>::SortableVector(const SortableVector &vec):Vector<Data>(vec){}
+
+    template<typename Data>
+    SortableVector<Data>::SortableVector(SortableVector &&vec) noexcept :Vector<Data>(std::move(vec)){}
     
-}
+    // Copy and Move assignment
+    template<typename Data>
+    SortableVector<Data>& SortableVector<Data>::operator=(const SortableVector &vec){
+        Vector<Data>::operator=(vec);
 
-template<typename Data>
-SortableVector<Data> :: SortableVector(const TraversableContainer<Data> & container){
-    try
-    {
-        size = container.size;
-        elements = new Data[size];
-
-        unsigned long i = 0;
-        container.Traverse(
-            [this, &i](const Data &data){
-                elements[i++] = data;
-            }
-        );     
-    }
-    catch(std:: bad_alloc)
-    {
-        std::cerr << "[EXCEPTION] Cannot allocate memory for SortableVector" ;    
-    }
-    
-}
-
-template<typename Data>
-SortableVector<Data> :: SortableVector(MappableContainer<Data> && mappableCon){
-    try
-    {
-        size = mappableCon.size;
-        elements = new Data[size];
-
-        unsigned long i = 0;
-        mappableCon.Map(
-            [this, &i](Data & data){
-                elements[i++] = std::move(data);
-            }
-        );
-    }
-    catch(std::bad_alloc)
-    {
-        std::cerr << "[EXCEPTION] Cannot allocate memory for SortableVector" ;
-    }
-    
-}
-
-// Copy constructor
-template<typename Data>
-SortableVector<Data> ::SortableVector(const SortableVector & other){
-    try{
-        size = other.size;
-        elements = new Data[size];
-
-        std::copy(other.elements, other.elements + size, elements);
-
-    }catch(std::bad_alloc){
-
-        delete[] elements;
-        elements = nullptr;
-
-        std::cerr << "[EXCEPTION] Cannot allocate memory for SortableVector";
+        return *this;
     }
 
-}
+    template<typename Data>
+    SortableVector<Data>& SortableVector<Data>::operator=(SortableVector &&vec) noexcept{
+        Vector<Data>::operator=(std::move(vec));
 
-
-// Move constructor
-template<typename Data>
-SortableVector<Data>::SortableVector(SortableVector &&other) noexcept{
-    std::swap(elements, other.elements);
-    std::swap(size, other.size);
-}   
-
-// Copy assignmemt
-template<typename Data>
-SortableVector<Data>& SortableVector<Data>::operator=(const SortableVector &other){
-    if(this != &other){
-        try{
-            SortableVector<Data> tmp = new SortableVector<Data>(other);
-            std::swap(*tmp, *this);
-
-            delete tmp;
-        }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for SortableVector";
-        }
+        return *this;
     }
-
-    return *this;
-}
-
-
-
-// Move assignment
-template<typename Data>
-SortableVector<Data>& SortableVector<Data>::operator=(SortableVector &&other) noexcept{
-    std::swap(elements, other.elements);
-    std::swap(size, other.size);
-
-    return *this;
-}
 
 }

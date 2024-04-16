@@ -25,16 +25,16 @@ namespace lasd {
 
     //Move Constructor
     template<typename Data>
-    List<Data>::Node::Node(Node && node){
-        std:swap(element, node.element);
-        std:swap(next, node.next);
+    List<Data>::Node::Node(Node && node) noexcept{
+        std::swap(element, node.element);
+        std::swap(next, node.next);
     }
 
     //Copy Assignment
     template<typename Data>
     List<Data>::Node& List<Data>::Node:: operator=(const Node & node){
         if(this != &node){ //Controlla se gli indirizzi di memoria sono gli stessi
-            element = node.element
+            element = node.element;
             next = node.next;
         }
 
@@ -80,7 +80,7 @@ namespace lasd {
         tail = nullptr;
 
         container.Traverse(
-            [this](const Data & Data){
+            [this](const Data & data){
                 InsertAtBack(data);
             }
 
@@ -93,7 +93,7 @@ namespace lasd {
         tail = nullptr;
 
         container.Map(
-            [this](const Data & Data){
+            [this](const Data & data){
                 InsertAtBack(std::move(data));
             }
 
@@ -104,8 +104,8 @@ namespace lasd {
     template<typename Data>
     List<Data>::List(const List & other){
         if(this != &other){
-            if(list.head != nullptr){
-                for(Node* curr = list.head; curr != nullptr; curr = curr->next){
+            if(other.head != nullptr){
+                for(Node* curr = other.head; curr != nullptr; curr = curr->next){
                     InsertAtBack(curr->element);
                 }
             }
@@ -355,9 +355,10 @@ namespace lasd {
         if(head == nullptr)
             return false;
 
-        if(head->element == data)
+        if(head->element == data){
             RemoveFromFront();
             return true;
+        }
 
         Node *prev = head;
         Node *curr = head->next;
@@ -395,7 +396,7 @@ namespace lasd {
             return tail->element;
         
         Node* curr = head;
-        for(i = 0; i < index; i++){
+        for(unsigned long i = 0; i < index; i++){
             curr = curr->next;
         }
         
@@ -404,7 +405,7 @@ namespace lasd {
 
 
     template<typename Data>
-    Data& List<Data> :: operator[](const unsigned long){
+    Data& List<Data> :: operator[](const unsigned long index){
         
         if(index >= size){ //index essendo ulong non ha bisogno del controllo < 0 in quanto non può mai esserlo
             throw std::out_of_range("[EXCEPTION]: List index out of range");
@@ -414,7 +415,7 @@ namespace lasd {
             return tail->element;
         
         Node* curr = head;
-        for(i = 0; i < index; i++){
+        for(unsigned long i = 0; i < index; i++){
             curr = curr->next;
         }
         

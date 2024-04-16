@@ -18,7 +18,7 @@
 
 using namespace std;
 
-/* *************************************************************************
+
 
 template <typename Stk>
 void stestStackInt(Stk & stk, uint & testnum, uint & testerr) {
@@ -189,9 +189,9 @@ void stestStack(uint & testnum, uint & testerr) {
   cout << endl << "Exercise 1B - Stack (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
 }
 
-***************************************************************************** */
 
-/* **************************************************************************
+
+
 
 template <typename Que>
 void stestQueueInt(Que & que, uint & testnum, uint & testerr) {
@@ -362,7 +362,6 @@ void stestQueue(uint & testnum, uint & testerr) {
   cout << endl << "Exercise 1B - Queue (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
 }
 
-************************************************************************** */
 
 void testSimpleExercise1B(uint & testnum, uint & testerr) {
   //stestStack(testnum, testerr);

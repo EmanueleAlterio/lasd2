@@ -26,8 +26,8 @@ protected:
 
   using Vector<Data>:: elements;
   using Vector<Data>:: size;
-  using long head = 0;
-  using long tail = 0;
+  unsigned long head = 0;
+  unsigned long tail = 0;
 
   // ...
 

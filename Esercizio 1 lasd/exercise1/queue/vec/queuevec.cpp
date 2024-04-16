@@ -59,7 +59,7 @@ namespace lasd {
     }
 
     template<typename Data>
-    QueueVec<Data>& QueueVec<Data> :: operator=(QueueVec &&queueVec){
+    QueueVec<Data>& QueueVec<Data> :: operator=(QueueVec &&queueVec) noexcept{
         if(this != &queueVec){
             std::swap(head, queueVec.head);
             std::swap(tail, queueVec.tail);
@@ -103,7 +103,7 @@ namespace lasd {
 
     // Specific member functions (inherited from Queue)
     template <typename Data>
-    const Data& QueueVec<Data>::Head()const{
+    const Data& QueueVec<Data>::Head() const{
         if(head == tail){
             throw std::length_error("[EXCEPTION] Queue is empty");
         }

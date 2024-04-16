@@ -27,7 +27,7 @@ protected:
   
   using Vector<Data>::size;
   using Vector<Data>::elements;
-  using long index = 0;
+  unsigned long index = 0;
 
   // ...
 
@@ -87,9 +87,9 @@ public:
 
   // Specific member functions (inherited from Container)
 
-  inline bool Empty() const noexcept override; // Override Container member
+  bool Empty() const noexcept override; // Override Container member
 
-  inline unsigned long Size() const noexcept override; // Override Container member
+  unsigned long Size() const noexcept override; // Override Container member
 
   /* ************************************************************************ */
 

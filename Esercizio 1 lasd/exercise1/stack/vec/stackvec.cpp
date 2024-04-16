@@ -14,7 +14,7 @@ StackVec<Data> :: StackVec(const TraversableContainer<Data>& container){
             [this](const Data &data){
                 Push(data);
             }
-        )
+        );
     }catch(std::bad_alloc){
         std::cerr << "[EXCEPTION] Cannot allocate memory for Stack";
     }    
@@ -32,7 +32,7 @@ StackVec<Data> :: StackVec(MappableContainer<Data> && container){
             [this](const Data &data){
                 Push(std::move(data));
             }
-        )
+        );
     }catch(std::bad_alloc){
         std::cerr << "[EXCEPTION] Cannot allocate memory for Stack";
     }    
@@ -49,7 +49,7 @@ StackVec<Data>& StackVec<Data>::operator=(const StackVec &stackVec){
 }
 
 template<typename Data>
-StackVec<Data>& StackVec<Data>::operator=(StackVec &&stackVec){
+StackVec<Data>& StackVec<Data>::operator=(StackVec &&stackVec) noexcept{
     if(this != &stackVec){
         index = stackVec.index;
         Vector<Data>::operator=(std::move(stackVec));
@@ -94,7 +94,7 @@ Data& StackVec<Data> :: Top(){
 
 
 template<typename Data>
-void StackVec<Data> :: Pop() override{
+void StackVec<Data> :: Pop(){
     if(Empty())
         throw std::length_error("[EXCEPTION] Stack is empty.");
 
@@ -131,6 +131,11 @@ void StackVec<Data>::Push(Data && data) noexcept{
 template<typename Data>
 bool StackVec<Data>::Empty() const noexcept{
     return (index == 0);
+}
+
+template<typename Data>
+unsigned long StackVec<Data>::Size() const noexcept{
+    return index;
 }
 
 template<typename Data>

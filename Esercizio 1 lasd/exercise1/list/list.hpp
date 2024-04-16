@@ -169,7 +169,7 @@ public:
 
   // Specific member function (inherited from PreOrderTraversableContainer)
 
-  // Override PreOrderTraversableContainer member
+  void PreOrderTraverse(TraverseFun) const override; // Override PreOrderTraversableContainer member
 
   /* ************************************************************************ */
 
