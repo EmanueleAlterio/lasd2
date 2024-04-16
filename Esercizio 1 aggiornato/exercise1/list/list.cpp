@@ -93,7 +93,7 @@ namespace lasd {
         tail = nullptr;
 
         container.Map(
-            [this](const Data & data){
+            [this](Data & data){
                 InsertAtBack(std::move(data));
             }
 
@@ -115,11 +115,11 @@ namespace lasd {
     //Move Constructor
     template<typename Data>
     List<Data>::List(List && other) noexcept{
-    if(this != &other){
-            std::swap(head, other.head);
-            std::swap(tail, other.tail);
-            std::swap(size, other.size);
-    }
+        if(this != &other){
+                std::swap(head, other.head);
+                std::swap(tail, other.tail);
+                std::swap(size, other.size);
+        }
     }
 
     // Destructor
@@ -166,14 +166,17 @@ namespace lasd {
     //Comparison Operators
     template<typename Data>
     bool List<Data> :: operator==(const List & other) const noexcept{
-        if(this == &other)
+        if(this == &other){
             return true;
+        }
 
-        if(size != other.size)
+        if(size != other.size){
             return false;
-        
+        }
+
         return (size == other.size) &&
-            ((head == nullptr && other.head == nullptr) || ((head != nullptr && other.head != nullptr) && (*head == *(other.head)))); //Utilizza l'operatore == dei confronti dei nodi
+            ((head == nullptr && other.head == nullptr) || 
+            ((head != nullptr && other.head != nullptr) && (*head == *(other.head)))); //Utilizza l'operatore == dei confronti dei nodi
     }
 
     template<typename Data>
@@ -269,9 +272,7 @@ namespace lasd {
 
             if(tail != nullptr){
                 tail->next = newNode;
-            }
-
-            if(head == nullptr){
+            }else{
                 head = newNode;
             }
 
@@ -291,9 +292,7 @@ namespace lasd {
             
             if(tail != nullptr){
                 tail->next = newNode;
-            }
-
-            if(head == nullptr){
+            }else{
                 head = newNode;
             }
 

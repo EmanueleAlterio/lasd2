@@ -113,23 +113,26 @@ Vector<Data>& Vector<Data>::operator=(Vector &&other) noexcept{
 
 //Comparison Operators
 template<typename Data>
-bool Vector<Data> :: operator==(const Vector & other) const noexcept{
-
-    if (size != other.size)
-        return false;
-    
-    for(unsigned long i=0; i<size; i++){
-        if(elements[i] != other.elements[i]){
-            return false;
-        }
-
+bool Vector<Data>::operator==(const Vector &vec) const noexcept{
+    if(this == &vec){
+        return true;
     }
 
+    if(size != vec.size){
+        return false;
+    }
+
+    for(unsigned long i = 0; i < size; i++){
+        if(elements[i] != vec.elements[i]){
+            return false;
+        }
+    }
+    
     return true;
 }
 
 template<typename Data>
-bool Vector<Data> :: operator!=(const Vector & other) const noexcept{
+bool Vector<Data>::operator!=(const Vector & other) const noexcept{
     return !(*this == other);
 }
 

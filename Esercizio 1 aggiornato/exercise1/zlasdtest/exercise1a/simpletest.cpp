@@ -435,7 +435,7 @@ void stestVectorListString(uint & testnum, uint & testerr) {
     SetAt(loctestnum, loctesterr, vec, true, 2, string("C"));
 
     lasd::List<string> lst;
-    InsertAtFront(loctestnum, loctesterr, lst, true, string("B"));
+    InsertAtFront(loctestnum, loctesterr, lst, true, string("B"));                   
     InsertAtBack(loctestnum, loctesterr, lst, true, string("C"));
     InsertAtFront(loctestnum, loctesterr, lst, true, string("A"));
 

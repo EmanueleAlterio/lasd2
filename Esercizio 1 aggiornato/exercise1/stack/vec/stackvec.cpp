@@ -28,8 +28,8 @@ StackVec<Data> :: StackVec(MappableContainer<Data> && container){
         size = container.Size();
         elements = new Data[size];
         
-        container.Traverse(
-            [this](const Data &data){
+        container.Map(
+            [this](Data &data){
                 Push(std::move(data));
             }
         );
@@ -60,8 +60,8 @@ StackVec<Data>& StackVec<Data>::operator=(StackVec &&stackVec) noexcept{
 
 template<typename Data>
 bool StackVec<Data> :: operator==(const StackVec &stackVec) const noexcept{
-    if(this != &stackVec){
-        return false;
+    if(this == &stackVec){
+        return true;
     }
 
     return Vector<Data> :: operator==(stackVec);
