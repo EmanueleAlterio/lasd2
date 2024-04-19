@@ -16,8 +16,9 @@ void mytest() {
   loctestnum = 0; loctesterr = 0;
   VectorTest(loctestnum, loctesterr);
   ListTest(loctestnum, loctesterr);
+
   testnum += loctestnum; testerr += loctesterr;
 
   cout << endl << "*************Fine My Test*************";
-  cout << endl << "Errori: " << testerr << " Test:" << testnum << endl;
+  cout << endl << "Errori: " << testerr << " Test: " << testnum << endl;
 }
