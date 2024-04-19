@@ -1,5 +1,6 @@
 
 #include "./VectorTest/vectest.hpp"
+#include "./ListTest/listtest.hpp"
 
 #include <iostream>
 
@@ -14,6 +15,7 @@ void mytest() {
   
   loctestnum = 0; loctesterr = 0;
   VectorTest(loctestnum, loctesterr);
+  ListTest(loctestnum, loctesterr);
   testnum += loctestnum; testerr += loctesterr;
 
   cout << endl << "*************Fine My Test*************";

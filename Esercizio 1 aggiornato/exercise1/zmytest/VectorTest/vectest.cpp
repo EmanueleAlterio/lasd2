@@ -13,7 +13,7 @@ using namespace std;
 
 void testVectorInt(uint & testnum, uint & testerr) {
     uint loctestnum = 0, loctesterr = 0;
-    cout << endl << "Inizio Vector<int> Test:" << endl;
+    cout << endl << "Inizio Vector<int> Test:" << endl << endl;
 
     try{
         {
@@ -170,25 +170,93 @@ void testVectorDouble(uint & testnum, uint & testerr) {
 }
 
 
+void testVectorString(uint & testnum, uint & testerr) {
+    uint loctestnum = 0, loctesterr = 0;
+    cout << endl << "Inizio Vector<string> Test:" << endl;
 
-void testVector(uint & testnum, uint & testerr) {
-  uint loctestnum = 0, loctesterr = 0;
+    try{
+        {
+            lasd::Vector<string> vec;
+            Empty(loctestnum, loctesterr, vec, true);
+            SetAt(loctestnum, loctesterr, vec, false, 0, string("A"));
+            GetFront(loctestnum, loctesterr, vec, false, string("A"));
+            GetBack(loctestnum, loctesterr, vec, false, string("A"));
+            Exists(loctestnum, loctesterr, vec, false, string("A"));
+        }
+        {
+            cout << endl << "<<Creazione di un vettore con specific constructor(size = 3).>>" << endl;
+            lasd::Vector<string> vec(3);
+            Empty(loctestnum, loctesterr, vec, false);
+            Size(loctestnum, loctesterr, vec, true, 3);
+            Size(loctestnum, loctesterr, vec, false, 4);
+            SetAt(loctestnum, loctesterr, vec, true, 0, string("A"));
+            SetAt(loctestnum, loctesterr, vec, true, 1, string("B"));
+            SetAt(loctestnum, loctesterr, vec, true, 2, string("C"));
+            SetAt(loctestnum, loctesterr, vec, false, 3, string("D"));
+            GetFront(loctestnum, loctesterr, vec, false, string("B"));
+            GetFront(loctestnum, loctesterr, vec, true, string("A"));
+            GetBack(loctestnum, loctesterr, vec, false, string("D"));
+            GetBack(loctestnum, loctesterr, vec, true, string("C"));
+            TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<string>);
+            TraversePostOrder(loctestnum, loctesterr, vec, true, &TraversePrint<string>);
+            FoldPreOrder(loctestnum, loctesterr, vec, true, &FoldAdd<string>, string("?") , string("?ABC") );
+            FoldPreOrder(loctestnum, loctesterr, vec, false, &FoldAdd<string>, string("?") , string("ABC") );
+            vec.Resize(1);
+            Empty(loctestnum, loctesterr, vec, false);
+            Size(loctestnum, loctesterr, vec, true, 1);
+            vec.Resize(0);
+            Empty(loctestnum, loctesterr, vec, true);
+            vec.Resize(3);
+            SetAt(loctestnum, loctesterr, vec, true, 0, string("A"));
+            SetAt(loctestnum, loctesterr, vec, true, 1, string("A"));
+            SetAt(loctestnum, loctesterr, vec, true, 2,  string("A"));
 
-  testVectorInt(loctestnum, loctesterr);
-  testVectorDouble(loctestnum, loctesterr);
-  //testVectorString(loctestnum, loctesterr);
-  testnum += loctestnum;
-  testerr += loctesterr;
-  cout << endl << "Test Vettori ";
-  cout << endl << "Errori: " << loctesterr << " Test: " << loctestnum << endl;
+            cout << endl << "<<Creazione copvec con specific constructor(copy)>>" << endl;
+            lasd::Vector<string> copvec(vec);
+            TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<string>);
+            TraversePostOrder(loctestnum, loctesterr, vec, true, &TraversePrint<string>);
+
+            EqualVector(loctestnum, loctesterr, vec, copvec, true);
+            SetAt(loctestnum, loctesterr, copvec, true, 2, string("C"));
+            EqualVector(loctestnum, loctesterr, vec, copvec, false);
+        }
+        {
+            lasd::Vector<string> vec(2);
+            SetAt(loctestnum, loctesterr, vec, true, 0,  string("N"));
+            SetAt(loctestnum, loctesterr, vec, true, 1,  string("A"));
+
+            cout << endl << "<<Creazione movvec con specific constructor(move)>>" << endl;
+            lasd::Vector<string> copvec(vec);
+            lasd::Vector<string> movvec(move(vec));
+            TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<string>);
+            TraversePostOrder(loctestnum, loctesterr, vec, true, &TraversePrint<string>);
+            EqualVector(loctestnum, loctesterr, vec, movvec, false);
+            EqualVector(loctestnum, loctesterr, movvec, copvec, true);
+            movvec.Clear();
+            Size(loctestnum, loctesterr, movvec, true, 0);
+
+        }
+    }catch(...){
+            loctestnum++; loctesterr++;
+            cout << endl << "Errore!" << endl;
+    }
+
+
+    cout << endl << "Fine Vector<string> Test:";
+    cout << endl << "Errori: " << loctesterr  << " Test: " << loctestnum << endl;
+    testnum += loctestnum;
+    testerr += loctesterr;
 }
+
 
 void VectorTest(uint & testnum, uint & testerr){
     uint loctestnum = 0, loctesterr = 0;
 
-    cout << endl << "Inizio Test Vettori";
-    testVector(loctestnum, loctesterr);
+    cout << endl << "Inizio Test Vettori" << endl << endl;
 
+    testVectorInt(loctestnum, loctesterr);
+    testVectorDouble(loctestnum, loctesterr);
+    testVectorString(loctestnum, loctesterr);
     testnum += loctestnum;
     testerr += loctesterr;
     cout << endl << "Fine Test Vettori";
