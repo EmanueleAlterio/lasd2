@@ -144,33 +144,30 @@ public:
 /* ************************************************************************** */
 
 template <typename Data>
-class BreadthMappableContainer : virtual public MappableContainer<Data>, 
-                                virtual public BreadthTraversableContainer<Data>{
+class BreadthMappableContainer : virtual public MappableContainer<Data>, virtual public BreadthTraversableContainer<Data>{
 
 public:
 
   // Destructor
   virtual ~BreadthMappableContainer() = default;
 
-  /* ************************************************************************ */
 
-  // Copy and Move assignment of abstract types is not possible.
+  // Copy assignment of abstract types is not possible.
   BreadthMappableContainer& operator=(const BreadthMappableContainer&) = delete;
+
+  // Move assignment of abstract types is not possible.
   BreadthMappableContainer& operator=(BreadthMappableContainer&&) noexcept = delete;
 
-  /* ************************************************************************ */
 
   // Comparison operators of abstract types is not possible.
   bool operator==(const BreadthMappableContainer&) const noexcept = delete;
   bool operator!=(const BreadthMappableContainer&) const noexcept = delete;
 
-  /* ************************************************************************ */
 
   // Specific member function
   using typename MappableContainer<Data>::MapFun;
   virtual void BreadthMap(MapFun) = 0;
 
-  /* ************************************************************************ */
 
   // Specific member function (inherited from MappableContainer)
   virtual void Map(MapFun) override;

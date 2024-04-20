@@ -14,7 +14,7 @@ Vector<Data> :: Vector(const unsigned long initialSize){
         elements = new Data[size];
 
     }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+            std::cerr << "Cannot allocate memory " <<  exception.what();
     }
 }
 
@@ -32,7 +32,7 @@ Vector<Data> :: Vector(const TraversableContainer<Data> & traversableCon){
         );
 
     }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+            std::cerr << "Cannot allocate memory " <<  exception.what();
     }
 }
 
@@ -49,7 +49,7 @@ Vector<Data> :: Vector(MappableContainer<Data> && mappableCon){
             }
         );
     }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+            std::cerr << "Cannot allocate memory "<<  exception.what();
     }
 }
 
@@ -64,7 +64,7 @@ Vector<Data>::Vector(const Vector & other){
         std::copy(other.elements, other.elements + size, elements);
 
     }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+            std::cerr << "Cannot allocate memory " <<  exception.what();
     }
 }
 
@@ -93,6 +93,8 @@ Vector<Data> :: ~Vector(){
                 std::swap(*tmp, *this);
 
                 delete tmp;
+                return *this;
+                
             }catch(std::bad_alloc &exception){
             std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
             }
@@ -105,8 +107,8 @@ Vector<Data> :: ~Vector(){
 template<typename Data>
 Vector<Data>& Vector<Data>::operator=(Vector &&other) noexcept{
 
-    std::swap(elements, other.elements); //Scambia i puntatori agli elementi
     std::swap(size, other.size);//Scambia le dimensioni dei vettori 
+    std::swap(elements, other.elements); //Scambia i puntatori agli elementi
 
     return *this;
 }
@@ -132,8 +134,8 @@ bool Vector<Data>::operator==(const Vector &vec) const noexcept{
 }
 
 template<typename Data>
-bool Vector<Data>::operator!=(const Vector & other) const noexcept{
-    return !(*this == other);
+bool Vector<Data>::operator!=(const Vector & vec) const noexcept{
+    return !(*this == vec);
 }
 
 
@@ -160,15 +162,16 @@ void Vector<Data> :: Resize(const unsigned long new_size) {
             Data* tmp = new Data[new_size];
 
             
-            unsigned long min = std::min(size, new_size); //copia dei valori del vecchio vettore nel vettore temporaneo
+            unsigned long min = std::min(size, new_size);
 
             for(unsigned long i=0; i<min; i++){
                 std::swap(elements[i], tmp[i]);
             }
 
-            std::swap(elements, tmp); //scambia i valori dei due puntatori
-            size = new_size; //aggiornamento della dimensione 
-            delete[] tmp; //elimina il vettore temp
+            std::swap(elements, tmp); 
+            size = new_size;  
+            delete[] tmp; 
+
         }catch(std::bad_alloc &exception){
             std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
         }
@@ -185,7 +188,7 @@ void Vector<Data> :: Resize(const unsigned long new_size) {
 template<typename Data>
 const Data& Vector<Data> :: operator[](const unsigned long index) const{
     if(index >= size){
-        throw std:: out_of_range("[EXCEPTION] index out of bounds");
+        throw std:: out_of_range("index out of bounds");
     }
     
     return elements[index];
@@ -194,7 +197,7 @@ const Data& Vector<Data> :: operator[](const unsigned long index) const{
 template<typename Data>
 Data& Vector<Data>::operator[](const unsigned long index){
     if(index >= size){
-        throw std::out_of_range("[EXCEPTION]: Vector index out of range");
+        throw std::out_of_range("index out of range");
     }
 
     return elements[index];
@@ -205,39 +208,39 @@ Data& Vector<Data>::operator[](const unsigned long index){
 //Front
 template<typename Data>
 const Data& Vector<Data>::Front() const{
-    if(size > 0){
-        return elements[0];
+    if(size == 0){
+        throw std::length_error("Empty Vector");   
     }
 
-    throw std::length_error("[EXCEPTION]: Empty Vector");
+    return elements[0];
 }
 
 template<typename Data>
 Data& Vector<Data>::Front(){
-    if(size > 0){
-        return elements[0];
+    if(size == 0){
+        throw std::length_error("Empty Vector");
     }
-
-    throw std::length_error("[EXCEPTION]: Empty Vector");
+    return elements[0];
+    
 }
 
 //Back
 template<typename Data>
 const Data& Vector<Data>::Back() const{
-    if(size > 0){
-        return elements[size-1];
+    if(size == 0){
+        throw std::length_error("Empty Vector");
     }
-
-    throw std::length_error("[EXCEPTION]: Empty Vector");
+    return elements[size-1];
+    
 }
 
 template<typename Data>
 Data& Vector<Data>::Back(){
-    if(size > 0){
-        return elements[size-1];
+    if(size == 0){
+        throw std::length_error("Empty Vector");
     }
 
-    throw std::length_error("[EXCEPTION]: Empty Vector");
+    return elements[size-1];
 }
 
     

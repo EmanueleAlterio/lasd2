@@ -1,8 +1,6 @@
 #include "list.hpp"
 namespace lasd {
 
-/* ************************************************************************** */
-
     //Specific constructor
     template<typename Data>
     List<Data>::Node::Node(const Data & data){
@@ -33,7 +31,7 @@ namespace lasd {
     //Copy Assignment
     template<typename Data>
     List<Data>::Node& List<Data>::Node:: operator=(const Node & node){
-        if(this != &node){ //Controlla se gli indirizzi di memoria sono gli stessi
+        if(this != &node){ 
             element = node.element;
             next = node.next;
         }
@@ -44,7 +42,7 @@ namespace lasd {
     //Move Assignment
     template<typename Data>
     List<Data>::Node& List<Data>::Node:: operator=(Node && node) noexcept{
-        if(this != &node){ //Controlla se gli indirizzi di memoria sono gli stessi
+        if(this != &node){ 
             std::swap(element, node.element);
             std::swap(next, node.next);
         }
@@ -58,11 +56,12 @@ namespace lasd {
     }
 
     template<typename Data>
-    bool List<Data>::Node:: operator==(const Node & node) const noexcept{
-        return (element == node.element) &&
-            ((next == nullptr && node.next == nullptr) || ((next != nullptr && node.next != nullptr) && *next == *(node.next))); //Viene confrontato il nodo successivo richiamando ricorsivamente ==
+    bool List<Data>::Node::operator==(const Node &node)const noexcept{
+        return (element == node.element) && 
+            ((next == nullptr && node.next == nullptr) || 
+            ((next != nullptr && node.next != nullptr) && *next == *(node.next)));
     }
-
+    
     template<typename Data>
     bool List<Data>::Node:: operator!=(const Node & node) const noexcept{
         return !(*this == node);
@@ -138,7 +137,7 @@ namespace lasd {
                 std::swap(*temp, *this);
                 delete temp;
             }catch(std::bad_alloc &exception){
-                std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+                std::cerr << "Cannot allocate memory " <<  exception.what();
             }
 
         }
@@ -176,7 +175,7 @@ namespace lasd {
 
         return (size == other.size) &&
             ((head == nullptr && other.head == nullptr) || 
-            ((head != nullptr && other.head != nullptr) && (*head == *(other.head)))); //Utilizza l'operatore == dei confronti dei nodi
+            ((head != nullptr && other.head != nullptr) && (*head == *(other.head)))); 
     }
 
     template<typename Data>
@@ -202,7 +201,7 @@ namespace lasd {
             size++;
 
         }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+            std::cerr << "Cannot allocate memory " <<  exception.what();
         }
 
     }   
@@ -221,7 +220,7 @@ namespace lasd {
 
             size++;
         }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+            std::cerr << "Cannot allocate memory " <<  exception.what();
         }
     }
 
@@ -252,7 +251,7 @@ namespace lasd {
     Data List<Data> :: FrontNRemove(){
         if(head != nullptr){
             
-            Data data = head->element;
+            Data data = Front();
             List<Data>::RemoveFromFront();
 
             return data;
@@ -279,7 +278,7 @@ namespace lasd {
             tail = newNode;
             size++;
         }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+            std::cerr << "Cannot allocate memory " <<  exception.what();
         }
         
     }
@@ -299,18 +298,16 @@ namespace lasd {
             tail = newNode;
             size++;
         }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+            std::cerr << "Cannot allocate memory " <<  exception.what();
         }
     }
 
 
     template<typename Data>
     void List<Data>::Clear(){
-        delete head;
-
-        size = 0;
-        head = nullptr;
-        tail = nullptr;
+        while(head!=nullptr) {
+            RemoveFromFront(); 
+        }
         
     }
 
@@ -378,12 +375,13 @@ namespace lasd {
     template<typename Data>
     const Data& List<Data> :: operator[](const unsigned long index) const{
         if(index >= size){ //index essendo ulong non ha bisogno del controllo < 0 in quanto non può mai esserlo
-            throw std::out_of_range("[EXCEPTION]: List index out of range");
+            throw std::out_of_range("List index out of range");
         }
 
-        if(index == size - 1)
+        if(index == size - 1){
             return tail->element;
-        
+        }
+
         Node* curr = head;
         for(unsigned long i = 0; i < index; i++,curr=curr->next){}
         
@@ -393,8 +391,8 @@ namespace lasd {
 
    template<typename Data>
     Data& List<Data>::operator[](const unsigned long index){
-        if(index < 0 || index >= size){
-            throw std::out_of_range("[EXCEPTION]: List index out of range");
+        if(index >= size){
+            throw std::out_of_range("List index out of range");
         }
 
        if(index == size - 1){
@@ -402,7 +400,9 @@ namespace lasd {
         }
 
         Node *curr = head;
-        for(unsigned long i = 0; i < index ; i++, curr = curr->next){}
+        for(unsigned long i = 0; i < index ; i++){
+            curr = curr->next;
+        }
 
         return curr->element;
     }
@@ -438,7 +438,7 @@ namespace lasd {
             return tail->element;
         }
 
-        throw std::length_error("[EXCEPTION]: List is empty");
+        throw std::length_error("List is empty");
     }
     
     template<typename Data>
@@ -447,7 +447,7 @@ namespace lasd {
             return tail->element;
         }
 
-        throw std::length_error("[EXCEPTION]: List Vector");
+        throw std::length_error("List is empty");
     }
 
    // Specific member function (inherited from TraversableContainer)
@@ -518,7 +518,4 @@ namespace lasd {
             fun(node->element);
         }
     }
-
-
-
 }

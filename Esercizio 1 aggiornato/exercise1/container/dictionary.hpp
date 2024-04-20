@@ -11,27 +11,24 @@
 namespace lasd {
 
 template <typename Data>
-class DictionaryContainer : virtual public TestableContainer<Data>, 
-                            virtual public MappableContainer<Data>{
+class DictionaryContainer : virtual public TestableContainer<Data>, virtual public MappableContainer<Data>{
  
 public:
 
   // Destructor
   virtual ~DictionaryContainer() = default;
 
-  /* ************************************************************************ */
 
-  // Copy and Move assignment of abstract types is not possible.
+  // Copy assignment of abstract types is not possible.
   DictionaryContainer& operator=(const DictionaryContainer&) = delete;
-  DictionaryContainer& operator=(DictionaryContainer&&) noexcept = delete;
 
-  /* ************************************************************************ */
+  // Move assignment of abstract types is not possible.
+  DictionaryContainer& operator=(DictionaryContainer&&) noexcept = delete;
 
   // Comparison operators
   bool operator==(const DictionaryContainer&) const noexcept = delete;
   bool operator!=(const DictionaryContainer&) const noexcept = delete;
   
-  /* ************************************************************************ */
 
   // Specific member functions
   
