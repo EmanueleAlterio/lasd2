@@ -60,7 +60,7 @@ void testListInt(uint & testnum, uint & testerr) {
       TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<int>);
 
 
-      cout << endl << "<<Creazione copia della lista con specific constructor(copy)>>" << endl;
+      cout << endl << "<<specific constructor(copy)>>" << endl;
       lasd::List<int> coplist(lst);
       EqualList(loctestnum, loctesterr, lst, coplist, true);
       Size(loctestnum, loctesterr, lst, true, 3);
@@ -71,12 +71,12 @@ void testListInt(uint & testnum, uint & testerr) {
       TraversePreOrder(loctestnum, loctesterr, coplist, true, &TraversePrint<int>);
 
 
-      cout << endl << "<<Crezione copia della lista con specific constructor(move)>>" << endl;
+      cout << endl << "<<specific constructor(move)>>" << endl;
       lasd::List<int> movlist(move(lst));
       EqualList(loctestnum, loctesterr, lst, movlist, false);
       EqualList(loctestnum, loctesterr, movlist, coplist, true);
 
-      cout << endl << "<<Crezione della lista con specific constructor(list from vector)>>" << endl;
+      cout << endl << "<<specific constructor(list from vector)>>" << endl;
       lasd::Vector<int> vec(5);
 
       SetAt(loctestnum, loctesterr, vec, true, 0, 1);
@@ -176,7 +176,7 @@ void testListDouble(uint & testnum, uint & testerr) {
       TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
 
 
-      cout << endl << "<<Creazione copia della lista con specific constructor(copy)>>" << endl;
+      cout << endl << "<<specific constructor(copy)>>" << endl;
       lasd::List<double> coplist(lst);
       EqualList(loctestnum, loctesterr, lst, coplist, true);
       Size(loctestnum, loctesterr, lst, true, 3);
@@ -187,12 +187,12 @@ void testListDouble(uint & testnum, uint & testerr) {
       TraversePreOrder(loctestnum, loctesterr, coplist, true, &TraversePrint<double>);
 
 
-      cout << endl << "<<Crezione copia della lista con specific constructor(move)>>" << endl;
+      cout << endl << "<<specific constructor(move)>>" << endl;
       lasd::List<double> movlist(move(lst));
       EqualList(loctestnum, loctesterr, lst, movlist, false);
       EqualList(loctestnum, loctesterr, movlist, coplist, true);
 
-      cout << endl << "<<Crezione della lista con specific constructor(list from vector)>>" << endl;
+      cout << endl << "<<specific constructor(list from vector)>>" << endl;
       lasd::Vector<double> vec(5);
 
       SetAt(loctestnum, loctesterr, vec, true, 0, 1.5);
@@ -291,7 +291,7 @@ void testListString(uint & testnum, uint & testerr) {
       TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<string>);
 
 
-      cout << endl << "<<Creazione copia della lista con specific constructor(copy)>>" << endl;
+      cout << endl << "<<specific constructor(copy)>>" << endl;
       lasd::List<string> coplist(lst);
       EqualList(loctestnum, loctesterr, lst, coplist, true);
       Size(loctestnum, loctesterr, lst, true, 3);
@@ -302,12 +302,12 @@ void testListString(uint & testnum, uint & testerr) {
       TraversePreOrder(loctestnum, loctesterr, coplist, true, &TraversePrint<string>);
 
 
-      cout << endl << "<<Crezione copia della lista con specific constructor(move)>>" << endl;
+      cout << endl << "<<specific constructor(move)>>" << endl;
       lasd::List<string> movlist(move(lst));
       EqualList(loctestnum, loctesterr, lst, movlist, false);
       EqualList(loctestnum, loctesterr, movlist, coplist, true);
 
-      cout << endl << "<<Crezione della lista con specific constructor(list from vector)>>" << endl;
+      cout << endl << "<<specific constructor(list from vector)>>" << endl;
       lasd::Vector<string> vec(5);
 
       SetAt(loctestnum, loctesterr, vec, true, 0, string("A"));

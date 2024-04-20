@@ -52,7 +52,7 @@ void testVectorInt(uint & testnum, uint & testerr) {
             SetAt(loctestnum, loctesterr, vec, true, 1, 2);
             SetAt(loctestnum, loctesterr, vec, true, 2, 3);
 
-            cout << endl << "<<Creazione copvec con specific constructor(copy)>>" << endl;
+            cout << endl << "<<specific constructor(copy)>>" << endl;
             lasd::Vector<int> copvec(vec);
             TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<int>);
             TraversePostOrder(loctestnum, loctesterr, vec, true, &TraversePrint<int>);
@@ -66,7 +66,7 @@ void testVectorInt(uint & testnum, uint & testerr) {
             SetAt(loctestnum, loctesterr, vec, true, 0, 1);
             SetAt(loctestnum, loctesterr, vec, true, 1, 2);
 
-            cout << endl << "<<Creazione movvec con specific constructor(move)>>" << endl;
+            cout << endl << "<<specific constructor(move)>>" << endl;
             lasd::Vector<int> copvec(vec);
             lasd::Vector<int> movvec(move(vec));
             TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<int>);
@@ -131,7 +131,7 @@ void testVectorDouble(uint & testnum, uint & testerr) {
             SetAt(loctestnum, loctesterr, vec, true, 1, 1.2);
             SetAt(loctestnum, loctesterr, vec, true, 2, 1.3);
 
-            cout << endl << "<<Creazione copvec con specific constructor(copy)>>" << endl;
+            cout << endl << "<<specific constructor(copy)>>" << endl;
             lasd::Vector<double> copvec(vec);
             TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<double>);
             TraversePostOrder(loctestnum, loctesterr, vec, true, &TraversePrint<double>);
@@ -145,7 +145,7 @@ void testVectorDouble(uint & testnum, uint & testerr) {
             SetAt(loctestnum, loctesterr, vec, true, 0, 1.1);
             SetAt(loctestnum, loctesterr, vec, true, 1, 1.2);
 
-            cout << endl << "<<Creazione movvec con specific constructor(move)>>" << endl;
+            cout << endl << "<<specific constructor(move)>>" << endl;
             lasd::Vector<double> copvec(vec);
             lasd::Vector<double> movvec(move(vec));
             TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<double>);
@@ -211,7 +211,7 @@ void testVectorString(uint & testnum, uint & testerr) {
             SetAt(loctestnum, loctesterr, vec, true, 1, string("A"));
             SetAt(loctestnum, loctesterr, vec, true, 2,  string("A"));
 
-            cout << endl << "<<Creazione copvec con specific constructor(copy)>>" << endl;
+            cout << endl << "<<specific constructor(copy)>>" << endl;
             lasd::Vector<string> copvec(vec);
             TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<string>);
             TraversePostOrder(loctestnum, loctesterr, vec, true, &TraversePrint<string>);
@@ -225,7 +225,7 @@ void testVectorString(uint & testnum, uint & testerr) {
             SetAt(loctestnum, loctesterr, vec, true, 0,  string("N"));
             SetAt(loctestnum, loctesterr, vec, true, 1,  string("A"));
 
-            cout << endl << "<<Creazione movvec con specific constructor(move)>>" << endl;
+            cout << endl << "<<specific constructor(move)>>" << endl;
             lasd::Vector<string> copvec(vec);
             lasd::Vector<string> movvec(move(vec));
             TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<string>);
@@ -260,5 +260,4 @@ void VectorTest(uint & testnum, uint & testerr){
     testnum += loctestnum;
     testerr += loctesterr;
     cout << endl << "Fine Test Vettori";
-    cout << endl << "Errori: " << testerr << " Test: " << testnum << endl;
 }

@@ -63,6 +63,10 @@ bool StackVec<Data> :: operator==(const StackVec &stackVec) const noexcept{
     if(this == &stackVec){
         return true;
     }
+    
+    if(index != stackVec.index){
+        return false;
+    }
 
     return Vector<Data> :: operator==(stackVec);
 }
