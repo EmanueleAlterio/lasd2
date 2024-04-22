@@ -2,6 +2,7 @@
 #include "./VectorTest/vectest.hpp"
 #include "./ListTest/listtest.hpp"
 #include "./StackTest/stktest.hpp"
+#include "./QueueTest/queuetest.hpp"
 
 #include <iostream>
 
@@ -18,6 +19,7 @@ void mytest() {
   VectorTest(loctestnum, loctesterr);
   ListTest(loctestnum, loctesterr);
   StackTest(loctestnum, loctesterr);
+  QueueTest(loctestnum, loctesterr);
 
   testnum += loctestnum; testerr += loctesterr;
 

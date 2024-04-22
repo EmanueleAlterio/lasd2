@@ -44,10 +44,11 @@ void testStackInt(Stk & stk, uint & testnum, uint & testerr) {
 
         cout << endl << "stack con specific constructor(move)" << endl;
         Stk movstk(move(stk));
+        Stk movs2(move(copstk));
 
         Empty(loctestnum, loctesterr, stk, true);
         EqualStack(loctestnum, loctesterr, stk, movstk, false);
-        EqualStack(loctestnum, loctesterr, copstk, movstk, false);
+        EqualStack(loctestnum, loctesterr, copstk, movs2, false);
 
 
 
@@ -190,6 +191,16 @@ void StackTest(uint & testnum, uint & testerr){
 
     lasd::StackVec<string> stackvecstr;
     testStackString(stackvecstr, loctestnum, loctesterr);
+
+    lasd::StackLst<int> stacklstint;
+    testStackInt(stacklstint, loctestnum, loctesterr);
+
+    lasd::StackLst<double> stacklstdouble;
+    testStackDouble(stacklstdouble, loctestnum, loctesterr);
+
+    lasd::StackLst<string> stacklststr;
+    testStackString(stacklststr, loctestnum, loctesterr);
+
     testnum += loctestnum;
     testerr += loctesterr;
     cout << endl << "Fine Test Stack";
