@@ -13,7 +13,6 @@ using namespace std;
 
 void testListInt(uint & testnum, uint & testerr) {
   uint loctestnum = 0, loctesterr = 0;
-  cout << endl << "Inizio List<int> Test:" << endl;
   try {
     {
       lasd::List<int> lst;
@@ -121,7 +120,6 @@ void testListInt(uint & testnum, uint & testerr) {
     testnum += loctestnum;
     testerr += loctesterr;
 
-    cout << endl <<  "Fine List<int> Test!" ;
     cout << endl<< "Errori: "<< loctesterr << " Test: " << loctestnum << endl;
 
 }
@@ -129,7 +127,6 @@ void testListInt(uint & testnum, uint & testerr) {
 
 void testListDouble(uint & testnum, uint & testerr) {
   uint loctestnum = 0, loctesterr = 0;
-  cout << endl << "Inizio List<double> Test:" << endl;
   try {
     {
       lasd::List<double> lst;
@@ -237,14 +234,12 @@ void testListDouble(uint & testnum, uint & testerr) {
     testnum += loctestnum;
     testerr += loctesterr;
 
-    cout << endl <<  "Fine List<double> Test!" ;
     cout << endl<< "Errori: "<< loctesterr << " Test: " << loctestnum << endl;
 
 }
 
 void testListString(uint & testnum, uint & testerr) {
   uint loctestnum = 0, loctesterr = 0;
-  cout << endl << "Inizio List<string> Test:" << endl;
   try {
     {
       lasd::List<string> lst;
@@ -352,21 +347,30 @@ void testListString(uint & testnum, uint & testerr) {
     testnum += loctestnum;
     testerr += loctesterr;
 
-    cout << endl <<  "Fine List<int> Test!" ;
     cout << endl<< "Errori: "<< loctesterr << " Test: " << loctestnum << endl;
 
 }
 
 
 void ListTest(uint & testnum, uint & testerr){
-    cout << endl << "Inizio Test Lista" << endl << endl;
+    cout << endl << endl << "Inizio Test Lista" << endl << endl;
+    cout << "-------------------------------------------------------------------------------" << endl;
+
     uint loctestnum = 0, loctesterr = 0;
+    
+    cout << endl << "~~~LIST<INT>~~~" << endl;
     testListInt(loctestnum, loctesterr);
+
+    cout << endl << "~~~LIST<DOUBLE>~~~" << endl;
     testListDouble(loctestnum, loctesterr);
+
+    cout << endl << "~~~LIST<STRING>~~~" << endl;
     testListString(loctestnum, loctesterr);
 
     cout << endl << "Fine test Lista";
     cout << endl << "Errori: " << loctesterr << " Test: " << loctestnum << endl;
+    cout << "-------------------------------------------------------------------------------" << endl;
+
 
     testnum += loctestnum;
     testerr += loctesterr;

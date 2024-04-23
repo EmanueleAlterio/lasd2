@@ -13,7 +13,6 @@ using namespace std;
 
 void testVectorInt(uint & testnum, uint & testerr) {
     uint loctestnum = 0, loctesterr = 0;
-    cout << endl << "Inizio Vector<int> Test:" << endl << endl;
 
     try{
         {
@@ -83,7 +82,6 @@ void testVectorInt(uint & testnum, uint & testerr) {
             cout << endl << "Errore!" << endl;
     }
 
-    cout << endl << "Fine Vector<int> Test:";
     cout << endl << "Errori: " << loctesterr  << " Test: " << loctestnum << endl;
     testnum += loctestnum;
     testerr += loctesterr;
@@ -92,7 +90,6 @@ void testVectorInt(uint & testnum, uint & testerr) {
 
 void testVectorDouble(uint & testnum, uint & testerr) {
     uint loctestnum = 0, loctesterr = 0;
-    cout << endl << "Inizio Vector<double> Test:" << endl;
 
     try{
         {
@@ -162,8 +159,6 @@ void testVectorDouble(uint & testnum, uint & testerr) {
             cout << endl << "Errore!" << endl;
     }
 
-
-    cout << endl << "Fine Vector<double> Test:";
     cout << endl << "Errori: " << loctesterr  << " Test: " << loctestnum << endl;
     testnum += loctestnum;
     testerr += loctesterr;
@@ -172,7 +167,6 @@ void testVectorDouble(uint & testnum, uint & testerr) {
 
 void testVectorString(uint & testnum, uint & testerr) {
     uint loctestnum = 0, loctesterr = 0;
-    cout << endl << "Inizio Vector<string> Test:" << endl;
 
     try{
         {
@@ -242,7 +236,6 @@ void testVectorString(uint & testnum, uint & testerr) {
     }
 
 
-    cout << endl << "Fine Vector<string> Test:";
     cout << endl << "Errori: " << loctesterr  << " Test: " << loctestnum << endl;
     testnum += loctestnum;
     testerr += loctesterr;
@@ -252,12 +245,23 @@ void testVectorString(uint & testnum, uint & testerr) {
 void VectorTest(uint & testnum, uint & testerr){
     uint loctestnum = 0, loctesterr = 0;
 
-    cout << endl << "Inizio Test Vettori" << endl << endl;
+    cout << endl << "Inizio Test Vettori" << endl;
+    cout << "-------------------------------------------------------------------------------" << endl;
 
+    cout << endl << "~~~VECTOR<INT>~~~" << endl;
     testVectorInt(loctestnum, loctesterr);
+
+    cout << endl << "~~~VECTOR<DOUBLE>~~~" << endl;
     testVectorDouble(loctestnum, loctesterr);
+
+    cout << endl << "~~~VECTOR<STRING>~~~" << endl;
     testVectorString(loctestnum, loctesterr);
     testnum += loctestnum;
     testerr += loctesterr;
+
     cout << endl << "Fine Test Vettori";
+    cout << endl << "Errori: " << loctesterr << " Test: " << loctestnum << endl;
+
+    cout << "-------------------------------------------------------------------------------" << endl;
+
 }

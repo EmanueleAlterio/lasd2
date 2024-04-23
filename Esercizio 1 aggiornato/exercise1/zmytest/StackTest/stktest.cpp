@@ -12,7 +12,6 @@ using namespace std;
 template <typename Stk>
 void testStackInt(Stk & stk, uint & testnum, uint & testerr) {
 
-    cout << endl << "Inizio Stack<int> Test" << endl;
     uint loctestnum = 0, loctesterr = 0;
     try
     {
@@ -60,7 +59,6 @@ void testStackInt(Stk & stk, uint & testnum, uint & testerr) {
   
     testnum += loctestnum;
     testerr += loctesterr;
-    cout << endl << "Fine Stack<int> Test:";
     cout << endl << "Errori: " << loctesterr  << " Test: " << loctestnum << endl;
     
 }
@@ -69,7 +67,6 @@ void testStackInt(Stk & stk, uint & testnum, uint & testerr) {
 template <typename Stk>
 void testStackDouble(Stk & stk, uint & testnum, uint & testerr) {
 
-    cout << endl << "Inizio Stack<double> Test" << endl;
     uint loctestnum = 0, loctesterr = 0;
     try
     {
@@ -116,7 +113,6 @@ void testStackDouble(Stk & stk, uint & testnum, uint & testerr) {
   
     testnum += loctestnum;
     testerr += loctesterr;
-    cout << endl << "Fine Stack<double> Test:";
     cout << endl << "Errori: " << loctesterr  << " Test: " << loctestnum << endl;
     
 }
@@ -126,7 +122,6 @@ void testStackDouble(Stk & stk, uint & testnum, uint & testerr) {
 template <typename Stk>
 void testStackString(Stk & stk, uint & testnum, uint & testerr) {
 
-    cout << endl << "Inizio Stack<string> Test" << endl;
     uint loctestnum = 0, loctesterr = 0;
     try
     {
@@ -173,7 +168,6 @@ void testStackString(Stk & stk, uint & testnum, uint & testerr) {
   
     testnum += loctestnum;
     testerr += loctesterr;
-    cout << endl << "Fine Stack<string> Test:";
     cout << endl << "Errori: " << loctesterr  << " Test: " << loctestnum << endl;
     
 }
@@ -182,26 +176,37 @@ void testStackString(Stk & stk, uint & testnum, uint & testerr) {
 void StackTest(uint & testnum, uint & testerr){
     uint loctestnum = 0, loctesterr = 0;
 
-    cout << endl << "Inizio Test Stack" << endl << endl;
+    cout << endl << endl << "Inizio Test Stack" << endl;
+    cout << "-------------------------------------------------------------------------------" << endl;
+
+    cout << endl << "~~~STACKVEC<INT>~~~" << endl;
     lasd::StackVec<int> stackvecint;
     testStackInt(stackvecint, loctestnum, loctesterr);
 
+    cout << endl << "~~~STACKVEC<DOUBLE>~~~" << endl;
     lasd::StackVec<double> stackvecdouble;
     testStackDouble(stackvecdouble, loctestnum, loctesterr);
 
+    cout << endl << "~~~STACKVEC<STRING>~~~" << endl;
     lasd::StackVec<string> stackvecstr;
     testStackString(stackvecstr, loctestnum, loctesterr);
 
+    cout << endl << "~~~STACKLIST<INT>~~~" << endl;
     lasd::StackLst<int> stacklstint;
     testStackInt(stacklstint, loctestnum, loctesterr);
 
+    cout << endl << "~~~STACKLIST<DOUBLE>~~~" << endl;
     lasd::StackLst<double> stacklstdouble;
     testStackDouble(stacklstdouble, loctestnum, loctesterr);
 
+    cout << endl << "~~~STACKLIST<STRING>~~~" << endl;
     lasd::StackLst<string> stacklststr;
     testStackString(stacklststr, loctestnum, loctesterr);
 
     testnum += loctestnum;
     testerr += loctesterr;
     cout << endl << "Fine Test Stack";
+    cout << endl << "Errori: " << loctesterr << " Test: " << loctestnum << endl;
+
+    cout << "-------------------------------------------------------------------------------" << endl;
 }
