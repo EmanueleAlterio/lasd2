@@ -17,7 +17,7 @@ namespace lasd {
                 }
             );
         }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+            std::cerr << "Cannot allocate memory " <<  exception.what();
         }
         
     }
@@ -37,7 +37,7 @@ namespace lasd {
                 }
             );
         }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+            std::cerr << "Cannot allocate memory " <<  exception.what();
         }
         
     }
@@ -101,7 +101,7 @@ namespace lasd {
     template <typename Data>
     const Data& QueueVec<Data>::Head() const{
         if(head == tail){
-            throw std::length_error("[EXCEPTION] Queue is empty");
+            throw std::length_error("Queue is empty");
         }
 
         return elements[head];
@@ -110,7 +110,7 @@ namespace lasd {
     template <typename Data>
     Data& QueueVec<Data>::Head(){
         if(head == tail){
-            throw std::length_error("[EXCEPTION] Queue is empty");
+            throw std::length_error("Queue is empty");
         }
 
         return elements[head];
@@ -122,7 +122,7 @@ namespace lasd {
     template <typename Data>
     void QueueVec<Data>::Dequeue(){
         if(head == tail){
-            throw std::length_error("[EXCEPTION] Queue is empty");
+            throw std::length_error("Queue is empty");
         }
 
         Reduce();    
@@ -134,7 +134,7 @@ namespace lasd {
     template <typename Data>
     Data QueueVec<Data>::HeadNDequeue(){
         if(head == tail){
-            throw std::length_error("[EXCEPTION] Queue is empty");
+            throw std::length_error("Queue is empty");
         }
 
         Reduce();

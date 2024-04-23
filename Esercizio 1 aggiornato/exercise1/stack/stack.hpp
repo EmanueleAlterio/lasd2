@@ -19,8 +19,10 @@ public:
 
   /* ************************************************************************ */
 
-  // Copy and Move assignment
+  // Copy assignment
   Stack& operator=(const Stack&) = delete;
+
+  // Move assignment
   Stack& operator=(Stack&&) noexcept = delete;
 
   /* ************************************************************************ */

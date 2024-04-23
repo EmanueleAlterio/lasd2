@@ -55,6 +55,8 @@ namespace lasd {
         delete next;
     }
 
+
+    //Comparison operator
     template<typename Data>
     bool List<Data>::Node::operator==(const Node &node)const noexcept{
         return (element == node.element) && 
@@ -62,6 +64,8 @@ namespace lasd {
             ((next != nullptr && node.next != nullptr) && *next == *(node.next)));
     }
     
+
+    //Comparison operator
     template<typename Data>
     bool List<Data>::Node:: operator!=(const Node & node) const noexcept{
         return !(*this == node);
@@ -72,7 +76,6 @@ namespace lasd {
     //List
 
     //Specific Constructor
-
     template<typename Data>
     List<Data> :: List(const TraversableContainer<Data> & container){
         head = nullptr;
@@ -86,6 +89,8 @@ namespace lasd {
         );
     }
 
+
+    //Specific Constructor
     template<typename Data>
     List<Data> :: List(MappableContainer<Data> && container){
         head = nullptr;
@@ -98,6 +103,7 @@ namespace lasd {
 
         );
     }
+
 
     //Copy Constructor
     template<typename Data>
@@ -126,6 +132,7 @@ namespace lasd {
     List<Data>::~List(){
         delete head;
     }
+
 
     // Copy Assignment
     template<typename Data>
@@ -371,7 +378,7 @@ namespace lasd {
         return false;
     }
 
-
+    // [] operator
     template<typename Data>
     const Data& List<Data> :: operator[](const unsigned long index) const{
         if(index >= size){ //index essendo ulong non ha bisogno del controllo < 0 in quanto non può mai esserlo
@@ -389,6 +396,7 @@ namespace lasd {
     }   
 
 
+    // [] operator
    template<typename Data>
     Data& List<Data>::operator[](const unsigned long index){
         if(index >= size){
@@ -449,6 +457,8 @@ namespace lasd {
 
         throw std::length_error("List is empty");
     }
+
+
 
    // Specific member function (inherited from TraversableContainer)
     template<typename Data>

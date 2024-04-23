@@ -4,20 +4,21 @@
 namespace lasd {
 
 /* ************************************************************************** */
-// Copy and Move assignment
+// Copy assignment
 template<typename Data>
 StackLst<Data>& StackLst<Data>::operator=(const StackLst<Data> &stackLst){
     List<Data>::operator=(stackLst);
     return *this;
 }
 
+// Move assignment
 template<typename Data>
 StackLst<Data>& StackLst<Data>::operator=(StackLst<Data> &&stackLst) noexcept{
     List<Data>::operator=(std::move(stackLst));
     return *this;
 }
 
-// Comparison operators
+// Comparison operator
 template<typename Data>
 bool StackLst<Data>::operator==(const StackLst<Data> &stackLst) const noexcept{
     if(this == &stackLst){
@@ -27,6 +28,7 @@ bool StackLst<Data>::operator==(const StackLst<Data> &stackLst) const noexcept{
     return List<Data>::operator==(stackLst);
 }
 
+// Comparison operator
 template<typename Data>
 bool StackLst<Data>::operator!=(const StackLst<Data> &stackLst) const noexcept{
     return List<Data>::operator!=(stackLst);

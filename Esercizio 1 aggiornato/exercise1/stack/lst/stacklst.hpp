@@ -31,8 +31,10 @@ public:
 
   /* ************************************************************************ */
 
-  // Copy and Move constructor
+  // Copy constructor
   StackLst(const StackLst &stackLst) : List<Data>(stackLst){};
+
+  // Move constructor
   StackLst(StackLst &&stackLst) noexcept : List<Data>(std::move(stackLst)){};
 
   /* ************************************************************************ */
@@ -42,8 +44,10 @@ public:
 
   /* ************************************************************************ */
 
-  // Copy and Move assignment
-  StackLst& operator=(const StackLst&);
+  // Copy assignment
+  StackLst& operator=(const StackLst&)
+
+  // Move assignment
   StackLst& operator=(StackLst&&) noexcept;
 
   /* ************************************************************************ */

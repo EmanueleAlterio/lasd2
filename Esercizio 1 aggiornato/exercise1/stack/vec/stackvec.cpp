@@ -3,6 +3,7 @@ namespace lasd {
 
 /* ************************************************************************** */
 
+// Specific constructor 
 template<typename Data>
 StackVec<Data> :: StackVec(const TraversableContainer<Data>& container){
     try{
@@ -16,11 +17,11 @@ StackVec<Data> :: StackVec(const TraversableContainer<Data>& container){
             }
         );
    }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+            std::cerr << "Cannot allocate memory " <<  exception.what();
     }
 }
 
-
+// Specific constructor
 template<typename Data>
 StackVec<Data> :: StackVec(MappableContainer<Data> && container){
     try{
@@ -34,10 +35,12 @@ StackVec<Data> :: StackVec(MappableContainer<Data> && container){
             }
         );
     }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+            std::cerr << "Cannot allocate memory " <<  exception.what();
     }  
 }
 
+
+  // Copy assignment
 template<typename Data>
 StackVec<Data>& StackVec<Data>::operator=(const StackVec &stackVec){
     if(this != &stackVec){
@@ -48,6 +51,8 @@ StackVec<Data>& StackVec<Data>::operator=(const StackVec &stackVec){
     return *this;
 }
 
+
+// Move assignment
 template<typename Data>
 StackVec<Data>& StackVec<Data>::operator=(StackVec &&stackVec) noexcept{
     if(this != &stackVec){
@@ -58,6 +63,8 @@ StackVec<Data>& StackVec<Data>::operator=(StackVec &&stackVec) noexcept{
     return *this;
 }
 
+
+//Coparison operator
 template<typename Data>
 bool StackVec<Data> :: operator==(const StackVec &stackVec) const noexcept{
     if(this == &stackVec){
@@ -71,6 +78,8 @@ bool StackVec<Data> :: operator==(const StackVec &stackVec) const noexcept{
     return Vector<Data> :: operator==(stackVec);
 }
 
+
+//Comparison operator
 template<typename Data>
 bool StackVec<Data> :: operator!=(const StackVec &stackVec) const noexcept{
     return !(*this == stackVec);
@@ -83,7 +92,7 @@ bool StackVec<Data> :: operator!=(const StackVec &stackVec) const noexcept{
 template<typename Data>
 const Data& StackVec<Data> :: Top() const{
     if(Empty())
-        throw std::length_error("[EXCEPTION] Stack is empty.");
+        throw std::length_error("Stack is empty.");
     
     return elements[index-1];
 }
@@ -91,7 +100,7 @@ const Data& StackVec<Data> :: Top() const{
 template<typename Data>
 Data& StackVec<Data> :: Top(){
     if(Empty())
-        throw std::length_error("[EXCEPTION] Stack is empty.");
+        throw std::length_error("Stack is empty.");
     
     return elements[index-1];
 }
@@ -100,7 +109,7 @@ Data& StackVec<Data> :: Top(){
 template<typename Data>
 void StackVec<Data> :: Pop(){
     if(Empty())
-        throw std::length_error("[EXCEPTION] Stack is empty.");
+        throw std::length_error("Stack is empty.");
 
     Reduce();
     index--;
@@ -109,7 +118,7 @@ void StackVec<Data> :: Pop(){
 template<typename Data>
 Data StackVec<Data>::TopNPop(){
     if(Empty())
-        throw std::length_error("[EXCEPTION] Stack is empty.");
+        throw std::length_error("Stack is empty.");
 
     Reduce();
     return std::move(elements[--index]);
