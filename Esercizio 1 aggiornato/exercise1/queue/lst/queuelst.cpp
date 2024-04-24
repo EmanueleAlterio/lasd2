@@ -2,30 +2,41 @@
 namespace lasd {
 
 /* ************************************************************************** */
+
+
+// Copy assignment
 template<typename Data>
 QueueLst<Data>& QueueLst<Data> :: operator=(const QueueLst &queueLst){
     List<Data> :: operator=(queueLst);
     return *this;
 }
 
+
+//Move assignment
 template<typename Data>
 QueueLst<Data>& QueueLst<Data> :: operator=(QueueLst &&queueLst) noexcept {
     List<Data> :: operator=(std::move(queueLst));
     return *this;
 }
 
+
+//Comparison operator
 template<typename Data>
 bool QueueLst<Data> :: operator==(const QueueLst &queueLst) const noexcept{
     
     return List<Data> :: operator==(queueLst);
 }
 
+
+//Comparison operator
 template<typename Data>
 bool QueueLst<Data> :: operator!=(const QueueLst &queueLst) const noexcept{
 
     return List<Data> :: operator!=(queueLst);
 }
 
+
+ // Specific member functions (inherited from Queue)
 template<typename Data>
 const Data& QueueLst<Data> :: Head() const {
     return List<Data> :: Front();

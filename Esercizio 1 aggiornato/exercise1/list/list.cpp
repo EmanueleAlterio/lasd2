@@ -70,6 +70,8 @@ namespace lasd {
     bool List<Data>::Node:: operator!=(const Node & node) const noexcept{
         return !(*this == node);
     }
+
+
     /* ************************************************************************** */
 
 
@@ -127,6 +129,7 @@ namespace lasd {
         }
     }
 
+
     // Destructor
     template<typename Data>
     List<Data>::~List(){
@@ -169,7 +172,7 @@ namespace lasd {
     }
 
 
-    //Comparison Operators
+    //Comparison Operator
     template<typename Data>
     bool List<Data> :: operator==(const List & other) const noexcept{
         if(this == &other){
@@ -185,10 +188,13 @@ namespace lasd {
             ((head != nullptr && other.head != nullptr) && (*head == *(other.head)))); 
     }
 
+
+    //Comparison Operator
     template<typename Data>
     bool List<Data> :: operator!=(const List & other) const noexcept{
         return !(*this == other);
     }
+
 
     // Specific member functions
 
@@ -475,6 +481,8 @@ namespace lasd {
     void List<Data>::PostOrderTraverse(TraverseFun fun) const{
         PostOrderTraverse(fun, head);
     }
+
+    
 
     // Specific member function (inherited from MappableContainer)
 

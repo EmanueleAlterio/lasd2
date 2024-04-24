@@ -45,7 +45,7 @@ public:
   /* ************************************************************************ */
 
   // Copy assignment
-  StackLst& operator=(const StackLst&)
+  StackLst& operator=(const StackLst&);
 
   // Move assignment
   StackLst& operator=(StackLst&&) noexcept;
