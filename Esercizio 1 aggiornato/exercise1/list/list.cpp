@@ -1,4 +1,4 @@
-#include "list.hpp"
+
 namespace lasd {
 
     //Specific constructor
@@ -387,7 +387,7 @@ namespace lasd {
     // [] operator
     template<typename Data>
     const Data& List<Data> :: operator[](const unsigned long index) const{
-        if(index >= size){ //index essendo ulong non ha bisogno del controllo < 0 in quanto non può mai esserlo
+        if(index >= size){ 
             throw std::out_of_range("List index out of range");
         }
 

@@ -1,10 +1,8 @@
 
-#include "vector.hpp"
 
 namespace lasd {
 
 /* ************************************************************************** */
-/*vector*/
 
 //Specific Constructor
 template<typename Data>
@@ -72,10 +70,9 @@ Vector<Data>::Vector(const Vector & other){
 //Move Constructor
 template<typename Data>
 Vector<Data>::Vector(Vector && other) noexcept{
-        std::swap(elements, other.elements); //Scambia i puntatori agli elementi 
-        std::swap(size, other.size); //Scambia i valori delle size degli oggetti
+        std::swap(elements, other.elements); 
+        std::swap(size, other.size);
 }
-
 
 //Destructor
 template<typename Data>
@@ -96,7 +93,7 @@ Vector<Data> :: ~Vector(){
                 return *this;
                 
             }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+            std::cerr << "Cannot allocate memory " <<  exception.what();
             }
         }
 
@@ -107,8 +104,8 @@ Vector<Data> :: ~Vector(){
 template<typename Data>
 Vector<Data>& Vector<Data>::operator=(Vector &&other) noexcept{
 
-    std::swap(size, other.size);//Scambia le dimensioni dei vettori 
-    std::swap(elements, other.elements); //Scambia i puntatori agli elementi
+    std::swap(size, other.size);
+    std::swap(elements, other.elements); 
 
     return *this;
 }
@@ -173,7 +170,7 @@ void Vector<Data> :: Resize(const unsigned long new_size) {
             delete[] tmp; 
 
         }catch(std::bad_alloc &exception){
-            std::cerr << "[EXCEPTION] Cannot allocate memory for Vector: " <<  exception.what();
+            std::cerr << "Cannot allocate memory " <<  exception.what();
         }
         
         

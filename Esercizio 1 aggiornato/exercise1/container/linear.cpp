@@ -1,4 +1,3 @@
-#include "linear.hpp"
 
 namespace lasd {
  
@@ -36,7 +35,7 @@ namespace lasd {
         
         }
          
-        throw std::length_error("[EXCEPTION] Linear container is empty");
+        throw std::length_error("Linear container is empty");
     }
 
     template <typename Data>
@@ -45,7 +44,7 @@ namespace lasd {
             return operator[](0);
         }
          
-        throw std::length_error("[EXCEPTION] Linear container is empty");
+        throw std::length_error("Linear container is empty");
     }
 
     template <typename Data>
@@ -54,7 +53,7 @@ namespace lasd {
             return operator[](size - 1);
         }
 
-        throw std::length_error("[EXCEPTION] Linear container is empty");
+        throw std::length_error("Linear container is empty");
     }
 
     template <typename Data>
@@ -63,7 +62,7 @@ namespace lasd {
             return operator[](size - 1);
         }
 
-        throw std::length_error("[EXCEPTION] Linear container is empty");
+        throw std::length_error("Linear container is empty");
     }
 
     /* ************************************************************************** */
