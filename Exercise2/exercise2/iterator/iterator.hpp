@@ -22,7 +22,7 @@ protected:
 public:
 
   // Destructor
-  ~Iterator() = default;
+  virtual ~Iterator() = default;
 
   /* ************************************************************************ */
 

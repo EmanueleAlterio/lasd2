@@ -178,7 +178,7 @@ protected:
 
 public:
 
-  struct MutableNode : public virtual Node{
+  struct MutableNode : virtual Node{
     // Must extend Node
 
     friend class MutableBinaryTree<Data>;
@@ -360,7 +360,7 @@ public:
 
   // Specific member functions (inherited from ForwardIterator)
 
-  BTPreOrderIterator& operator++() override; // (throw std::out_of_range when terminated)
+  const BTPreOrderIterator& operator++() const override; // (throw std::out_of_range when terminated)
 
   /* ************************************************************************ */
 
@@ -523,7 +523,7 @@ public:
 
   // Specific member functions (inherited from ForwardIterator)
 
-  const Data& operator++() const override; // (throw std::out_of_range when terminated)
+  const BTPostOrderIterator& operator++() const override; // (throw std::out_of_range when terminated)
 
   /* ************************************************************************ */
 
@@ -531,10 +531,9 @@ public:
 
   void Reset() noexcept override; // (should not throw exceptions)
 
-  //protected:
- 
-  //void getLeftMostLeaf();
+protected:
 
+  void getLeftMostLeaf();
 };
 
 /* ************************************************************************** */
@@ -695,10 +694,7 @@ public:
 
   void Reset() noexcept override; // (should not throw exceptions)
 
-//protected:
-
-  //void getLeftMostNode();
-
+  void getLeftMostNode();
 };
 
 /* ************************************************************************** */
