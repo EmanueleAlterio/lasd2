@@ -1,4 +1,5 @@
 #include "binarytreevec.hpp"
+
 namespace lasd {
 
 /* ************************************************************************** */
@@ -133,10 +134,10 @@ template <typename Data>
 BinaryTreeVec<Data>::BinaryTreeVec(const BinaryTreeVec<Data>& bt){
     size = bt.Size();
     if(size > 0){
-        vector = new Vector<NodeVec*>(size);
+        vec = new Vector<NodeVec*>(size);
         for(unsigned long i=0; i<size; i++){
             NodeVec* tmp = new NodeVec(bt.vec->operator[](i)->Element(), i, vec);
-            vector->operator[](i) = tmp;
+            vec->operator[](i) = tmp;
         }
     }
 }
@@ -215,7 +216,7 @@ template <typename Data>
 void BinaryTreeVec<Data>::BreadthTraverse(TraverseFun fun) const{
     for(unsigned long i=0; i<size; i++){
         if(vec->operator[](i) != nullptr){
-            fun(vec->operator[](i)->Element())
+            fun(vec->operator[](i)->Element());
         }
     }
 }
@@ -225,7 +226,7 @@ template <typename Data>
 void BinaryTreeVec<Data>::BreadthMap(MapFun fun){
     for(unsigned long i=0; i<size; i++){
         if(vec->operator[](i) != nullptr){
-            fun(vec->operator[](i)->Element())
+            fun(vec->operator[](i)->Element());
         }
     }
 }

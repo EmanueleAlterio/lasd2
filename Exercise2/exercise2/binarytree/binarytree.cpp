@@ -110,11 +110,11 @@ void BinaryTree<Data>::PreOrderTraverse(TraverseFun fun, const Node* node) const
     fun(node->Element());
 
     if(node->HasLeftChild()){
-        PreOrderTraverse(fun, node->LeftChild());
+        PreOrderTraverse(fun, &node->LeftChild());
     }
 
     if(node->HasRightChild()){
-        PreOrderTraverse(fun, node->RightChild());
+        PreOrderTraverse(fun, &node->RightChild());
     }
 
 
@@ -128,11 +128,11 @@ void BinaryTree<Data>::PostOrderTraverse(TraverseFun fun, const Node* node) cons
     }
 
     if(node->HasLeftChild()){
-        PreOrderTraverse(fun, node->LeftChild());
+        PostOrderTraverse(fun, &node->LeftChild());
     }
 
     if(node->HasRightChild()){
-        PreOrderTraverse(fun, node->RightChild());
+        PostOrderTraverse(fun, &node->RightChild());
     }
 
     fun(node->Element());
@@ -147,13 +147,13 @@ void BinaryTree<Data>::InOrderTraverse(TraverseFun fun, const Node* node) const{
     }
 
     if(node->HasLeftChild()){
-        PreOrderTraverse(fun, node->LeftChild());
+        InOrderTraverse(fun, &node->LeftChild());
     }
 
     fun(node->Element());
 
     if(node->HasRightChild()){
-        PreOrderTraverse(fun, node->RightChild());
+        InOrderTraverse(fun, &node->RightChild());
     }
 
 }
@@ -179,21 +179,12 @@ void BinaryTree<Data>::BreadthTraverse(TraverseFun fun, const Node* node) const{
         }
 
         if(q.Head()->HasRightChild()){
-            q.Enqueue(&(q.Head()->RightChild()))
+            q.Enqueue(&(q.Head()->RightChild()));
         }
 
         q.Dequeue();
     }
 
-}
-
-
-//Specific functions
-template <typename Data>
-void BinaryTree<Data>::Traverse(TraverseFun fun) const {
-    if(size > 0){
-        PreOrderTraverse(fun, &Root());
-    }
 }
 
 
@@ -249,11 +240,11 @@ template <typename Data>
     fun(node->Element());
 
     if(node->HasLeftChild()){
-        PreOrderTraverse(fun, node->LeftChild());
+        PreOrderMap(fun, &node->LeftChild());
     }
 
     if(node->HasRightChild()){
-        PreOrderTraverse(fun, node->RightChild());
+        PreOrderMap(fun, &node->RightChild());
     }
 
  }
@@ -265,11 +256,11 @@ void MutableBinaryTree<Data>::PostOrderMap(MapFun fun, MutableNode* node){
     }
 
     if(node->HasLeftChild()){
-        PreOrderTraverse(fun, node->LeftChild());
+        PostOrderMap(fun, &node->LeftChild());
     }
 
     if(node->HasRightChild()){
-        PreOrderTraverse(fun, node->RightChild());
+        PostOrderMap(fun, &node->RightChild());
     }
 
     fun(node->Element());
@@ -284,13 +275,13 @@ void MutableBinaryTree<Data>::InOrderMap(MapFun fun, MutableNode* node){
     }
 
     if(node->HasLeftChild()){
-        PreOrderTraverse(fun, node->LeftChild());
+        InOrderMap(fun, &node->LeftChild());
     }
 
     fun(node->Element());
 
     if(node->HasRightChild()){
-        PreOrderTraverse(fun, node->RightChild());
+        InOrderMap(fun, &node->RightChild());
     }
 
 }
@@ -315,7 +306,7 @@ void MutableBinaryTree<Data>::BreadthMap(MapFun fun, MutableNode* node){
         }
 
         if(q.Head()->HasRightChild()){
-            q.Enqueue(&(q.Head()->RightChild()))
+            q.Enqueue(&(q.Head()->RightChild()));
         }
 
         q.Dequeue();
@@ -326,25 +317,21 @@ void MutableBinaryTree<Data>::BreadthMap(MapFun fun, MutableNode* node){
 // BTPreOrderIterator
 
 template <typename Data>
-const BTPreOrderIterator<Data>& BTPreOrderIterator<Data>::operator++() const {
+BTPreOrderIterator<Data>& BTPreOrderIterator<Data>::operator++() {
     if(Terminated()) {
         throw std::out_of_range("Iterator terminated!");
     }
-
     if(curr->HasRightChild()) {
         stk.Push(&(curr->RightChild()));
     }
-
     if(curr->HasLeftChild()) {
         stk.Push(&(curr->LeftChild()));
     }
-
     if(stk.Empty()) {
         curr = nullptr;
     } else {
         curr = stk.TopNPop();
     }
-
     return *this;
 }
 
@@ -361,7 +348,7 @@ BTPostOrderIterator<Data>::BTPostOrderIterator(const BinaryTree<Data>& bt) {
 }
 
 template <typename Data>
-const BTPostOrderIterator<Data>& BTPostOrderIterator<Data>::operator++() const{
+BTPostOrderIterator<Data>& BTPostOrderIterator<Data>::operator++(){
     if(Terminated()) {
         throw std::out_of_range("Iterator out of bounds");
     }
@@ -459,17 +446,17 @@ BTBreadthIterator<Data>& BTBreadthIterator<Data>::operator++() {
     }
 
     if(curr->HasLeftChild()) {
-        q.Enqueue(&(curr->LeftChild()));
+        que.Enqueue(&(curr->LeftChild()));
     }
 
     if(curr->HasRightChild()) {
-        q.Enqueue(&(curr->RightChild()));
+        que.Enqueue(&(curr->RightChild()));
     }
 
-    if(q.Empty()) {
+    if(que.Empty()) {
         curr = nullptr;
     } else {
-        curr = q.HeadNDequeue();
+        curr = que.HeadNDequeue();
     }
 
     return *this;

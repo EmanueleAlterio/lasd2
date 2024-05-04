@@ -71,9 +71,9 @@ public:
 
     virtual const Data& Element() const noexcept = 0; // Immutable access to the element (concrete function should not throw exceptions)
 
-    virtual bool IsLeaf() noexcept = 0; // (concrete function should not throw exceptions)
-    virtual bool HasLeftChild() noexcept = 0; // (concrete function should not throw exceptions)
-    virtual bool HasRightChild() noexcept = 0; // (concrete function should not throw exceptions)
+    virtual bool isLeaf() const noexcept = 0; // (concrete function should not throw exceptions)
+    virtual bool HasLeftChild() const noexcept = 0; // (concrete function should not throw exceptions)
+    virtual bool HasRightChild() const noexcept = 0; // (concrete function should not throw exceptions)
 
     virtual const Node& LeftChild() const = 0; // (concrete function must throw std::out_of_range when not existent)
     virtual const Node& RightChild() const = 0; // (concrete function must throw std::out_of_range when not existent)
@@ -360,7 +360,7 @@ public:
 
   // Specific member functions (inherited from ForwardIterator)
 
-  const BTPreOrderIterator& operator++() const override; // (throw std::out_of_range when terminated)
+  BTPreOrderIterator& operator++() override; // (throw std::out_of_range when terminated)
 
   /* ************************************************************************ */
 
@@ -397,10 +397,10 @@ public:
   /* ************************************************************************ */
 
   // Copy constructor
-  BTPreOrderMutableIterator(const BTPreOrderMutableIterator& iterator) BTPostOrderIterator<Data>(iterator) {};
+  BTPreOrderMutableIterator(const BTPreOrderMutableIterator& iterator) : BTPreOrderIterator<Data>(iterator) {};
 
   // Move constructor
-  BTPreOrderMutableIterator(BTPreOrderMutableIterator&& iterator) BTPostOrderIterator<Data>(std::move(iterator)) {};
+  BTPreOrderMutableIterator(BTPreOrderMutableIterator&& iterator) : BTPreOrderIterator<Data>(std::move(iterator)) {};
 
   /* ************************************************************************ */
 
@@ -415,7 +415,7 @@ public:
   };
 
   // Move assignment
-  BTPostOrderMutableIterator& operator=(BTPreOrderMutableIterator&& iterator) noexcept{
+  BTPreOrderMutableIterator& operator=(BTPreOrderMutableIterator&& iterator) noexcept{
     BTPreOrderIterator<Data>::operator=(std::move(iterator));
   };
 
@@ -423,7 +423,7 @@ public:
 
   // Comparison operators
   bool operator==(const BTPreOrderMutableIterator&) const noexcept = default;
-  bool operator!=(const BTPreOrderMutableIterator) const noexcept = default;
+  bool operator!=(const BTPreOrderMutableIterator&) const noexcept = default;
 
   /* ************************************************************************ */
 
@@ -523,7 +523,7 @@ public:
 
   // Specific member functions (inherited from ForwardIterator)
 
-  const BTPostOrderIterator& operator++() const override; // (throw std::out_of_range when terminated)
+  BTPostOrderIterator& operator++() override; // (throw std::out_of_range when terminated)
 
   /* ************************************************************************ */
 

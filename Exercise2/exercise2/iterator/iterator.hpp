@@ -126,7 +126,7 @@ public:
 
   // Specific member functions
 
-  virtual const Data& operator++() const = 0; // (concrete function must throw std::out_of_range when terminated)
+  virtual ForwardIterator& operator++() = 0; // (concrete function must throw std::out_of_range when terminated)
 
 };
 

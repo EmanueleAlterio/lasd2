@@ -23,10 +23,15 @@ private:
 protected:
 
   using Container::size;
+
+
+
+public:
   using typename BinaryTree<Data>:: Node;
   using typename MutableBinaryTree<Data>:: MutableNode;
   // ...
 
+protected:
   struct NodeLnk { // Must extend MutableNode
 
   private:
@@ -108,12 +113,12 @@ public:
   BinaryTreeLnk(const BinaryTreeLnk&);
 
   // Move constructor
-  BinaryTreeLnk(BinaryTreeLnk&&);
+  BinaryTreeLnk(BinaryTreeLnk&&) noexcept;
 
   /* ************************************************************************ */
 
   // Destructor
-  virtual ~BinaryTreeLnk() = default;
+  virtual ~BinaryTreeLnk();
 
   /* ************************************************************************ */
 

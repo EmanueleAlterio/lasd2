@@ -24,9 +24,13 @@ private:
 protected:
 
   using MutableBinaryTree<Data>::size;
+
+
+public:
   using typename BinaryTree<Data>::Node;
   using typename MutableBinaryTree<Data>::MutableNode;
 
+protected:
   struct NodeVec : virtual MutableNode{ // Must extend MutableNode
 
   private:

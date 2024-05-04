@@ -1,4 +1,4 @@
-
+#include "binarytreelnk.hpp"
 namespace lasd {
 
 /* ************************************************************************** */
@@ -74,7 +74,7 @@ typename BinaryTreeLnk<Data>::NodeLnk& BinaryTreeLnk<Data>::NodeLnk::operator=(N
 
 //Comparison operators
 template <typename Data>
-bool BinaryTree<Data>::Node::operator==(const Node& other) const noexcept {
+bool BinaryTreeLnk<Data>::NodeLnk::operator==(const NodeLnk& other) const noexcept {
 
     if (info != other.info){
         return false;
@@ -138,7 +138,7 @@ bool BinaryTreeLnk<Data>::NodeLnk::HasRightChild() const noexcept {
 }
 
 template <typename Data>
-const typename BinaryTree<Data>::Node& BinaryTreeLnk<Data>::NodeLnk::LeftChild() const {
+const BinaryTree<Data>::Node& BinaryTreeLnk<Data>::NodeLnk::LeftChild() const {
     if(left == nullptr) {
         throw std::out_of_range("Left child does not exists");    
     } else {
@@ -147,7 +147,7 @@ const typename BinaryTree<Data>::Node& BinaryTreeLnk<Data>::NodeLnk::LeftChild()
 }
 
 template <typename Data>
-const typename BinaryTree<Data>::Node& BinaryTreeLnk<Data>::NodeLnk::RightChild() const {
+const BinaryTree<Data>::Node& BinaryTreeLnk<Data>::NodeLnk::RightChild() const {
     if(right == nullptr) {
         throw std::out_of_range("Right child does not exists");
     } else {
@@ -157,7 +157,7 @@ const typename BinaryTree<Data>::Node& BinaryTreeLnk<Data>::NodeLnk::RightChild(
 
 
 template <typename Data>
-typename MutableBinaryTree<Data>::MutableNode& BinaryTreeLnk<Data>::NodeLnk::LeftChild() {
+MutableBinaryTree<Data>::MutableNode& BinaryTreeLnk<Data>::NodeLnk::LeftChild() {
     if(left == nullptr) {
         throw std::out_of_range("Left child does not exists"); 
     } else {
@@ -166,7 +166,7 @@ typename MutableBinaryTree<Data>::MutableNode& BinaryTreeLnk<Data>::NodeLnk::Lef
 }
 
 template <typename Data>
-typename MutableBinaryTree<Data>::MutableNode& BinaryTreeLnk<Data>::NodeLnk::RightChild() {
+MutableBinaryTree<Data>::MutableNode& BinaryTreeLnk<Data>::NodeLnk::RightChild() {
     if(right == nullptr) {
         throw std::out_of_range("Right child does not exists");
     } else {
@@ -188,7 +188,7 @@ BinaryTreeLnk<Data>::BinaryTreeLnk(const TraversableContainer<Data>& container) 
 
     QueueVec<NodeLnk**> que;
     que.Enqueue(&root);
-    con.Traverse([&que](const Data& data) {
+    container.Traverse([&que](const Data& data) {
         NodeLnk*& tmp = *que.HeadNDequeue();
         tmp = new NodeLnk(data);
         que.Enqueue(&tmp->left);
@@ -207,7 +207,7 @@ BinaryTreeLnk<Data>::BinaryTreeLnk(MappableContainer<Data>&& container) {
 
     QueueVec<NodeLnk**> que;
     que.Enqueue(&root);
-    con.Map([&que](Data& data) {
+    container.Map([&que](Data& data) {
         NodeLnk*& tmp = *que.HeadNDequeue();
         tmp = new NodeLnk(std::move(data));
         que.Enqueue(&tmp->left);
@@ -287,9 +287,10 @@ template <typename Data>
 typename MutableBinaryTree<Data>::MutableNode& BinaryTreeLnk<Data>::Root() {
     if(root == nullptr) {
         throw std::length_error("Tree is empty");
-    }
-     
+    } 
+    
     return *root;
+
 }
 
 
