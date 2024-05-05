@@ -83,7 +83,7 @@ Accumulator InOrderTraversableContainer<Data>::InOrderFold(FoldFun<Accumulator> 
 
 template<typename Data>
 void InOrderTraversableContainer<Data>::Traverse(TraverseFun fun) const{
-    OrderTraverse(fun);
+    InOrderTraverse(fun);
 }
 
 /* ************************************************************************** */

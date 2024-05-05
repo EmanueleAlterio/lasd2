@@ -32,7 +32,7 @@ public:
   // ...
 
 protected:
-  struct NodeLnk { // Must extend MutableNode
+  struct NodeLnk : virtual MutableNode { // Must extend MutableNode
 
   private:
 

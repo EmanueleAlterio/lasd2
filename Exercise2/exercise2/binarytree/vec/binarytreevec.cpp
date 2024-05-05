@@ -183,7 +183,7 @@ BinaryTreeVec<Data>& BinaryTreeVec<Data>::operator=(BinaryTreeVec<Data>&& bt) no
 
 template <typename Data>
 const typename BinaryTree<Data>::Node& BinaryTreeVec<Data>::Root() const {
-    if(size = 0) {
+    if(size == 0) {
         throw std::length_error("Empty tree");
     }
 
@@ -192,7 +192,7 @@ const typename BinaryTree<Data>::Node& BinaryTreeVec<Data>::Root() const {
 
 template <typename Data>
 typename MutableBinaryTree<Data>::MutableNode& BinaryTreeVec<Data>::Root(){
-    if(size = 0) {
+    if(size == 0) {
         throw std::length_error("Empty tree");
     }
 
@@ -207,7 +207,7 @@ void BinaryTreeVec<Data>::Clear(){
                 delete (*vec)[i];
             }
         }
-        vec->Clear;
+        vec->Clear();
         size = 0;
     }
 }

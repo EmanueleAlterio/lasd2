@@ -272,11 +272,10 @@ void stestBSTString(uint & testnum, uint & testerr) {
 */
 /* ************************************************************************** */
 
-/*
+
 void testSimpleExercise2B(uint & testnum, uint & testerr) {
-  stestBSTInt(testnum, testerr);
-  stestBSTFloat(testnum, testerr);
-  stestBSTString(testnum, testerr);
+  //stestBSTInt(testnum, testerr);
+  //stestBSTFloat(testnum, testerr);
+  //stestBSTString(testnum, testerr);
   cout << endl << "Exercise 2B (Simple Test) (Errors/Tests: " << testerr << "/" << testnum << ")" << endl;
 }
-*/

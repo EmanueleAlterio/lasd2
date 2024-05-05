@@ -292,7 +292,7 @@ void MutableBinaryTree<Data>::BreadthMap(MapFun fun, MutableNode* node){
         return;
     }
 
-    lasd::QueueVec<const Node*> q;
+    lasd::QueueVec<MutableNode*> q;
     if(node != nullptr){
         q.Enqueue(node);
     }
@@ -370,7 +370,10 @@ template <typename Data>
 void BTPostOrderIterator<Data>::Reset() noexcept {
     stk.Clear();
     curr = root;
-    getLeftMostLeaf();
+    if(curr != nullptr){
+        getLeftMostLeaf();
+    }
+    
 }
 
 template <typename Data>

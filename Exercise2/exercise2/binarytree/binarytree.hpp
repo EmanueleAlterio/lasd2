@@ -295,7 +295,7 @@ public:
   // Specific constructors
   BTPreOrderIterator(const BinaryTree<Data>& bt){
     if(bt.Size() != 0){
-      root = curr = &bt.root;
+      root = curr = &bt.Root();
     }
   }; // An iterator over a given binary tree
 
@@ -305,7 +305,7 @@ public:
   BTPreOrderIterator(const BTPreOrderIterator& iterator) : root(iterator.root), curr(iterator.curr), stk(iterator.stk) {};
 
   // Move constructor
-  BTPreOrderIterator(BTPreOrderIterator& iterator){
+  BTPreOrderIterator(BTPreOrderIterator&& iterator) noexcept{
     std::swap(root, iterator.root);
     std::swap(curr, iterator.curr);
     std::swap(stk, iterator.stk);
@@ -511,7 +511,7 @@ public:
     if(curr != nullptr){
       return curr->Element();
     }else{
-      std::out_of_range("Iterator out of bounds");
+      throw std::out_of_range("Iterator out of bounds");
     }
   }; // (throw std::out_of_range when terminated)
 
@@ -674,7 +674,7 @@ public:
     if(curr != nullptr){
       return curr->Element();
     }else{
-      std::out_of_range("Iterator out of bounds");
+      throw std::out_of_range("Iterator out of bounds");
     }
   }; // (throw std::out_of_range when terminated)
 
@@ -793,10 +793,10 @@ public:
   /* ************************************************************************ */
 
   // Copy constructor
-  BTBreadthIterator(const BTBreadthIterator& iterator) : root(iterator.root), curr(iterator.curr), que(iterator.que) {};
+  BTBreadthIterator(const BTBreadthIterator& iterator) : root(iterator.root), curr(iterator.root), que(iterator.que) {};
 
   // Move constructor
-  BTBreadthIterator(BTBreadthIterator&& iterator){
+  BTBreadthIterator(BTBreadthIterator&& iterator) noexcept{
     std::swap(root, iterator.root);
     std::swap(curr, iterator.curr);
     std::swap(que, iterator.que);
@@ -840,7 +840,7 @@ public:
     if(curr != nullptr){
       return curr->Element();
     }else{
-      std::out_of_range("Iterator out of bounds");
+      throw std::out_of_range("Iterator out of bounds");
     }
   }; // (throw std::out_of_range when terminated)
 
