@@ -51,12 +51,12 @@ bool BinaryTreeVec<Data>::NodeVec::isLeaf() const noexcept{
 
 template <typename Data>
 bool BinaryTreeVec<Data>::NodeVec::HasLeftChild() const noexcept{
-    return ((2*curr+1) > tree->Size());
+    return ((2*curr+1) < tree->Size());
 }
 
 template <typename Data>
 bool BinaryTreeVec<Data>::NodeVec::HasRightChild() const noexcept{
-    return ((2*curr+2) > tree->Size());
+    return ((2*curr+2) < tree->Size());
 }
 
 template <typename Data>
