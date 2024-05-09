@@ -14,7 +14,7 @@ BST<Data>::BST(const TraversableContainer<Data>& container){
 
 template <typename Data>
 BST<Data>::BST(MappableContainer<Data>&& container) noexcept {
-    container.Traverse([this](Data & data){
+    container.Map([this](Data & data){
         Insert(std::move(data));
     });
 }
@@ -24,27 +24,28 @@ template <typename Data>
 bool BST<Data>::operator==(const BST<Data>& bst) const noexcept {
     if(size != bst.Size()) {
         return false;
-    } else {
-        if(size == 0) {
-            return true;
-        }
+    }
 
-        BTInOrderIterator<Data> it1(*this);
-        BTInOrderIterator<Data> it2(bst);
-        while(!it1.Terminated() && !it2.Terminated()) {
-            if(*it1 != *it2) {
-                return false;
-            }
-            ++it1;
-            ++it2;
-        }
+    if(size == 0) {
+        return true;
+    }
 
-        if(it1.Terminated() && it2.Terminated()) {
-            return true;
+    BTInOrderIterator<Data> itr1(*this);
+    BTInOrderIterator<Data> itr2(bst);
+    while(!itr1.Terminated() && !itr2.Terminated()) {
+        if(*itr1 != *itr2) {
+            return false;
         }
+        ++itr1;
+        ++itr2;
+    }
 
+    if(!itr1.Terminated() || !itr2.Terminated()) {
         return false;
     }
+
+    return true;
+
 }
 
 template <typename Data>
@@ -236,7 +237,7 @@ bool BST<Data>::Exists(const Data& data) const noexcept {
 //DataNDelete
 template <typename Data>
 Data BST<Data>::DataNDelete(NodeLnk* node) {
-    Data data {};
+    Data data;
     std::swap(data, node->info);
     delete node;
     return data;
@@ -311,7 +312,6 @@ typename BST<Data>::NodeLnk* const & BST<Data>::FindPointerToMin(NodeLnk* const 
 }
 
 
-//FindPointerToMin mutable
 template <typename Data>
 typename BST<Data>::NodeLnk*& BST<Data>::FindPointerToMin(NodeLnk*& node) noexcept {
     return const_cast<NodeLnk* &>(static_cast<const BST<Data> *>(this)->FindPointerToMin(node));
@@ -332,7 +332,7 @@ typename BST<Data>::NodeLnk* const & BST<Data>::FindPointerToMax(NodeLnk* const 
     return *tmp;
 }
 
-//FindPointerToMax mutable
+
 template <typename Data>
 typename BST<Data>::NodeLnk*& BST<Data>::FindPointerToMax(NodeLnk*& node) noexcept {
     return const_cast<NodeLnk* &>(static_cast<const BST<Data> *>(this)->FindPointerToMax(node));
@@ -356,7 +356,7 @@ typename BST<Data>::NodeLnk* const & BST<Data>::FindPointerTo(NodeLnk* const & n
     return *tmp;
 }
 
-//FindPointerTo mutable
+
 template <typename Data>
 typename BST<Data>::NodeLnk*& BST<Data>::FindPointerTo(NodeLnk*& node, const Data& data) noexcept {
     return const_cast<NodeLnk* &>(static_cast<const BST<Data> *>(this)->FindPointerTo(node, data));
@@ -415,7 +415,7 @@ typename BST<Data>::NodeLnk* const * BST<Data>::FindPointerToSuccessor(NodeLnk* 
     return tmp;
 }
 
-//FindPointerToSuccessor mutable
+
 template <typename Data>
 typename BST<Data>::NodeLnk** BST<Data>::FindPointerToSuccessor(NodeLnk*& node, const Data& data) noexcept {
     return const_cast<NodeLnk* *>(static_cast<const BST<Data> *>(this)->FindPointerToSuccessor(node, data));
