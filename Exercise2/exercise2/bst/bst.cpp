@@ -386,7 +386,6 @@ typename BST<Data>::NodeLnk* const * BST<Data>::FindPointerToPredecessor(NodeLnk
 }
 
 
-//FindPointerToPredecessor mutable
 template <typename Data>
 typename BST<Data>::NodeLnk** BST<Data>::FindPointerToPredecessor(NodeLnk*& node, const Data& data) noexcept {
     return const_cast<NodeLnk* *>(static_cast<const BST<Data> *>(this)->FindPointerToPredecessor(node, data));
