@@ -1,5 +1,6 @@
 
 #include "./BinaryTreeTest/bttest.hpp"
+#include "./BSTTest/bsttest.hpp"
 
 /* ************************************************************************** */
 
@@ -17,6 +18,7 @@ void mytest() {
   
   loctestnum = 0; loctesterr = 0;
   BinaryTreeTest(loctestnum, loctesterr);
+  BSTTest(loctestnum, loctesterr);
 
   testnum += loctestnum; testerr += loctesterr;
 

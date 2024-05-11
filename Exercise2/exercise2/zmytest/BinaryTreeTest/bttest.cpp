@@ -52,11 +52,13 @@ void testBinaryTreeInt(unsigned int & testnum, unsigned int & testerr){
         EqualBT(loctestnum, loctesterr, copbtvec, btvec);
         Root(loctestnum, loctesterr, copbtvec, true, 1);
         Root(loctestnum, loctesterr, btvec, true, 1);
+        Traverse(loctestnum, loctesterr, copbtvec, true, &TraversePrint<int>);
         copbtvec.Clear();
         NonEqualBT(loctestnum, loctesterr, copbtvec, btvec);
         lasd::BinaryTreeVec<int> movbtvec(move(btvec));
         NonEqualBT(loctestnum, loctesterr, movbtvec, btvec);
-        
+        Traverse(loctestnum, loctesterr, btvec, true, &TraversePrint<int>);
+
 
 
 
@@ -105,10 +107,12 @@ void testBinaryTreeDouble(unsigned int & testnum, unsigned int & testerr){
         EqualBT(loctestnum, loctesterr, copbtvec, btvec);
         Root(loctestnum, loctesterr, copbtvec, true, 1.1);
         Root(loctestnum, loctesterr, btvec, true, 1.1);
+        Traverse(loctestnum, loctesterr, copbtvec, true, &TraversePrint<double>);
         copbtvec.Clear();
         NonEqualBT(loctestnum, loctesterr, copbtvec, btvec);
         lasd::BinaryTreeVec<double> movbtvec(move(btvec));
         NonEqualBT(loctestnum, loctesterr, movbtvec, btvec);
+        Traverse(loctestnum, loctesterr, btvec, true, &TraversePrint<double>);
         
 
 
@@ -159,10 +163,12 @@ void testBinaryTreeString(unsigned int & testnum, unsigned int & testerr){
         EqualBT(loctestnum, loctesterr, copbtvec, btvec);
         Root(loctestnum, loctesterr, copbtvec, true, string("A"));
         Root(loctestnum, loctesterr, btvec, true, string("A"));
+        Traverse(loctestnum, loctesterr, copbtvec, true, &TraversePrint<string>);
         copbtvec.Clear();
         NonEqualBT(loctestnum, loctesterr, copbtvec, btvec);
         lasd::BinaryTreeVec<string> movbtvec(move(btvec));
         NonEqualBT(loctestnum, loctesterr, movbtvec, btvec);
+        Traverse(loctestnum, loctesterr, btvec, true, &TraversePrint<string>);
         
 
 
@@ -187,6 +193,9 @@ void BinaryTreeTest(unsigned int & testnum, unsigned int & testerr){
     testBinaryTreeInt(loctestnum, loctesterr);
     testBinaryTreeDouble(loctestnum, loctesterr);
     testBinaryTreeString(loctestnum, loctesterr);
+
+
+    cout << "-------------------------------------------------------------------------------" << endl;
     testnum += loctestnum;
     testerr += loctesterr;
 }
