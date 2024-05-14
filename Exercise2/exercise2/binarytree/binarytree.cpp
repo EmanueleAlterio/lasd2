@@ -18,10 +18,8 @@ bool BinaryTree<Data>::Node::operator==(const Node& other) const noexcept {
         bool lChild = this->HasLeftChild();
         bool otherRChild = other.HasRightChild();
         bool otherLChild = other.HasLeftChild();
-        bool right = (rChild == otherRChild);
-        bool left = (lChild == otherLChild);
 
-        if(left && right) {
+        if(lChild == otherLChild && rChild == otherRChild) {
             if(lChild && rChild) {
                 return((LeftChild() == other.LeftChild()) && (RightChild() == other.RightChild()));
             } else if(lChild) {
@@ -370,14 +368,17 @@ template <typename Data>
 void BTPostOrderIterator<Data>::Reset() noexcept {
     stk.Clear();
     curr = root;
-    if(curr != nullptr){
-        getLeftMostLeaf();
-    }
+    getLeftMostLeaf();
+    
     
 }
 
 template <typename Data>
 void BTPostOrderIterator<Data>::getLeftMostLeaf() {
+    if (curr == nullptr){
+        return;
+    }
+
     while(curr->HasLeftChild()) {
         stk.Push(curr);
         curr = &curr->LeftChild();

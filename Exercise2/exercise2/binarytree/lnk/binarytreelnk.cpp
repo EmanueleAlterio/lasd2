@@ -84,10 +84,8 @@ bool BinaryTreeLnk<Data>::NodeLnk::operator==(const NodeLnk& other) const noexce
         bool lChild = this->HasLeftChild();
         bool otherRChild = other.HasRightChild();
         bool otherLChild = other.HasLeftChild();
-        bool right = (rChild == otherRChild);
-        bool left = (lChild == otherLChild);
 
-        if(left && right) {
+        if(lChild == otherLChild && rChild == otherRChild) {
             if(lChild && rChild) {
                 return((LeftChild() == other.LeftChild()) && (RightChild() == other.RightChild()));
             } else if(lChild) {
@@ -124,7 +122,7 @@ Data& BinaryTreeLnk<Data>::NodeLnk::Element() noexcept {
 
 template <typename Data>
 bool BinaryTreeLnk<Data>::NodeLnk::isLeaf() const noexcept{
-    return !(HasLeftChild() || HasRightChild());
+    return (!HasLeftChild() && !HasRightChild());
 }
 
 template <typename Data>
@@ -141,18 +139,16 @@ template <typename Data>
 const BinaryTree<Data>::Node& BinaryTreeLnk<Data>::NodeLnk::LeftChild() const {
     if(left == nullptr) {
         throw std::out_of_range("Left child does not exists");    
-    } else {
-        return *left;
     }
+    return *left;
 }
 
 template <typename Data>
 const BinaryTree<Data>::Node& BinaryTreeLnk<Data>::NodeLnk::RightChild() const {
     if(right == nullptr) {
         throw std::out_of_range("Right child does not exists");
-    } else {
-        return *right;
     }
+    return *right;
 }
 
 
@@ -160,18 +156,18 @@ template <typename Data>
 MutableBinaryTree<Data>::MutableNode& BinaryTreeLnk<Data>::NodeLnk::LeftChild() {
     if(left == nullptr) {
         throw std::out_of_range("Left child does not exists"); 
-    } else {
-        return *left;
-    }
+    } 
+    return *left;
+    
 }
 
 template <typename Data>
 MutableBinaryTree<Data>::MutableNode& BinaryTreeLnk<Data>::NodeLnk::RightChild() {
     if(right == nullptr) {
         throw std::out_of_range("Right child does not exists");
-    } else {
-        return *right;
     }
+    return *right;
+    
 }
 
 //BINARY LINK TREE

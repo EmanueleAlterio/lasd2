@@ -107,7 +107,7 @@ public:
 
   // Specific member function (inherited from BinaryTree)
 
-  // type Root(argument) specifiers; // Override BinaryTree member
+  using BinaryTreeLnk<Data>::Root; // Override BinaryTree member
 
   /* ************************************************************************ */
 

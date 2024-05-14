@@ -56,7 +56,7 @@ namespace lasd {
     template<typename Data>
     StackVec<Data>& StackVec<Data>::operator=(StackVec &&stackVec) noexcept{
         if(this != &stackVec){
-            index = stackVec.index;
+            std::swap(index, stackVec.index);
             Vector<Data>::operator=(std::move(stackVec));
         }
 

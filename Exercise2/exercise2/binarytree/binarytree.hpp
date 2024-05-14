@@ -347,9 +347,10 @@ public:
   const Data& operator*() const override{
     if(curr != nullptr){
       return curr->Element();
-    } else {
-      throw std::out_of_range("Iterator out of bounds!");
     }
+    
+    throw std::out_of_range("Iterator out of bounds!");
+    
   }; // (throw std::out_of_range when terminated)
 
   bool Terminated() const noexcept override{
@@ -432,9 +433,9 @@ public:
   Data& operator*() override{
     if(curr != nullptr){
       return const_cast<Data&>(curr->Element());
-    } else {
-      throw std::out_of_range("Iterator out of bounds");
-    }
+    } 
+    throw std::out_of_range("Iterator out of bounds");
+
   }; // (throw std::out_of_range when terminated)
 
 };
@@ -510,9 +511,9 @@ public:
   const Data& operator*() const override{
     if(curr != nullptr){
       return curr->Element();
-    }else{
-      throw std::out_of_range("Iterator out of bounds");
     }
+
+    throw std::out_of_range("Iterator out of bounds");
   }; // (throw std::out_of_range when terminated)
 
   bool Terminated() const noexcept override{
@@ -595,9 +596,10 @@ public:
   Data& operator*() override{
     if(curr != nullptr){
       return const_cast<Data&>(curr->Element());
-    }else{
-      std::out_of_range("Iterator out of bounds");
     }
+
+    throw std::out_of_range("Iterator out of bounds");
+
   }; // (throw std::out_of_range when terminated)
 
 };
@@ -673,9 +675,10 @@ public:
   const Data& operator*() const override{
     if(curr != nullptr){
       return curr->Element();
-    }else{
-      throw std::out_of_range("Iterator out of bounds");
     }
+    
+    throw std::out_of_range("Iterator out of bounds");
+
   }; // (throw std::out_of_range when terminated)
 
   bool Terminated() const noexcept override{
@@ -756,9 +759,9 @@ public:
   Data& operator*() override{
     if(curr != nullptr){
       return const_cast<Data&>(curr->Element());
-    }else{
-      std::out_of_range("Iterator out of bounds");
     }
+    
+    throw std::out_of_range("Iterator out of bounds");
   }; // (throw std::out_of_range when terminated)
 
 };
@@ -839,9 +842,9 @@ public:
   const Data& operator*() const override{
     if(curr != nullptr){
       return curr->Element();
-    }else{
-      throw std::out_of_range("Iterator out of bounds");
     }
+    
+    throw std::out_of_range("Iterator out of bounds");
   }; // (throw std::out_of_range when terminated)
 
   bool Terminated() const noexcept override{
@@ -924,9 +927,10 @@ public:
   Data& operator*() override{
     if(curr != nullptr){
       return const_cast<Data&>(curr->Element());
-    }else{
-      std::out_of_range("Iterator out of bounds");
     }
+
+    throw std::out_of_range("Iterator out of bounds");
+
   }; // (throw std::out_of_range when terminated)
 
 };

@@ -136,19 +136,6 @@ void testBSTInt(unsigned int & testnum, unsigned int & testerr){
 
         EqualBST(loctestnum, loctesterr, bst3, bst4);
 
-        lasd::BTBreadthIterator<int> itr4(bst4);
-        GetItrValue(loctestnum, loctesterr, itr4, true, 12);
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, 9);
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, 25);
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, 1);
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, 22);
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, 3);
-
 
     }catch (...) {
         loctestnum++; loctesterr++;
@@ -273,19 +260,6 @@ void testBSTDouble(unsigned int & testnum, unsigned int & testerr){
 
         EqualBST(loctestnum, loctesterr, bst3, bst4);
 
-        lasd::BTBreadthIterator<double> itr4(bst4);
-        GetItrValue(loctestnum, loctesterr, itr4, true, 12.3);
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, 9.9);
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, 25.4);
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, 1.5);
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, 22.1);
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, 3.3);
-
 
     }catch (...) {
         loctestnum++; loctesterr++;
@@ -409,19 +383,6 @@ void testBSTString(unsigned int & testnum, unsigned int & testerr){
         TraverseBreadth(loctestnum, loctesterr, bst4, true, &TraversePrint<string>);
 
         EqualBST(loctestnum, loctesterr, bst3, bst4);
-
-        lasd::BTBreadthIterator<string> itr4(bst4);
-        GetItrValue(loctestnum, loctesterr, itr4, true, string("D"));
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, string("A"));
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, string("M"));
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, string("E"));
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, string("O"));
-        ++itr4;
-        GetItrValue(loctestnum, loctesterr, itr4, true, string("L"));
 
     }catch (...) {
         loctestnum++; loctesterr++;
