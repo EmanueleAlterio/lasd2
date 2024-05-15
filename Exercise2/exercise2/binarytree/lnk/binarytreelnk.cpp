@@ -196,6 +196,11 @@ template <typename Data>
 BinaryTreeLnk<Data>::BinaryTreeLnk(MappableContainer<Data>&& container) {
     size = container.Size();
 
+    if(size == 0){
+        root = nullptr;
+        return;
+    }
+    
     QueueVec<NodeLnk**> que;
     que.Enqueue(&root);
     container.Map([&que](const Data& data) {
