@@ -1,4 +1,3 @@
-#include "binarytreevec.hpp"
 
 namespace lasd {
 

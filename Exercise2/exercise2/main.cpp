@@ -1,5 +1,5 @@
 #include "zlasdtest/test.hpp"
-#include "zmytest/test.hpp"
+
 
 #include "container/container.hpp"
 
@@ -19,17 +19,13 @@ int main() {
 
       std::cout << std::endl << "MENU:" << std::endl;
       std::cout << std::endl << "1. Avviare Lasd Test";
-      std::cout << std::endl << "2. Avviare My Test";
-      std::cout << std::endl << "3. Esci" << std::endl;
+      std::cout << std::endl << "2. Esci" << std::endl;
 
       std::cin >> scelta;
 
         switch (scelta) {
           case 1:
               lasdtest();
-              break;
-          case 2:
-                mytest();
               break;
           default:
               std::cout << std::endl << "Goodbye" << std::endl;
