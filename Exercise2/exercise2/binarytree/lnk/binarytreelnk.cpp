@@ -224,7 +224,7 @@ BinaryTreeLnk<Data>::BinaryTreeLnk(const BinaryTreeLnk& bt) {
 
 //Move constructor
 template <typename Data>
-BinaryTreeLnk<Data>::BinaryTreeLnk(BinaryTreeLnk&& bt) noexcept : BinaryTreeLnk<Data>() {
+BinaryTreeLnk<Data>::BinaryTreeLnk(BinaryTreeLnk&& bt) noexcept {
     std::swap(size, bt.size);
     std::swap(root, bt.root);
 }
