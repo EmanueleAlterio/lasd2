@@ -63,11 +63,11 @@ protected:
     NodeVec& operator=(NodeVec&&) noexcept;
 
     //Comparison operators
-    bool operator==(const NodeVec&& node) const noexcept{
+    bool operator==(const NodeVec& node) const noexcept{
       return BinaryTree<Data>::Node::opeartor==(node);
     }
 
-    bool operator!=(const NodeVec&& node) const noexcept{
+    bool operator!=(const NodeVec& node) const noexcept{
       return BinaryTree<Data>::Node::opeartor!=(node);
     }
 
