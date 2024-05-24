@@ -131,6 +131,90 @@ template<typename Data>
 bool HashTableClsAdr<Data>::operator!=(const HashTableClsAdr<Data>& ht) const noexcept {
     return !(*this == ht);
 }
+
+
+//Insert
+template <typename Data>
+bool HashTableClsAdr<Data>::Insert(const Data& data){
+    unsigned long key = HashTable<Data>::HashKey(enchash(data));
+    
+    if(table[key].Insert(data)){
+        size++;
+        return true;
+    }    
+    
+    return false;
+}
+
+template <typename Data>
+bool HashTableClsAdr<Data>::Insert(Data&& data){
+    unsigned long key = HashTable<Data>::HashKey(enchash(data));
+    
+    if(table[key].Insert(std::move(data))){
+        size++;
+        return true;
+    }    
+    
+    return false;
+}
+
+//Remove
+template <typename Data>
+bool HashTableClsAdr<Data>::Remove(const Data& data){
+    unsigned long key = HashKey(enchash(data));
+
+    if(table[key].Remove(data)){
+        size--;
+        return true;
+    }
+
+    return false;
+}
+
+
+//Exists
+template <typename Data>
+bool HashTableClsAdr<Data>::Exists(const Data& data) const noexcept{
+    unsigned long key = HashKey(enchash(data));
+    return table[key].Exists(data);
+}
+
+
+//Resize
+template <typename Data>
+void HashTableClsAdr<Data>::Resize(unsigned long newsize){
+    if(newsize < MIN_TABLESIZE || newsize > MAX_TABLESIZE){
+        return;
+    }
+    HashTableClsAdr<Data>* tmp = new HashTableClsAdr<Data>(newsize);
+    for(unsigned long i = 0; i < tableSize; i++){
+        if(table[i].Size() != 0){
+            BTInOrderIterator<Data> it(table[i]);
+            while (!(it.Terminated())){
+                Data dat = it.operator*();
+                tmp->Insert(dat);
+                it.operator++;
+            }
+            
+        }
+    }
+
+    std::swap(*this, *tmp);
+    delete tmp;
+}
+
+//Clear
+template <typename Data>
+void HashTableClsAdr<Data>::Clear(){
+    size = 0;
+    
+    for(unsigned long i = 0; i < tableSize; i++){
+        if(table[i].Size() != 0){
+            table[i].Clear();
+        }
+    }
+    
+}
 /* ************************************************************************** */
 
 }
