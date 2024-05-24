@@ -34,8 +34,6 @@ void testBinaryTreeInt(unsigned int & testnum, unsigned int & testerr){
         SetAt(loctestnum, loctesterr, vec, true, 8, 9);
 
         
-
-        cout << endl << "Begin of BinaryTreeVec<int> Test:" << endl;
         lasd::BinaryTreeVec<int> btvec(vec);
         Traverse(loctestnum, loctesterr, btvec, true, &TraversePrint<int>);
         TraversePreOrder(loctestnum, loctesterr, btvec, true, &TraversePrint<int>);
