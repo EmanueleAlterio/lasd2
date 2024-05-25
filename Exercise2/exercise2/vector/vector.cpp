@@ -9,7 +9,7 @@ template<typename Data>
 Vector<Data> :: Vector(const unsigned long initialSize){
     try{
         size = initialSize;
-        elements = new Data[size];
+        elements = new Data[size]{};
 
     }catch(std::bad_alloc &exception){
             std::cerr << "Cannot allocate memory " <<  exception.what();
@@ -20,7 +20,7 @@ template<typename Data>
 Vector<Data> :: Vector(const TraversableContainer<Data> & traversableCon){
     try{
         size = traversableCon.Size();
-        elements = new Data[size];
+        elements = new Data[size]{};
 
         unsigned long i = 0;
         traversableCon.Traverse(
@@ -38,7 +38,7 @@ template<typename Data>
 Vector<Data> :: Vector(MappableContainer<Data> && mappableCon){
     try{
         size = mappableCon.Size();
-        elements = new Data[size];
+        elements = new Data[size]{};
 
         unsigned long i = 0;
         mappableCon.Map(
@@ -57,7 +57,7 @@ template<typename Data>
 Vector<Data>::Vector(const Vector & other){
     try{
         size = other.size;
-        elements = new Data[size];
+        elements = new Data[size]{};
 
         std::copy(other.elements, other.elements + size, elements);
 

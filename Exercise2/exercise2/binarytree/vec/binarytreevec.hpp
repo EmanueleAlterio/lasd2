@@ -122,11 +122,11 @@ public:
 
   // Comparison operators
   bool operator==(const BinaryTreeVec<Data>& bt) const noexcept{
-    return MutableBinaryTree<Data>::operator==(bt);
+    return BinaryTree<Data>::operator==(bt);
   }
 
   bool operator!=(const BinaryTreeVec<Data>& bt) const noexcept{
-    return MutableBinaryTree<Data>::operator!=(bt);
+    return BinaryTree<Data>::operator!=(bt);
   }
   /* ************************************************************************ */
 
