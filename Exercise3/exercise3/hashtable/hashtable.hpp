@@ -21,7 +21,7 @@ class Hashable {
 
 public:
 
-  // type operator()(argument) specifiers; // (concrete function should not throw exceptions)
+  unsigned long operator()(const Data&) const noexcept; // (concrete function should not throw exceptions)
 
 };
 
@@ -48,7 +48,7 @@ protected:
 
   static const Hashable<Data> enchash;
 
-  std::default_random_engine  gen = std::default_random_engine(std::random_device {}());
+  std::default_random_engine  generator = std::default_random_engine(std::random_device {}());
   std::uniform_int_distribution<ulong> dista = std::uniform_int_distribution<ulong>(1, prime-1);
   std::uniform_int_distribution<ulong> distb = std::uniform_int_distribution<ulong>(1, prime-1);
 
@@ -78,8 +78,8 @@ protected:
 
   //Default Connstructor 
   HashTable(){
-    acoeff = dista(gen);
-    bcoeff = distb(gen);
+    acoeff = dista(generator);
+    bcoeff = distb(generator);
   }
 
   //Copy Constructor

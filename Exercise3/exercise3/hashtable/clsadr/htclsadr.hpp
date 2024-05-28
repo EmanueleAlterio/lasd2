@@ -28,10 +28,10 @@ private:
 protected:
 
   using HashTable<Data>::size;
-  using HashTable<Data>::tablesize;
-  using HashTable<Data>::hash;
-  using HashTable<Data>::a;
-  using HashTable<Data>::b;
+  using HashTable<Data>::tableSize;
+  using HashTable<Data>::enchash;
+  using HashTable<Data>::acoeff;
+  using HashTable<Data>::bcoeff;
   using HashTable<Data>::HashKey;
   using HashTable<Data>::Insert;
   using HashTable<Data>::InsertAll;
@@ -71,7 +71,7 @@ public:
   HashTableClsAdr& operator=(const HashTableClsAdr<Data>&);
 
   // Move assignment
-  HashTableClsAdr& operator=(HashTableClsAdr<Data>&&);
+  HashTableClsAdr& operator=(HashTableClsAdr<Data>&&) noexcept;
 
   /* ************************************************************************ */
 

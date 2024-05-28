@@ -7,6 +7,9 @@
 #include "../hashtable.hpp"
 #include "../../vector/vector.hpp"
 
+#define MIN_SIZE 128
+#define MAX_SIZE 2097152
+
 /* ************************************************************************** */
 
 namespace lasd {
@@ -25,18 +28,15 @@ protected:
 
   using HashTable<Data>::size;
   using HashTable<Data>::enchash;
-  using HashTable<Data>::a;
-  using HashTable<Data>::b;
+  using HashTable<Data>::acoeff;
+  using HashTable<Data>::bcoeff;
   using HashTable<Data>::dista;
   using HashTable<Data>::distb;
   using HashTable<Data>::generator;
-  using HashTable<Data>::tablesize;
+  using HashTable<Data>::tableSize;
   using HashTable<Data>::HashKey;
   using HashTable<Data>::Insert;
   using HashTable<Data>::InsertAll;
-
-  #define MIN_SIZE 128
-  #define MAX_SIZE 2097152
 
   double capacity = 0;
   Vector<Data> table;
@@ -67,7 +67,7 @@ public:
   /* ************************************************************************ */
 
   // Destructor
-  virutal ~HashTableOpnAdr() = default;
+  virtual ~HashTableOpnAdr() = default;
 
   /* ************************************************************************ */
 
@@ -117,7 +117,8 @@ protected:
   virtual unsigned long Find(const Data&, unsigned long) const noexcept;
   virtual unsigned long FindEmpty(const Data&, unsigned long) const noexcept;
   virtual bool Remove(const Data&, unsigned long);
-
+  unsigned long FindNext2Pow(unsigned long) const noexcept;
+  bool IsResizable(unsigned long) const noexcept;
 };
 
 /* ************************************************************************** */

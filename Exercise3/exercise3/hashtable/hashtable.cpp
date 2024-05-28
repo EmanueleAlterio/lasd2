@@ -3,14 +3,16 @@ namespace lasd {
 
 /* ************************************************************************** */
 
+template<>
 class Hashable<int>{
     public:
 
-        unsigned long operator()(const int& data) const noexcept{
+        unsigned long operator()(const int & data) const noexcept{
             return (data * data);
         }
 };
 
+template<>
 class Hashable<double>{
     public:
     
@@ -22,7 +24,7 @@ class Hashable<double>{
         }
 };
 
-
+template<>
 class Hashable<std::string>{
     public:
     
@@ -37,14 +39,14 @@ class Hashable<std::string>{
 };
 
 template <typename Data>
-unsigned long HashTable<Data>::HashKey(const Data& dat) const noexcept{
-    return HashKey(enchash(dat));
+unsigned long HashTable<Data>::HashKey(const Data& data) const noexcept{
+    return HashKey(enchash(data));
 }
 
 
 template <typename Data>
 unsigned long HashTable<Data>::HashKey(const unsigned long key) const noexcept {
-    return (((acoeff * key + bcoeff) % prime) % tablesize);
+    return (((acoeff * key + bcoeff) % prime) % tableSize);
 }
 
 /* ************************************************************************** */

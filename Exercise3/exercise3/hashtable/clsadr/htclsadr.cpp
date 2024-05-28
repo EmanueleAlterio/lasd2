@@ -19,13 +19,12 @@ HashTableClsAdr<Data>::HashTableClsAdr(unsigned long dim){
         dim = MAX_TABLESIZE;
     }
 
-    tableSize = con.Size();
+    tableSize = dim;
     table = Vector<BST<Data>>(tableSize);
 }
 
 template <typename Data>
-HashTableClsAdr<Data>::HashTableClsAdr(const TraversableContainer<Data>& con){
-    table = Vector<BST<Data>>(tableSize);
+HashTableClsAdr<Data>::HashTableClsAdr(const TraversableContainer<Data>& con) : HashTableClsAdr(){
     InsertAll(con);
 }
 
@@ -35,8 +34,7 @@ HashTableClsAdr<Data>::HashTableClsAdr(unsigned long dim, const TraversableConta
 }
 
 template <typename Data>
-HashTableClsAdr<Data>::HashTableClsAdr(MappableContainer<Data>&& con){
-    table = Vector<BST<Data>>(tableSize);
+HashTableClsAdr<Data>::HashTableClsAdr(MappableContainer<Data>&& con): HashTableClsAdr(){
     InsertAll(std::move(con));
 }
 
@@ -108,7 +106,7 @@ HashTableClsAdr<Data>& HashTableClsAdr<Data>::operator=(HashTableClsAdr<Data>&& 
 //Comparison Operators
 template <typename Data>
 bool HashTableClsAdr<Data>::operator==(const HashTableClsAdr<Data>& ht) const noexcept{
-    if (size != ht.size || tablesize != ht.tablesize){
+    if (size != ht.size || tableSize != ht.tableSize){
         return false;
     }
 
@@ -147,7 +145,7 @@ bool HashTableClsAdr<Data>::Insert(const Data& data){
 }
 
 template <typename Data>
-bool HashTableClsAdr<Data>::Insert(Data&& data){
+bool HashTableClsAdr<Data>::Insert(Data&& data) noexcept{
     unsigned long key = HashTable<Data>::HashKey(enchash(data));
     
     if(table[key].Insert(std::move(data))){
