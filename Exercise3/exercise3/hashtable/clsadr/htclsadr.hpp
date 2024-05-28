@@ -65,6 +65,7 @@ public:
   // Destructor
   virtual ~HashTableClsAdr() = default;
 
+
   /* ************************************************************************ */
 
   // Copy assignment

@@ -1,7 +1,8 @@
+
 #include "htclsadr.hpp"
 namespace lasd {
 
-/* ************************************************************************** */
+
 
 template <typename Data>
 HashTableClsAdr<Data>::HashTableClsAdr(){
@@ -58,7 +59,7 @@ HashTableClsAdr<Data>::HashTableClsAdr(const HashTableClsAdr<Data>& ht) : HashTa
             BTInOrderIterator<Data> it(ht.table[i]);
             while(!it.Terminated()){
                 Insert(it.operator*());
-                it.operator++;
+                it.operator++();
             }
         }
     }
@@ -191,7 +192,7 @@ void HashTableClsAdr<Data>::Resize(unsigned long newsize){
             while (!(it.Terminated())){
                 Data dat = it.operator*();
                 tmp->Insert(dat);
-                it.operator++;
+                it.operator++();
             }
             
         }
@@ -213,6 +214,7 @@ void HashTableClsAdr<Data>::Clear(){
     }
     
 }
-/* ************************************************************************** */
+
+
 
 }

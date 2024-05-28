@@ -11,7 +11,7 @@
 namespace lasd {
 
 template <typename Data>
-class DictionaryContainer : virtual public TestableContainer<Data>, virtual public MappableContainer<Data>{
+class DictionaryContainer : virtual public TestableContainer<Data>{
  
 public:
 
