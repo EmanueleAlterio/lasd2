@@ -10,13 +10,13 @@ HashTableClsAdr<Data>::HashTableClsAdr(){
 
 
 template <typename Data>
-HashTableClsAdr<Data>::HashTableClsAdr(unsigned long size){
-    if(size < MIN_TABLESIZE){
-        size = MIN_TABLESIZE;
+HashTableClsAdr<Data>::HashTableClsAdr(unsigned long dim){
+    if(dim < MIN_TABLESIZE){
+        dim = MIN_TABLESIZE;
     }
 
-    if(size > MAX_TABLESIZE){
-        size = MAX_TABLESIZE;
+    if(dim > MAX_TABLESIZE){
+        dim = MAX_TABLESIZE;
     }
 
     tableSize = con.Size();
@@ -30,7 +30,7 @@ HashTableClsAdr<Data>::HashTableClsAdr(const TraversableContainer<Data>& con){
 }
 
 template <typename Data>
-HashTableClsAdr<Data>::HashTableClsAdr(unsigned long size, const TraversableContainer<Data>& con) : HashTableClsAdr(size) {
+HashTableClsAdr<Data>::HashTableClsAdr(unsigned long dim, const TraversableContainer<Data>& con) : HashTableClsAdr(dim) {
     InsertAll(con);
 }
 
@@ -41,7 +41,7 @@ HashTableClsAdr<Data>::HashTableClsAdr(MappableContainer<Data>&& con){
 }
 
 template <typename Data>
-HashTableClsAdr<Data>::HashTableClsAdr(unsigned long size, MappableContainer<Data>&& con) : HashTableClsAdr(size){
+HashTableClsAdr<Data>::HashTableClsAdr(unsigned long dim, MappableContainer<Data>&& con) : HashTableClsAdr(dim){
     InsertAll(std::move(con));
 }
 

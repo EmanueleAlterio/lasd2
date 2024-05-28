@@ -38,6 +38,7 @@ protected:
   #define MIN_SIZE 128
   #define MAX_SIZE 2097152
 
+  double capacity = 0;
   Vector<Data> table;
   Vector<char> flags;
 
@@ -61,7 +62,7 @@ public:
   HashTableOpnAdr(const HashTableOpnAdr<Data>&);
 
   // Move constructor
-  HashTableOpnAdr(HashTableOpnAdr<Data>&&);
+  HashTableOpnAdr(HashTableOpnAdr<Data>&&) noexcept;
 
   /* ************************************************************************ */
 
@@ -112,10 +113,10 @@ protected:
 
   // Auxiliary member functions
 
-  // type HashKey(argument) specifiers;
-  // type Find(argument) specifiers;
-  // type FindEmpty(argument) specifiers;
-  // type Remove(argument) specifiers;
+  virtual unsigned long HashKey(const Data&, unsigned long) const noexcept;
+  virtual unsigned long Find(const Data&, unsigned long) const noexcept;
+  virtual unsigned long FindEmpty(const Data&, unsigned long) const noexcept;
+  virtual bool Remove(const Data&, unsigned long);
 
 };
 

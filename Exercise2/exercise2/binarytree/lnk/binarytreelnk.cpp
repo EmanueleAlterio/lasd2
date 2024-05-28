@@ -48,18 +48,11 @@ BinaryTreeLnk<Data>::NodeLnk:: ~NodeLnk(){
 //Copy assignment
 template <typename Data>
 typename BinaryTreeLnk<Data>::NodeLnk& BinaryTreeLnk<Data>::NodeLnk::operator=(const NodeLnk& nodelnk) {
-    NodeLnk tmp (nodelnk.info);
-
-    if(nodelnk.HasLeftChild()){
-        tmp.left = nodelnk.left;
-    }
-
-    if(nodelnk.HasRightChild()){
-        tmp.right = nodelnk.right;
-    }
-    std::swap(tmp, *this);
-
+    NodeLnk* tmp = new NodeLnk(nodelnk);
+    std::swap(*tmp, *this);
+    delete tmp;
     return *this;
+
 
 }
 

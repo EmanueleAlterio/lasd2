@@ -136,6 +136,57 @@ void testBSTInt(unsigned int & testnum, unsigned int & testerr){
 
         EqualBST(loctestnum, loctesterr, bst3, bst4);
 
+        lasd::BTBreadthIterator<int> itr4(bst4);
+        GetItrValue(loctestnum, loctesterr, itr4, true, 12);
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, 9);
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, 25);
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, 1);
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, 22);
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, 3);
+
+        lasd::BTInOrderIterator<int> itr5(bst4);
+        GetItrValue(loctestnum, loctesterr, itr5, true, 1);
+        ++itr5;
+        GetItrValue(loctestnum, loctesterr, itr5, true, 3);
+        ++itr5;
+        GetItrValue(loctestnum, loctesterr, itr5, true, 9);
+        ++itr5;
+        GetItrValue(loctestnum, loctesterr, itr5, true, 12);
+        ++itr5;
+        GetItrValue(loctestnum, loctesterr, itr5, true, 22);
+        ++itr5;
+        GetItrValue(loctestnum, loctesterr, itr5, true, 25);
+
+        lasd::BTPostOrderIterator<int> itr6(bst4);
+        GetItrValue(loctestnum, loctesterr, itr6, true, 3);
+        ++itr6;
+        GetItrValue(loctestnum, loctesterr, itr6, true, 1);
+        ++itr6;
+        GetItrValue(loctestnum, loctesterr, itr6, true, 9);
+        ++itr6;
+        GetItrValue(loctestnum, loctesterr, itr6, true, 22);
+        ++itr6;
+        GetItrValue(loctestnum, loctesterr, itr6, true, 25);
+        ++itr6;
+        GetItrValue(loctestnum, loctesterr, itr6, true, 12);
+
+        lasd::BTPreOrderIterator<int> itr7(bst4);
+        GetItrValue(loctestnum, loctesterr, itr7, true, 12);
+        ++itr7;
+        GetItrValue(loctestnum, loctesterr, itr7, true, 9);
+        ++itr7;
+        GetItrValue(loctestnum, loctesterr, itr7, true, 1);
+        ++itr7;
+        GetItrValue(loctestnum, loctesterr, itr7, true, 3);
+        ++itr7;
+        GetItrValue(loctestnum, loctesterr, itr7, true, 25);
+        ++itr7;
+        GetItrValue(loctestnum, loctesterr, itr7, true, 22);
 
     }catch (...) {
         loctestnum++; loctesterr++;
@@ -260,6 +311,18 @@ void testBSTDouble(unsigned int & testnum, unsigned int & testerr){
 
         EqualBST(loctestnum, loctesterr, bst3, bst4);
 
+        lasd::BTBreadthIterator<double> itr4(bst4);
+        GetItrValue(loctestnum, loctesterr, itr4, true, 12.3);
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, 9.9);
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, 25.4);
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, 1.5);
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, 22.1);
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, 3.3);
 
     }catch (...) {
         loctestnum++; loctesterr++;
@@ -383,6 +446,19 @@ void testBSTString(unsigned int & testnum, unsigned int & testerr){
         TraverseBreadth(loctestnum, loctesterr, bst4, true, &TraversePrint<string>);
 
         EqualBST(loctestnum, loctesterr, bst3, bst4);
+
+        lasd::BTBreadthIterator<string> itr4(bst4);
+        GetItrValue(loctestnum, loctesterr, itr4, true, string("D"));
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, string("A"));
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, string("M"));
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, string("E"));
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, string("O"));
+        ++itr4;
+        GetItrValue(loctestnum, loctesterr, itr4, true, string("L"));
 
     }catch (...) {
         loctestnum++; loctesterr++;
