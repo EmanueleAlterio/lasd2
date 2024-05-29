@@ -26,6 +26,25 @@ private:
 
 protected:
 
+/*   using HashTable<Data>::size;
+  using HashTable<Data>::enchash;
+  using HashTable<Data>::acoeff;
+  using HashTable<Data>::bcoeff;
+  using HashTable<Data>::dista;
+  using HashTable<Data>::distb;
+  using HashTable<Data>::generator;
+  using HashTable<Data>::tableSize;
+  using HashTable<Data>::HashKey;
+  using HashTable<Data>::Insert;
+  using HashTable<Data>::InsertAll;
+
+  double capacity = 0;
+  Vector<Data> table;
+  Vector<char> flags; */
+
+
+public:
+
   using HashTable<Data>::size;
   using HashTable<Data>::enchash;
   using HashTable<Data>::acoeff;
@@ -41,9 +60,6 @@ protected:
   double capacity = 0;
   Vector<Data> table;
   Vector<char> flags;
-
-
-public:
 
   // Default constructor
   HashTableOpnAdr();
@@ -119,7 +135,7 @@ protected:
   virtual unsigned long FindEmpty(const Data&, unsigned long) const noexcept;
   virtual bool Remove(const Data&, unsigned long);
   unsigned long FindNext2Pow(unsigned long) const noexcept;
-  bool IsResizable(unsigned long) const noexcept;
+  
 };
 
 /* ************************************************************************** */

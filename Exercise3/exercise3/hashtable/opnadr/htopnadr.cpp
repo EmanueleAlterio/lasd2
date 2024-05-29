@@ -1,4 +1,5 @@
 #include "htopnadr.hpp"
+
 namespace lasd {
 
 /* ************************************************************************** */
@@ -133,15 +134,15 @@ template <typename Data>
 bool HashTableOpnAdr<Data>::Insert(const Data& data) {
     capacity = (static_cast<double>(size)/static_cast<double>(tableSize))*100;
     if((capacity) > 75) {
-        Resize(2*tableSize+1);
+        Resize(2*tableSize);
     }
     if(!Exists(data)) {
         unsigned long index = FindEmpty(data, 0);
         if(index < tableSize) {
-            unsigned long pos = HashKey(data, index);
-            if(flags[pos] == 'E' || flags[pos] == 'R') {
-                table[pos] = data;
-                flags[pos] = 'F';
+            unsigned long key = HashKey(data, index);
+            if(flags[key] == 'E' || flags[key] == 'R') {
+                table[key] = data;
+                flags[key] = 'F';
                 size++;
                 return true;
             }
@@ -155,15 +156,15 @@ template <typename Data>
 bool HashTableOpnAdr<Data>::Insert(Data&& data) noexcept {
     capacity = (static_cast<double>(size)/static_cast<double>(tableSize))*100;
     if(capacity > 75) {
-        Resize(2*tableSize+1);
+        Resize(2*tableSize);
     }
     if(!Exists(data)) {
         unsigned long index = FindEmpty(data, 0);
         if(index < tableSize) {
-            unsigned long pos = HashKey(data, index);
-            if(flags[pos] == 'E' || flags[pos] == 'R') {
-                table[pos] = std::move(data);
-                flags[pos] = 'F';
+            unsigned long key = HashKey(data, index);
+            if(flags[key] == 'E' || flags[key] == 'R') {
+                table[key] = std::move(data);
+                flags[key] = 'F';
                 size++;
                 return true;
             }
@@ -177,11 +178,11 @@ bool HashTableOpnAdr<Data>::Insert(Data&& data) noexcept {
 template <typename Data>
 bool HashTableOpnAdr<Data>::Remove(const Data& data) {
     capacity = (static_cast<double>(size)/static_cast<double>(tableSize))*100;
-    bool res = Remove(data, 0);
+    bool removed = Remove(data, 0);
     if(capacity < 10) {
-        Resize((tableSize/2)-1);
+        Resize((tableSize/2));
     }
-    return res;
+    return removed;
 }
 
 //Exists
@@ -190,8 +191,8 @@ bool HashTableOpnAdr<Data>::Exists(const Data& data) const noexcept {
     if(size > 0) {
         unsigned long index = Find(data, 0);   
         if(index < tableSize) {
-            unsigned long pos = HashKey(data, index);
-            if(flags[pos] == 'F' && table[pos] == data) {
+            unsigned long key = HashKey(data, index);
+            if(flags[key] == 'F' && table[key] == data) {
                 return true;
             }
         }
@@ -201,23 +202,38 @@ bool HashTableOpnAdr<Data>::Exists(const Data& data) const noexcept {
 
 //Resize
 template <typename Data>
-void HashTableOpnAdr<Data>::Resize(unsigned long siz) {
-    unsigned long newSize;
-    if(!IsResizable(siz)) {
+void HashTableOpnAdr<Data>::Resize(unsigned long dim) {
+    bool isResizable = true;
+
+    if(dim > tableSize) {
+        isResizable = true;
+    } else {
+        if(dim == tableSize) {
+            isResizable = false;
+        }
+        unsigned long capacity = (static_cast<double>(size)/static_cast<double>(dim))*100;
+        if(capacity < 75) {
+            isResizable = true;
+        }
+        isResizable = false;
+    } 
+
+    if(!isResizable) {
         return;
     }
-    newSize = FindNext2Pow(siz);
+
+    unsigned long newSize = FindNext2Pow(dim);
     if(newSize == tableSize) {
         return;
     }
-    HashTableOpnAdr<Data>* tmpht = new HashTableOpnAdr<Data>(newSize);
+    HashTableOpnAdr<Data>* tmp = new HashTableOpnAdr<Data>(newSize);
     for(unsigned long i=0; i<tableSize; i++) {
         if(flags[i] == 'F') {
-            tmpht->Insert(table[i]);
+            tmp->Insert(table[i]);
         }
     }
-    std::swap(*this, *tmpht);
-    delete tmpht;
+    std::swap(*this, *tmp);
+    delete tmp;
 }
 
 
@@ -239,7 +255,6 @@ void HashTableOpnAdr<Data>::Clear() {
 template <typename Data>
 unsigned long HashTableOpnAdr<Data>::HashKey(const Data& data, unsigned long index) const noexcept {
     unsigned long key = enchash(data);
-    //return ((HashKey(key)+index)%tablesize); //linear probing
     return ((HashKey(key)+((index*index)+index)/2)%tableSize); //quadratic probing
 }
 
@@ -247,7 +262,6 @@ unsigned long HashTableOpnAdr<Data>::HashKey(const Data& data, unsigned long ind
 template <typename Data>
 unsigned long HashTableOpnAdr<Data>::Find(const Data& data, unsigned long index) const noexcept {
     unsigned long start = HashKey(data, index);
-    ulong collision = 0;
     while(index < tableSize) {
         if(table[start] == data) {
             return index;
@@ -255,7 +269,7 @@ unsigned long HashTableOpnAdr<Data>::Find(const Data& data, unsigned long index)
         if(flags[start] =='E') {
             return tableSize;
         }
-        collision++;
+    
         index++; 
         start = HashKey(data, index);
     }
@@ -266,12 +280,11 @@ unsigned long HashTableOpnAdr<Data>::Find(const Data& data, unsigned long index)
 template <typename Data>
 unsigned long HashTableOpnAdr<Data>::FindEmpty(const Data& data, unsigned long index) const noexcept {
     unsigned long start = HashKey(data, index);
-    ulong collision = 0;
     while(index < tableSize) {
         if(flags[start] == 'E' || flags[start] == 'R') {
             return index;
         }
-        collision++;
+        
         index++;
         start = HashKey(data, index);
     }
@@ -282,11 +295,11 @@ unsigned long HashTableOpnAdr<Data>::FindEmpty(const Data& data, unsigned long i
 template <typename Data>
 bool HashTableOpnAdr<Data>::Remove(const Data& data, unsigned long index) {
     if(size > 0) {
-        unsigned long idx = Find(data, index);
-        if(idx < tableSize) {
-            unsigned long pos = HashKey(data, idx);  
-            if(flags[pos] == 'F' && table[pos] == data) {
-                flags[pos] = 'R';
+        unsigned long i = Find(data, index);
+        if(i < tableSize) {
+            unsigned long key = HashKey(data, i);  
+            if(flags[key] == 'F' && table[key] == data) {
+                flags[key] = 'R';
                 size--;
                 return true;
             }
@@ -297,9 +310,9 @@ bool HashTableOpnAdr<Data>::Remove(const Data& data, unsigned long index) {
 
 //FindNext2Pow
 template <typename Data>
-unsigned long HashTableOpnAdr<Data>::FindNext2Pow(unsigned long siz) const noexcept {
+unsigned long HashTableOpnAdr<Data>::FindNext2Pow(unsigned long dim) const noexcept {
     unsigned long newSize = MIN_SIZE;
-    while(newSize < siz) {
+    while(newSize < dim) {
         if(newSize >= MAX_SIZE) {
             break;   
         }
@@ -308,23 +321,7 @@ unsigned long HashTableOpnAdr<Data>::FindNext2Pow(unsigned long siz) const noexc
     return newSize;
 }
 
-//isResizable
-template <typename Data>
-bool HashTableOpnAdr<Data>::IsResizable(unsigned long siz) const noexcept {
-    if(siz > tableSize) {
-        return true;
-    } else {
-        if(siz == tableSize) {
-            return false;
-        }
-        ulong cap = (static_cast<double>(size)/static_cast<double>(siz))*100;
-        if(cap < 75) {
-            return true;
-        }
-        return false;
-    } 
 
-}
 
 /* ************************************************************************** */
 

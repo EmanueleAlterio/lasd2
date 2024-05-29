@@ -1,72 +1,42 @@
 #include <iostream>
-#include <random>
-#include <string>
-#include <sstream>
-#include "test.hpp"
-
+#include "./BinaryTreeTest/bttest.hpp"
+#include "./BSTTest/bsttest.hpp"
 /* ************************************************************************** */
 
-#include "../container/container.hpp"
-#include "../container/testable.hpp"
-#include "../container/dictionary.hpp"
-#include "../container/traversable.hpp"
-#include "../container/mappable.hpp"
-#include "../container/linear.hpp"
 
-#include "../vector/vector.hpp"
-
-#include "../list/list.hpp"
-
-#include "../binarytree/binarytree.hpp"
-#include "../binarytree/vec/binarytreevec.hpp"
-#include "../binarytree/lnk/binarytreelnk.hpp"
-#include "../bst/bst.hpp"
-
-#include "../hashtable/hashtable.hpp"
-#include "../hashtable/opnadr/htopnadr.hpp"
-#include "../hashtable/clsadr/htclsadr.hpp"
-#include "../zlasdtest/binarytree/binarytree.hpp"
 
 using namespace std;
 
 /* ************************************************************************** */
 
 void mytest() {
-/* 
+
+  cout << endl << "~*~#~*~ Inizio My Test ~*~#~*~" << endl;
+
+  unsigned int loctestnum, loctesterr;
+  unsigned int testnum = 0, testerr = 0;
+  loctestnum = 0; loctesterr = 0;
+  BinaryTreeTest(loctestnum, loctesterr);
+  BSTTest(loctestnum, loctesterr);
+
+  testnum += loctestnum; testerr += loctesterr;
+  
+  cout << endl << "~*~#~*~ Fine My Test ~*~#~*~";
+  cout << endl << "Errori: " << testerr << " Test: " << testnum << endl;
+/*   cout << endl << "Errori: " << testerr << " Test: " << testnum << endl;
+
     cout << "---------------------------------HASHISH<int>---------------------------------" << endl;
 
 
-
-    //lasd::HashTableOpnAdr<int> ht;
-    lasd::HashTableClsAdr<int> ht;
-
-    cout << "Size: " << ht.Size() << endl;
-    cout << "Table Size: " << ht.tableSize << endl;
-    cout << "a: " << ht.acoeff << endl;
-    cout << "b: " << ht.bcoeff << endl;
-
-    ht.Insert(10);
-    ht.Insert(10);
-    ht.Insert(20);
-
-    cout << "Size: " << ht.Size() << endl;
-
-    for(unsigned long i=0; i<ht.tableSize; i++ ){
-        ht.table[i].Traverse(&TraversePrint<int>);
+    lasd::Vector<int> vec(127);
+    for(unsigned long i = 0; i<127; i++){
+        vec[i] = i;
     }
+
+    lasd::HashTableOpnAdr<int> ht(83, vec);
+    //cout << ht.tableSize << endl;
     
-    cout << endl << endl;
 
-    ht.Remove(20);
+cout << "---------------------------------HASHISH<int>---------------------------------" << endl; */
 
-    cout << "Size: " << ht.Size() << endl;
-
-    for(unsigned long i=0; i<ht.tableSize; i++ ){
-        ht.table[i].Traverse(&TraversePrint<int>);
-    }
-    
-    cout << endl << endl;
-
-cout << "---------------------------------HASHISH<int>---------------------------------" << endl;
- */
 }
