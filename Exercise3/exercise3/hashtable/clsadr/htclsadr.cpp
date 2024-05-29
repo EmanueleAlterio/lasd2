@@ -48,33 +48,18 @@ HashTableClsAdr<Data>::HashTableClsAdr(unsigned long dim, MappableContainer<Data
 //Copy Constructor
 template <typename Data>
 HashTableClsAdr<Data>::HashTableClsAdr(const HashTableClsAdr<Data>& ht) : HashTable<Data>(ht){
-    if(ht.size == 0){
-        Clear();
-        return;
-    }
-
-    table = Vector<BST<Data>>(tableSize);
-    for(unsigned long i=0; i < ht.tableSize; i++){
-        if(ht.table[i].Size()!=0){
-            BTInOrderIterator<Data> it(ht.table[i]);
-            while(!it.Terminated()){
-                Insert(it.operator*());
-                it.operator++();
-            }
-        }
+    table.Resize(ht.tableSize);
+    for (unsigned long i = 0; i < ht.tableSize; i++){
+        table[i] = ht.table[i];
     }
 }
 
 
 //Move Constructor
 template <typename Data>
-HashTableClsAdr<Data>::HashTableClsAdr(HashTableClsAdr<Data>&& ht) noexcept{
-    std::swap(size, ht.size);
+HashTableClsAdr<Data>::HashTableClsAdr(HashTableClsAdr<Data>&& ht) noexcept : HashTable<Data>(ht){
     std::swap(tableSize, ht.tableSize);
     std::swap(table, ht.table);
-    std::swap(acoeff, ht.acoeff);
-    std::swap(bcoeff, ht.bcoeff);
-
 }
 
 

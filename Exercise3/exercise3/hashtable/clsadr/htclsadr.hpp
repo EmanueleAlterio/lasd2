@@ -40,6 +40,7 @@ protected:
 
 public:
 
+
   // Default constructor
   HashTableClsAdr();
 

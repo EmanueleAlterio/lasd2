@@ -42,6 +42,7 @@ protected:
   Vector<Data> table;
   Vector<char> flags;
 
+
 public:
 
   // Default constructor
