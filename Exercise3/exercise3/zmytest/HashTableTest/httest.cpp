@@ -23,24 +23,31 @@
 using namespace std;
 
 void testHashTableInt(unsigned int & testnum, unsigned int & testerr){
+
+
+
     
     unsigned int loctestnum = 0, loctesterr = 0;
     cout << endl << "Begin of HashTable<int> Test" << endl;
-    try{
 
+    cout << endl << "OPN ADR" << endl;
+    cout << "-------------------------------------------------------------------------------" << endl;
+    try{
+ 
     
     lasd::Vector<int> vec(126);
     for (uint i = 0; i < 126; i++) {
       vec[i] = i;
     }
 
-    lasd::HashTableOpnAdr<int> htopnadr(100, vec);
-    Size(loctestnum, loctesterr, htopnadr, true, 126);
+   lasd::HashTableOpnAdr<int> htopnadr(100, vec);
+    Size(loctestnum, loctesterr, htopnadr, true, 126); 
 
     lasd::Vector<int> container(63);
     for(uint i = 0; i < 63; i++){
         container[i] = 2 * i;
     }
+
 
     CountHT(loctestnum, loctesterr, htopnadr, container, 63);
 
@@ -74,7 +81,42 @@ void testHashTableInt(unsigned int & testnum, unsigned int & testerr){
     InsertC(loctestnum, loctesterr, htopnadr, vec);
     Size(loctestnum, loctesterr, htopnadr, true, 126);
 
+    lasd::HashTableOpnAdr<int> cophtopnadr(htopnadr);
+    EqualHT(loctestnum, loctesterr, cophtopnadr, htopnadr);
+    lasd::HashTableOpnAdr<int> movhtopnadr(std::move(cophtopnadr));
+    EqualHT(loctestnum, loctesterr, movhtopnadr, htopnadr);
+    //NonEqualHT(loctestnum, loctesterr, cophtopnadr, movhtopnadr);
+    cophtopnadr = htopnadr;
+    EqualHT(loctestnum, loctesterr, movhtopnadr, cophtopnadr);
+    lasd::HashTableOpnAdr<int> cop2htopnadr;
+    cop2htopnadr = std::move(cophtopnadr);
+    EqualHT(loctestnum, loctesterr, cop2htopnadr, htopnadr);
+    lasd::HashTableOpnAdr<int> htdimconstropn(90);
+    lasd::HashTableOpnAdr<int> htdimconstropn2(90000);
 
+    lasd::Vector<int> vec2(10);
+    for (uint i = 0; i < 10; i++) {
+      vec[i] = i;
+    }
+
+    
+    lasd::HashTableOpnAdr<int> htopnadr2(100, vec2);
+    lasd::HashTableOpnAdr<int> htopnadr3(100, std::move(vec2));
+    EqualHT(loctestnum, loctesterr, htopnadr2, htopnadr3);
+
+    lasd::Vector<int> vec3(10);
+    for (uint i = 0; i < 10; i++){
+      vec[i] = i;
+    }
+
+    lasd::HashTableOpnAdr<int> htopnadr4(vec3);
+    lasd::HashTableOpnAdr<int> htopnadr5(std::move(vec3));
+    //EqualHT(loctestnum, loctesterr, htopnadr4, htopnadr5);
+
+    cout << endl << endl << "CLS ADR" << endl;
+    cout << "-------------------------------------------------------------------------------" << endl;
+
+/* -------------------------------------------------------------------------------------------------- */
 
     lasd::HashTableClsAdr<int> htclsadr(100, vec);
     Size(loctestnum, loctesterr, htclsadr, true, 126);
@@ -103,13 +145,51 @@ void testHashTableInt(unsigned int & testnum, unsigned int & testerr){
     }
 
     htclsadr.Resize(4001);
+    //cout << endl << "table size dopo Resize 4001: " << htclsadr.tableSize << endl;
     Size(loctestnum, loctesterr, htclsadr, true, 126);
     Empty(loctestnum, loctesterr, htclsadr, false);
     htclsadr.Clear();
+    cout<< endl << "COPY HT TableSIZE dopo clear "<< htclsadr.tableSize << endl;
     Empty(loctestnum, loctesterr, htclsadr, true);
     Size(loctestnum, loctesterr, htclsadr, true, 0);
     InsertC(loctestnum, loctesterr, htclsadr, vec);
     Size(loctestnum, loctesterr, htclsadr, true, 126);
+
+    lasd::HashTableClsAdr<int> cophtclsadr(htclsadr);
+    Size(loctestnum, loctesterr, htclsadr, true, 126);
+    cout<< endl << "COPY HT TableSIZE "<< cophtclsadr.tableSize << endl;
+    cout<< endl << "COPY HT SIZE " << cophtclsadr.Size() << endl;
+    Size(loctestnum, loctesterr, cophtclsadr, true, 126);
+    EqualHT(loctestnum, loctesterr, cophtclsadr, htclsadr);
+    lasd::HashTableClsAdr<int> movhtclsadr(std::move(cophtclsadr));
+    EqualHT(loctestnum, loctesterr, movhtclsadr, htclsadr);
+    NonEqualHT(loctestnum, loctesterr, cophtclsadr, movhtclsadr);
+    cophtclsadr = htclsadr;
+    EqualHT(loctestnum, loctesterr, movhtclsadr, cophtclsadr);
+    lasd::HashTableClsAdr<int> cop2htclsadr;
+    cop2htclsadr = std::move(cophtclsadr);
+    EqualHT(loctestnum, loctesterr, cop2htclsadr, htclsadr);
+    lasd::HashTableClsAdr<int> htdimconstr(90);
+    lasd::HashTableClsAdr<int> htdimconstr2(90000);
+
+    lasd::Vector<int> vec4(10);
+    for (uint i = 0; i < 10; i++) {
+      vec[i] = i;
+    }
+
+    
+    lasd::HashTableClsAdr<int> htclsadr2(100, vec4);
+    lasd::HashTableClsAdr<int> htclsadr3(100, std::move(vec4));
+    EqualHT(loctestnum, loctesterr, htclsadr2, htclsadr3);
+
+    lasd::Vector<int> vec5(10);
+    for (uint i = 0; i < 10; i++){
+      vec[i] = i;
+    }
+
+    lasd::HashTableClsAdr<int> htclsadr4(vec5);
+    lasd::HashTableClsAdr<int> htclsadr5(std::move(vec5));
+    //EqualHT(loctestnum, loctesterr, htclsadr4, htclsadr5);
 
 
 
