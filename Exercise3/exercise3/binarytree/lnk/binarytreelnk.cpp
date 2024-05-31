@@ -51,8 +51,6 @@ typename BinaryTreeLnk<Data>::NodeLnk& BinaryTreeLnk<Data>::NodeLnk::operator=(c
     std::swap(*tmp, *this);
     delete tmp;
     return *this;
-
-
 }
 
 //move assignment

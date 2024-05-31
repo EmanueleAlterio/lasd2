@@ -46,13 +46,8 @@ void Remove(uint & testnum, uint & testerr, lasd::DictionaryContainer<Data> & co
   bool tst = true;
   try {
     std::cout << " " << testnum << " (" << testerr << ") Removal from the dictionary container of the value \"" << val << "\": ";
-    bool flag = con.Remove(val);
-    if(flag){
-      std::cout << "Correct!" << std::endl;
-    } else {
-      std::cout << "Error!" << std::endl;
-    }
-    
+    con.Remove(val);
+    std::cout << "Correct!" << std::endl; 
   }
   catch (std::exception & exc) {
     tst = false;

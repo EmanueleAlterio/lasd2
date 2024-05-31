@@ -6,7 +6,7 @@ namespace lasd {
 
 template <typename Data>
 HashTableClsAdr<Data>::HashTableClsAdr(){
-    table = Vector<BST<Data>>(tableSize);
+    table = Vector<List<Data>>(MIN_TABLESIZE);
 }
 
 
@@ -21,7 +21,7 @@ HashTableClsAdr<Data>::HashTableClsAdr(unsigned long dim){
     }
 
     tableSize = dim;
-    table = Vector<BST<Data>>(tableSize);
+    table = Vector<List<Data>>(tableSize);
 }
 
 template <typename Data>
@@ -96,16 +96,18 @@ bool HashTableClsAdr<Data>::operator==(const HashTableClsAdr<Data>& ht) const no
         return false;
     }
 
-    for (ulong i = 0; i < tableSize; i++) {
+    for (unsigned long i = 0; i < tableSize; i++) {
+        for(unsigned long j = 0; j < table[i].Size(); j++){
             if(table[i].Size()!=0){
-                BTInOrderIterator<Data> it(table[i]);
-                while (!it.Terminated()) {
-                    if (!ht.Exists(it.operator*())){
-                        return false;
-                    }
-                    it.operator++();
-                }    
+                
+                unsigned long key = HashKey(table[i].operator[](j));
+                if(!table[key].Exists(table[i].operator[](j))){
+                    return false;
+                }
+                    
             }
+        }
+            
     }
     
     return true;
@@ -170,16 +172,13 @@ void HashTableClsAdr<Data>::Resize(unsigned long newsize){
     if(newsize < MIN_TABLESIZE || newsize > MAX_TABLESIZE){
         return;
     }
+
     HashTableClsAdr<Data>* tmp = new HashTableClsAdr<Data>(newsize);
     for(unsigned long i = 0; i < tableSize; i++){
-        if(table[i].Size() != 0){
-            BTInOrderIterator<Data> it(table[i]);
-            while (!(it.Terminated())){
-                Data dat = it.operator*();
-                tmp->Insert(dat);
-                it.operator++();
+        for(unsigned long j = 0; j < table[i].Size(); j++){
+            if(table[i].Size() != 0){
+                tmp->Insert(table[i].operator[](j));
             }
-            
         }
     }
 

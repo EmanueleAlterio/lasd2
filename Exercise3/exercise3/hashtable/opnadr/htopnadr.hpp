@@ -40,8 +40,8 @@ protected:
 
   double capacity = 0;
   Vector<Data> table;
-  Vector<char> flags; */
-
+  Vector<char> flags;
+ */
 
 public:
 
@@ -57,9 +57,9 @@ public:
   using HashTable<Data>::Insert;
   using HashTable<Data>::InsertAll;
 
-  double capacity = 0;
   Vector<Data> table;
   Vector<char> flags;
+
 
   // Default constructor
   HashTableOpnAdr();

@@ -1,5 +1,5 @@
 #include "htopnadr.hpp"
-
+#include <iostream> 
 namespace lasd {
 
 /* ************************************************************************** */
@@ -18,7 +18,6 @@ HashTableOpnAdr<Data>:: HashTableOpnAdr(){
         flags[i] = 'E';
     }
 
-    capacity = (static_cast<double>(size)/static_cast<double>(tableSize))*100;
 }
 
 //Specific constructors
@@ -33,11 +32,13 @@ HashTableOpnAdr<Data>::HashTableOpnAdr(unsigned long dim){
     for(unsigned long i=0; i<tableSize; i++) {
         flags[i] = 'E'; // Empty, Full, Removed
     }
-    capacity = (static_cast<double>(size)/static_cast<double>(tableSize))*100;
+
 }
 
 template <typename Data>
 HashTableOpnAdr<Data>::HashTableOpnAdr(const TraversableContainer<Data>& con) : HashTableOpnAdr(){
+
+
     InsertAll(con);
 }
 
@@ -66,7 +67,6 @@ HashTableOpnAdr<Data>::HashTableOpnAdr(const HashTableOpnAdr<Data>& ht){
     bcoeff = ht.bcoeff;
     table = ht.table;
     flags = ht.flags;
-    capacity = ht.capacity;
 }
 
 //Move constructor
@@ -78,7 +78,6 @@ HashTableOpnAdr<Data>::HashTableOpnAdr(HashTableOpnAdr<Data>&& ht) noexcept{
     std::swap(bcoeff, ht.bcoeff);
     std::swap(table, ht.table);
     std::swap(flags, ht.flags);
-    std::swap(capacity, ht.capacity);
 }
 
 //Copy assigment
@@ -101,7 +100,7 @@ HashTableOpnAdr<Data>& HashTableOpnAdr<Data>:: operator=(HashTableOpnAdr&& ht) n
     std::swap(bcoeff, ht.bcoeff);
     std::swap(table, ht.table);
     std::swap(flags, ht.flags);
-    std::swap(capacity, ht.capacity);
+
 
     return *this;
 }
@@ -132,7 +131,7 @@ bool HashTableOpnAdr<Data>::operator!=(const HashTableOpnAdr<Data>& ht) const no
 //Insert
 template <typename Data>
 bool HashTableOpnAdr<Data>::Insert(const Data& data) {
-    capacity = (static_cast<double>(size)/static_cast<double>(tableSize))*100;
+    double capacity = (static_cast<double>(size)/static_cast<double>(tableSize))*100;
     if((capacity) > 75) {
         Resize(2*tableSize);
     }
@@ -154,7 +153,7 @@ bool HashTableOpnAdr<Data>::Insert(const Data& data) {
 //Insert move
 template <typename Data>
 bool HashTableOpnAdr<Data>::Insert(Data&& data) noexcept {
-    capacity = (static_cast<double>(size)/static_cast<double>(tableSize))*100;
+    double capacity = (static_cast<double>(size)/static_cast<double>(tableSize))*100;
     if(capacity > 75) {
         Resize(2*tableSize);
     }
@@ -177,7 +176,7 @@ bool HashTableOpnAdr<Data>::Insert(Data&& data) noexcept {
 //Remove
 template <typename Data>
 bool HashTableOpnAdr<Data>::Remove(const Data& data) {
-    capacity = (static_cast<double>(size)/static_cast<double>(tableSize))*100;
+    double capacity = (static_cast<double>(size)/static_cast<double>(tableSize))*100;
     bool removed = Remove(data, 0);
     if(capacity < 10) {
         Resize((tableSize/2));
@@ -211,7 +210,7 @@ void HashTableOpnAdr<Data>::Resize(unsigned long dim) {
         if(dim == tableSize) {
             isResizable = false;
         }
-        unsigned long capacity = (static_cast<double>(size)/static_cast<double>(dim))*100;
+        double capacity = (static_cast<double>(size)/static_cast<double>(dim))*100;
         if(capacity < 75) {
             isResizable = true;
         }

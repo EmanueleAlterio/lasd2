@@ -5,8 +5,8 @@
 /* ************************************************************************** */
 
 #include "../hashtable.hpp"
-#include "../../bst/bst.hpp"
 #include "../../vector/vector.hpp"
+#include "../../list/list.hpp"
 
 #define MAX_TABLESIZE 9973
 #define MIN_TABLESIZE 127
@@ -36,7 +36,7 @@ protected:
   using HashTable<Data>::Insert;
   using HashTable<Data>::InsertAll;
 
-  Vector<BST<Data>> table;
+  Vector<List<Data>> table;
 
 public:
 
