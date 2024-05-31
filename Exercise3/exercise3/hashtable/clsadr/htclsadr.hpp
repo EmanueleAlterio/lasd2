@@ -9,7 +9,7 @@
 #include "../../list/list.hpp"
 
 #define MAX_TABLESIZE 9973
-#define MIN_TABLESIZE 129
+#define MIN_TABLESIZE 127
 
 /* ************************************************************************** */
 

@@ -34,7 +34,6 @@ HashTableClsAdr<Data>::HashTableClsAdr(unsigned long givenSize) {
 template<typename Data>
 HashTableClsAdr<Data>::HashTableClsAdr(const TraversableContainer<Data>& container){
     unsigned long givenSize = 0;
-    std::cout << container.Size() << std::endl;
     if(container.Size() < MIN_TABLESIZE) {
         givenSize = MIN_TABLESIZE;
     }
@@ -104,17 +103,21 @@ HashTableClsAdr<Data>::HashTableClsAdr(unsigned long givenSize, MappableContaine
 // Copy and Move Constructors - HashTableClsAdr
 
 template <typename Data>
-HashTableClsAdr<Data>::HashTableClsAdr(const HashTableClsAdr<Data>& ht) : HashTable<Data>(ht) {
-    table.Resize(ht.tableSize);
-    for (unsigned long i = 0; i < ht.tableSize; i++){
-        table[i] = ht.table[i];
-    }
+HashTableClsAdr<Data>::HashTableClsAdr(const HashTableClsAdr<Data>& ht){
+    size = ht.size;
+    tableSize = ht.tableSize;
+    acoeff = ht.acoeff;
+    bcoeff = ht.bcoeff;
+    table = ht.table;
 }
 
 template <typename Data>
-HashTableClsAdr<Data>::HashTableClsAdr(HashTableClsAdr<Data>&& ht) noexcept : HashTable<Data>(std::move(ht)) {
-    std::swap(table, ht.table);
+HashTableClsAdr<Data>::HashTableClsAdr(HashTableClsAdr<Data>&& ht) noexcept {
+    std::swap(size, ht.size);
     std::swap(tableSize, ht.tableSize);
+    std::swap(acoeff, ht.acoeff);
+    std::swap(bcoeff, ht.bcoeff);
+    std::swap(table, ht.table);
 }
 
 /* ************************************************************************** */
@@ -145,35 +148,29 @@ HashTableClsAdr<Data> & HashTableClsAdr<Data>::operator=(HashTableClsAdr<Data>&&
 
 template<typename Data>
 bool HashTableClsAdr<Data>::operator==(const HashTableClsAdr<Data>& ht) const noexcept{
-    std::cout << std::endl << tableSize << std::endl;
-    std::cout << std::endl << table.Size() << std::endl;
-    std::cout << std::endl << ht.tableSize << std::endl;
-    std::cout << std::endl << ht.table.Size() << std::endl;
     if(size == ht.size){
-        //for (unsigned long i = 0; i < tablesize; i++){
-            // for (Node* it = table[i].Front(); it != nullptr; it = it->next){
-            //     unsigned long index = HashKey(*(it)->data);
-            //     if(!table[index].Exists(*(it)->data)){
-            //         return false;
-            //     }
-            // }
-        //}
 
         for(unsigned long i = 0; i < table.Size(); i++){
-            for(unsigned long j = 0; j < table[i].Size() && table[i].Size() != 0; j++){
-                unsigned long index = HashKey(table[i].operator[](j));
-                if(!table[index].Exists(table[i].operator[](j))){
-                    return false;
+            if(table[i].Size() == ht.table[i].Size()){
+                for(unsigned long j = 0; j < table[i].Size() && table[i].Size() != 0; j++){
+                    unsigned long index = ht.HashKey(table[i].operator[](j));
+                    if(!table[index].Exists(table[i].operator[](j))){
+                        return false;
+                    }
                 }
+            }
+            else{
+                return false; 
             }
         }
         return true;
+
     }
     return false;
 }
 
 template<typename Data>
-bool HashTableClsAdr<Data>::operator!=(const HashTableClsAdr<Data> & ht) const noexcept{
+bool HashTableClsAdr<Data>::operator!=(const HashTableClsAdr<Data>& ht) const noexcept{
     return !(*this == ht);
 }
 
@@ -184,7 +181,6 @@ bool HashTableClsAdr<Data>::operator!=(const HashTableClsAdr<Data> & ht) const n
 template<typename Data>
 bool HashTableClsAdr<Data>::Insert(const Data& data){
     unsigned long index = HashKey(data);
-    //std::cout << "Index per lo 0 (const): " << index << std::endl;
     if(table[index].Insert(data)){
         size++;
         return true;
@@ -195,7 +191,6 @@ bool HashTableClsAdr<Data>::Insert(const Data& data){
 template<typename Data>
 bool HashTableClsAdr<Data>::Insert(Data&& data) noexcept{
     unsigned long index = HashKey(std::move(data));
-    std::cout << "Index per lo 0: " << index << std::endl;
     if(table[index].Insert(std::move(data))){
         size++;
         return true;

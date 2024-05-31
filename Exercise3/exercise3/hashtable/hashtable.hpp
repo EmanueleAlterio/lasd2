@@ -44,13 +44,13 @@ protected:
   unsigned long acoeff = 1;
   unsigned long bcoeff = 0;
 
-  static const unsigned long prime = 1000000016531;
+  static const unsigned long prime = 17;
 
   static const Hashable<Data> enchash;
 
   std::default_random_engine  generator = std::default_random_engine(std::random_device {}());
   std::uniform_int_distribution<ulong> dista = std::uniform_int_distribution<ulong>(1, prime-1);
-  std::uniform_int_distribution<ulong> distb = std::uniform_int_distribution<ulong>(1, prime-1);
+  std::uniform_int_distribution<ulong> distb = std::uniform_int_distribution<ulong>(0, prime-1);
 
 
   unsigned long tableSize = 128;

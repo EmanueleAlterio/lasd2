@@ -40,8 +40,9 @@ void testHashTableInt(unsigned int & testnum, unsigned int & testerr){
       vec[i] = i;
     }
 
+
    lasd::HashTableOpnAdr<int> htopnadr(100, vec);
-    Size(loctestnum, loctesterr, htopnadr, true, 126); 
+    Size(loctestnum, loctesterr, htopnadr, true, 126);  
 
     lasd::Vector<int> container(63);
     for(uint i = 0; i < 63; i++){
@@ -92,11 +93,11 @@ void testHashTableInt(unsigned int & testnum, unsigned int & testerr){
     cop2htopnadr = std::move(cophtopnadr);
     EqualHT(loctestnum, loctesterr, cop2htopnadr, htopnadr);
     lasd::HashTableOpnAdr<int> htdimconstropn(90);
-    lasd::HashTableOpnAdr<int> htdimconstropn2(90000);
+    lasd::HashTableOpnAdr<int> htdimconstropn2(90000); 
 
-    lasd::Vector<int> vec2(10);
+     lasd::Vector<int> vec2(10);
     for (uint i = 0; i < 10; i++) {
-      vec[i] = i;
+      vec2[i] = i;
     }
 
     
@@ -106,7 +107,7 @@ void testHashTableInt(unsigned int & testnum, unsigned int & testerr){
 
     lasd::Vector<int> vec3(10);
     for (uint i = 0; i < 10; i++){
-      vec[i] = i;
+      vec3[i] = i;
     }
 
     lasd::HashTableOpnAdr<int> htopnadr4(vec3);
@@ -149,7 +150,6 @@ void testHashTableInt(unsigned int & testnum, unsigned int & testerr){
     Size(loctestnum, loctesterr, htclsadr, true, 126);
     Empty(loctestnum, loctesterr, htclsadr, false);
     htclsadr.Clear();
-    cout<< endl << "COPY HT TableSIZE dopo clear "<< htclsadr.tableSize << endl;
     Empty(loctestnum, loctesterr, htclsadr, true);
     Size(loctestnum, loctesterr, htclsadr, true, 0);
     InsertC(loctestnum, loctesterr, htclsadr, vec);
@@ -157,8 +157,6 @@ void testHashTableInt(unsigned int & testnum, unsigned int & testerr){
 
     lasd::HashTableClsAdr<int> cophtclsadr(htclsadr);
     Size(loctestnum, loctesterr, htclsadr, true, 126);
-    cout<< endl << "COPY HT TableSIZE "<< cophtclsadr.tableSize << endl;
-    cout<< endl << "COPY HT SIZE " << cophtclsadr.Size() << endl;
     Size(loctestnum, loctesterr, cophtclsadr, true, 126);
     EqualHT(loctestnum, loctesterr, cophtclsadr, htclsadr);
     lasd::HashTableClsAdr<int> movhtclsadr(std::move(cophtclsadr));
@@ -174,17 +172,17 @@ void testHashTableInt(unsigned int & testnum, unsigned int & testerr){
 
     lasd::Vector<int> vec4(10);
     for (uint i = 0; i < 10; i++) {
-      vec[i] = i;
+      vec4[i] = i;
     }
 
     
     lasd::HashTableClsAdr<int> htclsadr2(100, vec4);
     lasd::HashTableClsAdr<int> htclsadr3(100, std::move(vec4));
-    EqualHT(loctestnum, loctesterr, htclsadr2, htclsadr3);
+    NonEqualHT(loctestnum, loctesterr, htclsadr2, htclsadr3);
 
     lasd::Vector<int> vec5(10);
     for (uint i = 0; i < 10; i++){
-      vec[i] = i;
+      vec5[i] = i;
     }
 
     lasd::HashTableClsAdr<int> htclsadr4(vec5);
