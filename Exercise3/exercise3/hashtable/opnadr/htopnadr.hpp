@@ -26,25 +26,6 @@ private:
 
 protected:
 
-/*   using HashTable<Data>::size;
-  using HashTable<Data>::enchash;
-  using HashTable<Data>::acoeff;
-  using HashTable<Data>::bcoeff;
-  using HashTable<Data>::dista;
-  using HashTable<Data>::distb;
-  using HashTable<Data>::generator;
-  using HashTable<Data>::tableSize;
-  using HashTable<Data>::HashKey;
-  using HashTable<Data>::Insert;
-  using HashTable<Data>::InsertAll;
-
-  double capacity = 0;
-  Vector<Data> table;
-  Vector<char> flags; */
-
-
-public:
-
   using HashTable<Data>::size;
   using HashTable<Data>::enchash;
   using HashTable<Data>::acoeff;
@@ -60,6 +41,9 @@ public:
   double capacity = 0;
   Vector<Data> table;
   Vector<char> flags;
+
+
+public:
 
 
   // Default constructor
