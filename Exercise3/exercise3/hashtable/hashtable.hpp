@@ -44,7 +44,7 @@ protected:
   unsigned long acoeff = 1;
   unsigned long bcoeff = 0;
 
-  static const unsigned long prime = 17;
+  static const unsigned long prime = 1000000016531;
 
   static const Hashable<Data> enchash;
 

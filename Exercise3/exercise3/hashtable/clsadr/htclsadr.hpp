@@ -27,19 +27,6 @@ private:
 
 protected:
 
-/*   using HashTable<Data>::size;
-  using HashTable<Data>::tableSize;
-  using HashTable<Data>::enchash;
-  using HashTable<Data>::acoeff;
-  using HashTable<Data>::bcoeff;
-  using HashTable<Data>::HashKey;
-  using HashTable<Data>::Insert;
-  using HashTable<Data>::InsertAll;
-
-  Vector<List<Data>> table;
- */
-public:
-
   using HashTable<Data>::size;
   using HashTable<Data>::tableSize;
   using HashTable<Data>::enchash;
@@ -51,7 +38,7 @@ public:
 
   Vector<List<Data>> table;
 
-
+public:
 
   // Default constructor
   HashTableClsAdr();
@@ -118,9 +105,7 @@ public:
   // Specific member functions (inherited from ClearableContainer)
 
   void Clear() override; // Override Container member
-
-  protected:
-    unsigned long FindNextPrime(unsigned long) const noexcept;  
+ 
 
 };
 

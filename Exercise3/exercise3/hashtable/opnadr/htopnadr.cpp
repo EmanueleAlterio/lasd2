@@ -37,8 +37,6 @@ HashTableOpnAdr<Data>::HashTableOpnAdr(unsigned long dim){
 
 template <typename Data>
 HashTableOpnAdr<Data>::HashTableOpnAdr(const TraversableContainer<Data>& con) : HashTableOpnAdr(){
-
-
     InsertAll(con);
 }
 
@@ -132,7 +130,7 @@ bool HashTableOpnAdr<Data>::operator!=(const HashTableOpnAdr<Data>& ht) const no
 template <typename Data>
 bool HashTableOpnAdr<Data>::Insert(const Data& data) {
     double capacity = (static_cast<double>(size)/static_cast<double>(tableSize))*100;
-    if((capacity) > 75) {
+    if((capacity) > 50) {
         Resize(2*tableSize);
     }
     if(!Exists(data)) {
@@ -154,7 +152,7 @@ bool HashTableOpnAdr<Data>::Insert(const Data& data) {
 template <typename Data>
 bool HashTableOpnAdr<Data>::Insert(Data&& data) noexcept {
     double capacity = (static_cast<double>(size)/static_cast<double>(tableSize))*100;
-    if(capacity > 75) {
+    if(capacity > 50) {
         Resize(2*tableSize);
     }
     if(!Exists(data)) {
@@ -213,8 +211,10 @@ void HashTableOpnAdr<Data>::Resize(unsigned long dim) {
         double capacity = (static_cast<double>(size)/static_cast<double>(dim))*100;
         if(capacity < 75) {
             isResizable = true;
+        }else{
+            isResizable = false;
         }
-        isResizable = false;
+        
     } 
 
     if(!isResizable) {
