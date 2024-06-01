@@ -7,10 +7,7 @@ namespace lasd {
 //Default constructor
 template <typename Data>
 HashTableOpnAdr<Data>:: HashTableOpnAdr(){
-    tableSize = MIN_SIZE;
     size = 0;
-    acoeff = 2*(dista(generator))+1;
-    bcoeff = 2*(distb(generator));
     table.Resize(tableSize);
     flags.Resize(tableSize);
 
@@ -24,8 +21,6 @@ HashTableOpnAdr<Data>:: HashTableOpnAdr(){
 template <typename Data>
 HashTableOpnAdr<Data>::HashTableOpnAdr(unsigned long dim){
     size = 0;
-    acoeff = 2*(dista(generator))+1;
-    bcoeff = 2*(distb(generator));
     tableSize = FindNext2Pow(dim);
     table.Resize(tableSize);
     flags.Resize(tableSize);
