@@ -8,11 +8,6 @@
 
 void mytest();
 
-template <typename Data>
-void TraversePrint(const Data& dat) {
-  std::cout << dat << " ";
-}
-
 /* ************************************************************************** */
 
 #endif

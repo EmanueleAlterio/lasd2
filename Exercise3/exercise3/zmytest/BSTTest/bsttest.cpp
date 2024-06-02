@@ -20,7 +20,7 @@
 using namespace std;
 
 
-void testBSTInt(unsigned int & testnum, unsigned int & testerr){
+void mytestBSTInt(unsigned int & testnum, unsigned int & testerr){
 
     unsigned int loctestnum = 0, loctesterr = 0;
     cout << endl << "Begin of BST<int> Test" << endl;
@@ -199,7 +199,7 @@ void testBSTInt(unsigned int & testnum, unsigned int & testerr){
 }
     
 
-void testBSTDouble(unsigned int & testnum, unsigned int & testerr){
+void mytestBSTDouble(unsigned int & testnum, unsigned int & testerr){
 
     unsigned int loctestnum = 0, loctesterr = 0;
     cout << endl << "Begin of BST<double> Test" << endl;
@@ -335,7 +335,7 @@ void testBSTDouble(unsigned int & testnum, unsigned int & testerr){
 }
 
 
-void testBSTString(unsigned int & testnum, unsigned int & testerr){
+void mytestBSTString(unsigned int & testnum, unsigned int & testerr){
 
     unsigned int loctestnum = 0, loctesterr = 0;
     cout << endl << "Begin of BST<string> Test" << endl;
@@ -472,16 +472,16 @@ void testBSTString(unsigned int & testnum, unsigned int & testerr){
 
 
 
-void BSTTest(unsigned int & testnum, unsigned int & testerr){
+void myBSTTest(unsigned int & testnum, unsigned int & testerr){
     unsigned int loctestnum = 0;
     unsigned int loctesterr = 0;
 
     cout << endl << "Inizio Test BST" << endl;
     cout << "-------------------------------------------------------------------------------" << endl;
 
-    testBSTInt(loctestnum, loctesterr);
-    testBSTDouble(loctestnum, loctesterr);
-    testBSTString(loctestnum, loctesterr);
+    mytestBSTInt(loctestnum, loctesterr);
+    mytestBSTDouble(loctestnum, loctesterr);
+    mytestBSTString(loctestnum, loctesterr);
 
 
     cout << "-------------------------------------------------------------------------------" << endl;

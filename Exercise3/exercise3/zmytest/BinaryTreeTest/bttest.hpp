@@ -3,7 +3,7 @@
 
 /* ************************************************************************** */
 
-void BinaryTreeTest(unsigned int &, unsigned int &);
+void myBinaryTreeTest(unsigned int &, unsigned int &);
 
 /* ************************************************************************** */
 

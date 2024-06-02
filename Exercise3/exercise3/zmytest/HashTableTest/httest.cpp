@@ -22,7 +22,7 @@
 
 using namespace std;
 
-void testHashTableInt(unsigned int & testnum, unsigned int & testerr){
+void mytestHashTableInt(unsigned int & testnum, unsigned int & testerr){
 
 
 
@@ -200,7 +200,7 @@ void testHashTableInt(unsigned int & testnum, unsigned int & testerr){
     testerr += loctesterr;
 }
 
-void testHashTableDouble(unsigned int & testnum, unsigned int & testerr){
+void mytestHashTableDouble(unsigned int & testnum, unsigned int & testerr){
 
     unsigned int loctestnum = 0, loctesterr = 0;
     cout << endl << "Begin of HashTable<double> Test" << endl;
@@ -358,7 +358,7 @@ void testHashTableDouble(unsigned int & testnum, unsigned int & testerr){
     testerr += loctesterr;
 }
 
-void testHashTableString(unsigned int & testnum, unsigned int & testerr){
+void mytestHashTableString(unsigned int & testnum, unsigned int & testerr){
 
     unsigned int loctestnum = 0, loctesterr = 0;
     cout << endl << "Begin of HashTable<string> Test" << endl;
@@ -426,16 +426,16 @@ void testHashTableString(unsigned int & testnum, unsigned int & testerr){
     testnum += loctestnum;
     testerr += loctesterr;
 }
-void HashTableTest(unsigned int & testnum, unsigned int & testerr){
+void myHashTableTest(unsigned int & testnum, unsigned int & testerr){
     unsigned int loctestnum = 0;
     unsigned int loctesterr = 0;
 
     cout << endl << "Inizio Test Hash Table" << endl;
     cout << "-------------------------------------------------------------------------------" << endl;
 
-    testHashTableInt(loctestnum, loctesterr);
-    testHashTableDouble(loctestnum, loctesterr);
-    testHashTableString(loctestnum, loctesterr);
+    mytestHashTableInt(loctestnum, loctesterr);
+    mytestHashTableDouble(loctestnum, loctesterr);
+    mytestHashTableString(loctestnum, loctesterr);
 
     cout << "-------------------------------------------------------------------------------" << endl;
     testnum += loctestnum;

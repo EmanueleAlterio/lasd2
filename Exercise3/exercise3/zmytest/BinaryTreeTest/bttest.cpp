@@ -17,7 +17,7 @@
 
 using namespace std;
 
-void testBinaryTreeInt(unsigned int & testnum, unsigned int & testerr){
+void mytestBinaryTreeInt(unsigned int & testnum, unsigned int & testerr){
 
     unsigned int loctestnum = 0, loctesterr = 0;
     cout << endl << "Begin of BinaryTree<int> Test" << endl;
@@ -70,7 +70,7 @@ void testBinaryTreeInt(unsigned int & testnum, unsigned int & testerr){
     testerr += loctesterr;
 }
 
-void testBinaryTreeDouble(unsigned int & testnum, unsigned int & testerr){
+void mytestBinaryTreeDouble(unsigned int & testnum, unsigned int & testerr){
 
     unsigned int loctestnum = 0, loctesterr = 0;
     cout << endl << "Begin of BinaryTreeVec<double> Test:" << endl;
@@ -126,7 +126,7 @@ void testBinaryTreeDouble(unsigned int & testnum, unsigned int & testerr){
 }
 
 
-void testBinaryTreeString(unsigned int & testnum, unsigned int & testerr){
+void mytestBinaryTreeString(unsigned int & testnum, unsigned int & testerr){
 
     unsigned int loctestnum = 0, loctesterr = 0;
     cout << endl << "Begin of BinaryTreeVec<string> Test:" << endl;
@@ -181,16 +181,16 @@ void testBinaryTreeString(unsigned int & testnum, unsigned int & testerr){
     testerr += loctesterr;
 }
 
-void BinaryTreeTest(unsigned int & testnum, unsigned int & testerr){
+void myBinaryTreeTest(unsigned int & testnum, unsigned int & testerr){
     unsigned int loctestnum = 0;
     unsigned int loctesterr = 0;
 
     cout << endl << "Inizio Test BinaryTree" << endl;
     cout << "-------------------------------------------------------------------------------" << endl;
 
-    testBinaryTreeInt(loctestnum, loctesterr);
-    testBinaryTreeDouble(loctestnum, loctesterr);
-    testBinaryTreeString(loctestnum, loctesterr);
+    mytestBinaryTreeInt(loctestnum, loctesterr);
+    mytestBinaryTreeDouble(loctestnum, loctesterr);
+    mytestBinaryTreeString(loctestnum, loctesterr);
 
 
     cout << "-------------------------------------------------------------------------------" << endl;

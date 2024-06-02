@@ -20,9 +20,9 @@ void mytest() {
   unsigned int loctestnum, loctesterr;
   unsigned int testnum = 0, testerr = 0;
   loctestnum = 0; loctesterr = 0;
-  BinaryTreeTest(loctestnum, loctesterr);
-  BSTTest(loctestnum, loctesterr);
-  HashTableTest(loctestnum, loctesterr);
+  myBinaryTreeTest(loctestnum, loctesterr);
+  myBSTTest(loctestnum, loctesterr);
+  myHashTableTest(loctestnum, loctesterr);
   testnum += loctestnum; testerr += loctesterr;
   
   cout << endl << "~*~#~*~ Fine My Test ~*~#~*~";
