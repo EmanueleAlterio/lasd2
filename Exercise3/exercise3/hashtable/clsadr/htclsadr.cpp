@@ -1,6 +1,4 @@
-#include "htclsadr.hpp"
-#include "../../zmytest/test.hpp"
-#include <iostream>
+
 namespace lasd {
 
 /* ************************************************************************** */
